@@ -1,0 +1,27 @@
+.btn{
+    font-size:11px;
+}
+.btn:not(.active):hover{
+    /* background-color: lightgray; */
+    outline:0;
+    box-shadow:none;
+}
+button:focus{
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+.btn.active{
+    background-color: darkgray;
+    box-shadow:none;
+}
+
+.btn-group-toggle{
+    display: inline-flex;
+}
+
+.age-button{
+    width:180px;
+}
+.dropdown-item{
+    text-align: center;
+}

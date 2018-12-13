@@ -1,0 +1,44 @@
+.outree{
+    overflow: scroll;
+    height: 60vh;
+    color:black;
+    min-width: 18vw;
+    max-width: 18vw;
+    border-radius: 20px;
+    padding-top: 20px;
+    background: white;
+}
+
+#orgUnitTree ul li {
+    list-style: none;
+    font-size: 14px;
+    color:black;
+} 
+
+#orgUnitTree ul li > ul {
+    padding-left:10px;
+    color:black;
+}
+
+ul li a {
+    text-decoration: none;
+    color:#000 ;
+}
+ul li a:hover{
+    text-decoration: none;
+    color:#FF8000;
+}
+
+.selected-org-unit > a {
+    font-weight: bold;
+    color: #FF8000 !important;
+}
+
+.selectedou{
+    background: white;
+    padding: 5px;
+    min-width:18vw;
+    min-height: 34px;
+    text-align: center;
+    border-radius: 20px;
+}
