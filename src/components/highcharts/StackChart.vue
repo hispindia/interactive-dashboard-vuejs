@@ -149,6 +149,10 @@ export default {
             ? parseFloat(dataloop[i][6])
             : parseFloat(dataloop[i][5]);
         var age_id_match = dataloop[i][3];
+        if(age_id_match == variables.age_0_4_id){
+          console.log(value + " --- "+ disease_id + " -- " + age_id_match );
+        }
+
         age_id_match == variables.age_0_4_id
           ? temp[0][disease_id].data[0] === undefined
             ? (temp[0][disease_id].data[0] = value)

@@ -522,7 +522,7 @@ const diseases_obj_yld = [{
         name: "Self-inflicted injuries (suicide) - YLD",
         data: []
     },
-    'ˀ': {
+    'CPSynCWa3F3': {
         name: "Breast cancer - YLD",
         data: []
     },
