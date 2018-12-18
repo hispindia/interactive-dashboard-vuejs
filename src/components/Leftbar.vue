@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="row justify-content-center p-1 leftbar-menu-main">
-      <div class="class selectedou">{{selectedOuName}}</div>
+      <div class="class selectedou" v-bind:id='selectedOu'>{{selectedOuName}}</div>
     </div>
     <div class="row justify-content-center p-1 leftbar-menu-main">
       <div class="class outree">

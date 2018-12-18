@@ -14,6 +14,12 @@
           <button @click="select('mapChart')" :class="{btnActive: selected === 'mapChart'}">
             <img src="../../assets/images/map.png" alt="Map Chart" width="60px" height="60px">
           </button>
+          <button @click="select('pointChart')" :class="{btnActive: selected === 'pointChart'}">
+            <img src="../../assets/images/linechart.png" alt="Point Chart" width="60px" height="60px">
+          </button>
+          <button @click="select('pieChart')" :class="{btnActive: selected === 'pieChart'}">
+            <img src="../../assets/images/piechart.png" alt="Pie Chart" width="60px" height="60px">
+          </button>
         </div>
       </div>
     </div>
@@ -64,6 +70,8 @@
 <script>
 import StackChart from "../highcharts/StackChart";
 import MapChart from "../highcharts/MapChart";
+import PointChart from "../highcharts/PointChart";
+import PieChart from "../highcharts/PieChart";
 import { EventBus } from "../../event-bus";
 import params from "../Leftbar";
 
@@ -71,7 +79,9 @@ export default {
   name: "CenterContainer",
   components: {
     stackChart: StackChart,
-    mapChart: MapChart
+    mapChart: MapChart,
+    PointChart: PointChart,
+    PieChart: PieChart
   },
   methods: {
     select(elem) {
@@ -89,29 +99,34 @@ export default {
       $(".rightbar-menu-main").removeClass("hidediv");
       if (t == "age") {
         $(".rightbarage").addClass("hidediv");
-        EventBus.$emit("param", {
-          ou: params.data().selectedOu,
+        EventBus.$emit("param-"+this.selected, {
+          ou: $(".selectedou").attr('id'),
           type: "age"
         });
       } else if (t == "gender") {
         $(".rightbargender").addClass("hidediv");
-        EventBus.$emit("param", {
-          ou: params.data().selectedOu,
+        EventBus.$emit("param-"+this.selected, {
+          ou: $(".selectedou").attr('id'),
           type: "gender"
         });
       } else if (t == "location") {
         // $(".rightbarlocation").addClass("hidediv");
-        EventBus.$emit("param", {
-          ou: params.data().selectedOu,
+        EventBus.$emit("param-"+this.selected, {
+          ou: $(".selectedou").attr('id'),
           type: "location"
         });
       } else {
         $(".rightbarsite").addClass("hidediv");
-        EventBus.$emit("param", {
-          ou: params.data().selectedOu,
+        EventBus.$emit("param-"+this.selected, {
+          ou: $(".selectedou").attr('id'),
           type: "site"
         });
       }
+    }
+  },
+  watch : {
+    selected : function(v){
+       this.sendParams("age");
     }
   },
   mounted() {

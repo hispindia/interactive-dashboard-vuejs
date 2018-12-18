@@ -15,7 +15,8 @@ export default {
     EventBus.$on("filters", this.setFilters);
     EventBus.$on("ou-created", this.setSelectedOu);
     EventBus.$on("ou-changed", this.setSelectedOu);
-    EventBus.$on("param-stackChart", this.setSelections);
+    EventBus.$on("param-pointChart", this.setSelections);
+    this.getApiData();
   },
   watch: {
     ou: function() {
@@ -122,6 +123,7 @@ export default {
     },
     setSelections: function(params) {
       this.selections = params.type;
+      this.ou = params.ou;
       this.genderFilter = variables.gender_main_var;
       this.ageFilter = variables.age_main_var;
       this.siteFilter = variables.site_main_var;
@@ -368,7 +370,7 @@ export default {
       ageFilter: variables.age_main_var,
       siteFilter: variables.site_main_var,
       measureFilter: variables.yll,
-      ou: "",
+      ou: variables.indiaOuId,
       statesApi: "",
       defaultIndiaApi:
         "../../analytics.json?dimension=pe:2015&dimension=ou:" +
@@ -381,10 +383,10 @@ export default {
       colors: [],
       chartOptions: {
         chart: {
-          type: "column"
+          type: "line"
         },
         title: {
-          text: "Stacked column chart"
+          text: "Line chart"
         },
         xAxis: {
           categories: []
@@ -434,7 +436,7 @@ export default {
   destroyed() {
     EventBus.$off("ou-created", this.getApiData);
     EventBus.$off("ou-changed", this.getApiData);
-    EventBus.$off("param-stackChart", this.getApiData);
+    EventBus.$off("param-pointChart", this.getApiData);
     EventBus.$off("filters", this.setFilters);
   }
 };
