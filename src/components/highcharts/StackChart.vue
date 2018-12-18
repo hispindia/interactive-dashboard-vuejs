@@ -42,6 +42,57 @@ export default {
     }
   },
   methods: {
+    setColors: function() {
+      var count1 = 1,
+        count2 = 1,
+        count3 = 1,
+        count4 = 1;
+      for (let g = 0; g < Object.keys(this.diseases[0]).length; g++) {
+        var key = Object.keys(this.diseases[0])[g];
+        var index = this.diseases[0][key].group;
+        if (index == 0) {
+          this.diseases[0][key].color = this.getColorShades(
+            128,
+            0,
+            0,
+            count1
+          );
+          count1++;
+        } else if (index == 1) {
+          this.diseases[0][key].color = this.getColorShades(
+            0,
+            128,
+            0,
+            count2
+          );
+          count2++;
+        } else if (index == 2) {
+          this.diseases[0][key].color = this.getColorShades(
+            255,
+            165,
+            0,
+            count3
+          );
+          count3++;
+        } else {
+          this.diseases[0][key].color = this.getColorShades(
+            0,
+            0,
+            255,
+            count4
+          );
+          count4++;
+        }
+      }
+    },
+    getColorShades: function(r, g, b, x) {
+      var o =  x>3 && x<6 ? 0.9 : x>=6 && x<10 ? 0.75 : x>=10 && x<16 ? 0.60 : x>=16 && x<20 ? 0.45 : x>=20 ? 0.3 : 1;
+      x = x+4;
+      r = (x * r) / 10;
+      g = (x * g) / 10;
+      b = (x * b) / 10;
+      return "rgb(" + r  + "," + g + "," + b + "," + o + ")";
+    },
     handleShowHide: function() {
       $(".bottom-options").removeClass("selected-option");
       if (this.ou == variables.indiaOuId) {
@@ -88,6 +139,7 @@ export default {
             : this.statesApi
         )
         .then(response => {
+          this.setColors();
           this.handleShowHide();
           this.chartOptions.series = [];
           var dataloop = "";
@@ -149,8 +201,8 @@ export default {
             ? parseFloat(dataloop[i][6])
             : parseFloat(dataloop[i][5]);
         var age_id_match = dataloop[i][3];
-        if(age_id_match == variables.age_0_4_id){
-          console.log(value + " --- "+ disease_id + " -- " + age_id_match );
+        if (age_id_match == variables.age_0_4_id) {
+          console.log(value + " --- " + disease_id + " -- " + age_id_match);
         }
 
         age_id_match == variables.age_0_4_id
@@ -289,11 +341,11 @@ export default {
         "&dimension=dx:" +
         this.measureFilter +
         "&displayProperty=NAME&outputIdScheme=UID";
-        
+
       this.defaultIndiaApi =
         "../../analytics.json?dimension=pe:2015&dimension=ou:" +
         variables.allouIDs +
-        "&dimension="+
+        "&dimension=" +
         variables.gender_id +
         ":" +
         this.genderFilter +
@@ -325,6 +377,7 @@ export default {
         "&displayProperty=NAME&outputIdScheme=UID",
       indiaApi: "",
       updateArgs: [true, true, { duration: 1000 }],
+      colors: [],
       chartOptions: {
         chart: {
           type: "column"
