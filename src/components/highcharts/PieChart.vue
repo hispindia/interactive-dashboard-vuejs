@@ -149,7 +149,7 @@ export default {
           this.selections == "gender"
             ? this.sortDataByGender(dataloop)
             : this.selections == "age"
-            ? this.sortDataByGender(dataloop)
+            ? this.sortDataByAge(dataloop)
             : this.selections == "location"
             ? this.sortDataByLoc(dataloop)
             : this.sortDataBySite(dataloop);
@@ -167,8 +167,8 @@ export default {
         var disease_id = dataloop[i][0];
         var value =
           this.ou == variables.indiaOuId
-            ? parseFloat(dataloop[i][6])
-            : parseFloat(dataloop[i][5]);
+            ? parseInt(dataloop[i][6])
+            : parseInt(dataloop[i][5]);
         var gender_id = dataloop[i][2];
         gender_id == variables.gender_male_id
           ? (male += value)
@@ -188,52 +188,44 @@ export default {
     },
     sortDataByAge: function(dataloop) {
       $("#btnAge").addClass("selected-option");
-      let temp = JSON.parse(JSON.stringify(this.diseases));
+      var age_04 = 0;
+      var age_514 = 0;
+      var age_1529 = 0;
+      var age_3049 = 0;
+      var age_5059 = 0;
+      var age_6069 = 0;
+      var age_7079 = 0;
+      var age_80above = 0;
       for (let i = 0, len = dataloop.length; i < len; i++) {
         var disease_id = dataloop[i][0];
         var value =
           this.ou == variables.indiaOuId
-            ? parseFloat(dataloop[i][6])
-            : parseFloat(dataloop[i][5]);
-        var age_id_match = dataloop[i][3];
-
-        age_id_match == variables.age_0_4_id
-          ? temp[0][disease_id].data[0] === undefined
-            ? (temp[0][disease_id].data[0] = value)
-            : (temp[0][disease_id].data[0] += value)
-          : age_id_match == variables.age_5_14_id
-          ? temp[0][disease_id].data[1] === undefined
-            ? (temp[0][disease_id].data[1] = value)
-            : (temp[0][disease_id].data[1] += value)
-          : age_id_match == variables.age_15_29_id
-          ? temp[0][disease_id].data[2] === undefined
-            ? (temp[0][disease_id].data[2] = value)
-            : (temp[0][disease_id].data[2] += value)
-          : age_id_match == variables.age_30_49_id
-          ? temp[0][disease_id].data[3] === undefined
-            ? (temp[0][disease_id].data[3] = value)
-            : (temp[0][disease_id].data[3] += value)
-          : age_id_match == variables.age_50_59_id
-          ? temp[0][disease_id].data[4] === undefined
-            ? (temp[0][disease_id].data[4] = value)
-            : (temp[0][disease_id].data[4] += value)
-          : age_id_match == variables.age_60_69_id
-          ? temp[0][disease_id].data[5] === undefined
-            ? (temp[0][disease_id].data[5] = value)
-            : (temp[0][disease_id].data[5] += value)
-          : age_id_match == variables.age_70_79_id
-          ? temp[0][disease_id].data[6] === undefined
-            ? (temp[0][disease_id].data[6] = value)
-            : (temp[0][disease_id].data[6] += value)
-          : temp[0][disease_id].data[7] === undefined
-          ? (temp[0][disease_id].data[7] = value)
-          : (temp[0][disease_id].data[7] += value);
-
+            ? parseInt(dataloop[i][6])
+            : parseInt(dataloop[i][5]);
+        var age_id = dataloop[i][3];
+        age_id == variables.age_0_4_id
+          ? (age_04 += value)
+          : age_id == variables.age_5_14_id ? (age_514 += value) :
+          age_id == variables.age_15_29_id ? (age_1529 += value) :
+          age_id == variables.age_30_49_id ? (age_3049 += value) :
+          age_id == variables.age_50_59_id ? (age_5059 += value) :
+          age_id == variables.age_60_69_id ? (age_6069 += value) :
+          age_id == variables.age_70_79_id ? (age_7079 += value) :
+          age_80above += value;
         if (i == len - 1) {
           var vm = this;
+          var temp = [];
+          temp.push({ name: "0-4 years", y: age_04, sliced: true, selected: true });
+          temp.push({ name: "5-14 years", y: age_514 });
+          temp.push({ name: "15-29 years", y: age_1529 });
+          temp.push({ name: "30-49 years", y: age_3049 });
+          temp.push({ name: "50-59 years", y: age_5059 });
+          temp.push({ name: "60-69 years", y: age_6069 });
+          temp.push({ name: "70-70 years", y: age_7079 });
+          temp.push({ name: "80 years and above", y: age_80above });
           setTimeout(function() {
-            vm.chartOptions.series = [...Object.values(temp[0])];
-            vm.chartOptions.xAxis.categories = [...variables.age_categories];
+            vm.chartOptions.series[0].data = [...temp];
+            // vm.chartOptions.xAxis.categories = [...variables.gender_categories_];
             $("#loader").hide();
           }, 2000);
         }
@@ -241,31 +233,25 @@ export default {
     },
     sortDataBySite: function(dataloop) {
       $("#btnSite").addClass("selected-option");
-      let temp = JSON.parse(JSON.stringify(this.diseases));
+      var urban = 0;
+      var rural = 0;
       for (let i = 0, len = dataloop.length; i < len; i++) {
         var disease_id = dataloop[i][0];
         var value =
           this.ou == variables.indiaOuId
-            ? parseFloat(dataloop[i][6])
-            : parseFloat(dataloop[i][5]);
-        var site_id_match = dataloop[i][4];
-        site_id_match == variables.site_urban_id
-          ? temp[0][disease_id].data[0] === undefined
-            ? (temp[0][disease_id].data[0] = value)
-            : (temp[0][disease_id].data[0] += value)
-          : temp[0][disease_id].data[1] === undefined
-          ? (temp[0][disease_id].data[1] = value)
-          : (temp[0][disease_id].data[1] += value);
-
-        temp[0][disease_id].data[2] === undefined
-          ? (temp[0][disease_id].data[2] = value)
-          : (temp[0][disease_id].data[2] += value);
-
+            ? parseInt(dataloop[i][6])
+            : parseInt(dataloop[i][5]);
+        var site_id = dataloop[i][4];
+        site_id == variables.site_urban_id
+          ? (urban += value)
+          : (rural += value);
         if (i == len - 1) {
           var vm = this;
+          var temp = [];
+          temp.push({ name: "Urban", y: urban, sliced: true, selected: true });
+          temp.push({ name: "Rural", y: rural });
           setTimeout(function() {
-            vm.chartOptions.series = [...Object.values(temp[0])];
-            vm.chartOptions.xAxis.categories = [...variables.site_categories];
+            vm.chartOptions.series[0].data = [...temp];
             $("#loader").hide();
           }, 2000);
         }
@@ -273,32 +259,32 @@ export default {
     },
     sortDataByLoc: function(dataloop) {
       $("#btnLocation").addClass("selected-option");
-       var loopdata = dataloop;
-        let temp = JSON.parse(JSON.stringify(variables.statesMapData));
-        for (let i = 0, len = loopdata.length; i < len; i++) {
-          var ouid = loopdata[i][2];
-          var value = parseFloat(loopdata[i][5]);
-          if (temp[0][ouid] !== undefined) {
-            temp[0][ouid].data += value;
-          }
-
-          if (i == len - 1) {
-            var vm = this;
-            $("#loader").show();
-            var temp_arr = [];
-            for (let j = 0; j < Object.keys(temp[0]).length; j++) {
-              temp_arr.push({
-                name : variables.stateNames[0][Object.keys(temp[0])[j]],
-                y : temp[0][Object.keys(temp[0])[j]].data
-              });
-            }
-            setTimeout(function() {
-               vm.chartOptions.series[0].data = [...temp_arr];
-              // console.log(vm.mapOptions.series[0].data);
-              $("#loader").hide();
-            }, 2000);
-          }
+      var loopdata = dataloop;
+      let temp = JSON.parse(JSON.stringify(variables.statesMapData));
+      for (let i = 0, len = loopdata.length; i < len; i++) {
+        var ouid = loopdata[i][2];
+        var value = parseInt(loopdata[i][5]);
+        if (temp[0][ouid] !== undefined) {
+          temp[0][ouid].data += value;
         }
+
+        if (i == len - 1) {
+          var vm = this;
+          $("#loader").show();
+          var temp_arr = [];
+          for (let j = 0; j < Object.keys(temp[0]).length; j++) {
+            temp_arr.push({
+              name: variables.stateNames[0][Object.keys(temp[0])[j]],
+              y: temp[0][Object.keys(temp[0])[j]].data
+            });
+          }
+          setTimeout(function() {
+            vm.chartOptions.series[0].data = [...temp_arr];
+            // console.log(vm.mapOptions.series[0].data);
+            $("#loader").hide();
+          }, 2000);
+        }
+      }
     },
     setApis: function() {
       this.statesApi =
@@ -409,7 +395,7 @@ export default {
         },
         tooltip: {
           headerFormat: "<b>{point.x}</b><br/>",
-          pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}"
+          pointFormat: "{series.name}: {point.y}<br><b>{point.name}</b>: {point.percentage:.1f} %"
         },
         plotOptions: {
           pie: {
@@ -417,7 +403,7 @@ export default {
             cursor: "pointer",
             dataLabels: {
               enabled: true,
-              format: "<b>{point.name}</b>: {point.percentage:.1f} %",
+              format: "<b>{point.name}</b>: {point.y}",
               style: {
                 color: "black"
               }

@@ -20,6 +20,9 @@
           <button @click="select('pieChart')" :class="{btnActive: selected === 'pieChart'}">
             <img src="../../assets/images/piechart.png" alt="Pie Chart" width="60px" height="60px">
           </button>
+          <button @click="select('treeChart')" :class="{btnActive: selected === 'treeChart'}">
+            <img src="../../assets/images/treemap.png" alt="Tree Chart" width="60px" height="60px">
+          </button>
         </div>
       </div>
     </div>
@@ -40,7 +43,7 @@
         </keep-alive>
       </div>
     </div>
-    <div class="row justify-content-center" v-if="currentView!='mapChart'">
+    <div class="row justify-content-center" v-if="currentView!='mapChart' && currentView!='treeChart'">
       <div id="cc" class="col pt-2" style="max-width:fit-content">
         <button
           class="btn btn-default bottom-options selected-option"
@@ -72,6 +75,7 @@ import StackChart from "../highcharts/StackChart";
 import MapChart from "../highcharts/MapChart";
 import PointChart from "../highcharts/PointChart";
 import PieChart from "../highcharts/PieChart";
+import TreeChart from "../highcharts/TreeChart";
 import { EventBus } from "../../event-bus";
 import params from "../Leftbar";
 
@@ -81,7 +85,8 @@ export default {
     stackChart: StackChart,
     mapChart: MapChart,
     PointChart: PointChart,
-    PieChart: PieChart
+    PieChart: PieChart,
+    TreeChart: TreeChart
   },
   methods: {
     select(elem) {

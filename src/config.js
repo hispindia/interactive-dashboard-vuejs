@@ -42,6 +42,7 @@ const diseases_obj_yll = [{
     'jUOkNisSGtL': {
         name: 'Epilepsy - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 13,
         group: 1
@@ -49,6 +50,7 @@ const diseases_obj_yll = [{
     'rbvkGJD9mNb': {
         name: 'Malaria - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 0,
         group: 0
@@ -56,6 +58,7 @@ const diseases_obj_yll = [{
     'wiGw1nW0bh8': {
         name: 'Sexually-transmitted infections incl. HIV/AIDS - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 1,
         group: 0
@@ -63,6 +66,7 @@ const diseases_obj_yll = [{
     'oHxYHpmJFTI': {
         name: 'Diarrhoeal diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 2,
         group: 0
@@ -70,6 +74,7 @@ const diseases_obj_yll = [{
     'hqkcNhlZa3l': {
         name: 'Selected vaccine preventable diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 3,
         group: 0
@@ -77,6 +82,7 @@ const diseases_obj_yll = [{
     'nac95mZ6R3J': {
         name: 'Meningitis/encephalitis - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 4,
         group: 0
@@ -84,6 +90,7 @@ const diseases_obj_yll = [{
     'YV6xDaZiFOA': {
         name: 'Hepatitis - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 5,
         group: 0
@@ -91,6 +98,7 @@ const diseases_obj_yll = [{
     'TqAnqg4TGIi': {
         name: 'Respiratory infections - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 6,
         group: 0
@@ -98,6 +106,7 @@ const diseases_obj_yll = [{
     'Lo9m9x0Noo3': {
         name: 'Other infectious and parasitic diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 7,
         group: 0
@@ -105,6 +114,7 @@ const diseases_obj_yll = [{
     'HoAv6hDtfx9': {
         name: 'Maternal conditions - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 8,
         group: 0
@@ -112,6 +122,7 @@ const diseases_obj_yll = [{
     'pEmQPvuMsCd': {
         name: 'Stomach cancer - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 14,
         group: 1
@@ -119,6 +130,7 @@ const diseases_obj_yll = [{
     'b8bF2H1nlKM': {
         name: 'Lung & airway cancers - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 15,
         group: 1
@@ -126,6 +138,7 @@ const diseases_obj_yll = [{
     'WADeiOG2GZ3': {
         name: 'Oral and upper aerodigestive cancers - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 16,
         group: 1
@@ -133,6 +146,7 @@ const diseases_obj_yll = [{
     'u1vQIT0KDmq': {
         name: 'Liver cancer - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 17,
         group: 1
@@ -140,6 +154,7 @@ const diseases_obj_yll = [{
     'f54afn66e00': {
         name: 'Perinatal conditions - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 9,
         group: 0
@@ -147,6 +162,7 @@ const diseases_obj_yll = [{
     'ZenTjUJdMit': {
         name: 'Nutritional deficiencies - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 10,
         group: 0
@@ -154,13 +170,15 @@ const diseases_obj_yll = [{
     'qSGAN58i4Y4': {
         name: 'Fever of unknown origin - YLL',
         data: [],
+        val: 0,
         color: "",
-        index:11,
+        index: 11,
         group: 0
     },
     'K3vVuinN0sf': {
         name: 'Other digestive cancers - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 18,
         group: 1
@@ -168,6 +186,7 @@ const diseases_obj_yll = [{
     'XkvbmSQNWS0': {
         name: 'Breast cancer - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 19,
         group: 1
@@ -175,6 +194,7 @@ const diseases_obj_yll = [{
     'ttdmF6w8y5T': {
         name: 'Cervix & uterus cancers - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 20,
         group: 1
@@ -182,6 +202,7 @@ const diseases_obj_yll = [{
     'Y90XWSZUXil': {
         name: 'Leukemia,lymphoma and oth. hemotopoietic malignancies - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 21,
         group: 1
@@ -189,6 +210,7 @@ const diseases_obj_yll = [{
     'KHRNfvdT9dA': {
         name: 'All other cancers - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 22,
         group: 1
@@ -196,6 +218,7 @@ const diseases_obj_yll = [{
     'lkZH71b2qqI': {
         name: 'Diabetes, endocrine and immune disorders - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 23,
         group: 1
@@ -203,6 +226,7 @@ const diseases_obj_yll = [{
     'zTXCQFLMd07': {
         name: 'Other neuropsychiatric conditions (excl. epilepsy) - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 24,
         group: 1
@@ -210,6 +234,7 @@ const diseases_obj_yll = [{
     'DxDvbzbqX8U': {
         name: 'Skin, sense organs and Oral conditions - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 25,
         group: 1
@@ -217,6 +242,7 @@ const diseases_obj_yll = [{
     'MWl8SCPJLAE': {
         name: 'Musculoskeletal disorders - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 26,
         group: 1
@@ -224,6 +250,7 @@ const diseases_obj_yll = [{
     'bo2ysWfPPNp': {
         name: 'Rheumatic heart disease - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 27,
         group: 1
@@ -231,6 +258,7 @@ const diseases_obj_yll = [{
     'PP5wOeAYiO3': {
         name: 'Cerebrovascular diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 28,
         group: 1
@@ -238,6 +266,7 @@ const diseases_obj_yll = [{
     'fEdSIl29SXB': {
         name: 'Heart diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 29,
         group: 1
@@ -245,6 +274,7 @@ const diseases_obj_yll = [{
     'ItofpP0Eo2H': {
         name: 'Chronic respiratory diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 30,
         group: 1
@@ -252,6 +282,7 @@ const diseases_obj_yll = [{
     'ycnYaICFBo5': {
         name: 'Gastro-oesophageal diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 31,
         group: 1
@@ -259,6 +290,7 @@ const diseases_obj_yll = [{
     'OnFNzSJmpDd': {
         name: 'Liver diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 32,
         group: 1
@@ -266,6 +298,7 @@ const diseases_obj_yll = [{
     'q1y9nxTmGCB': {
         name: 'Other digestive diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 33,
         group: 1
@@ -273,6 +306,7 @@ const diseases_obj_yll = [{
     'Q3gKBv7Q76G': {
         name: 'Nephritis and nephrosis - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 34,
         group: 1
@@ -280,6 +314,7 @@ const diseases_obj_yll = [{
     'tAlC7ioAkP3': {
         name: 'Geneto-urintary diseases - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 35,
         group: 1
@@ -287,6 +322,7 @@ const diseases_obj_yll = [{
     'YAZdpC2fdlp': {
         name: 'Falls - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 44,
         group: 2
@@ -294,6 +330,7 @@ const diseases_obj_yll = [{
     'oE12jKw1cDn': {
         name: 'Drowning - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 36,
         group: 2
@@ -301,6 +338,7 @@ const diseases_obj_yll = [{
     'LiDCa42AKC1': {
         name: 'Self-inflicted injuries (suicide) - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 37,
         group: 2
@@ -308,6 +346,7 @@ const diseases_obj_yll = [{
     'qZvcjbS6Vaq': {
         name: 'All other injuries - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 38,
         group: 2
@@ -315,6 +354,7 @@ const diseases_obj_yll = [{
     'Gzmf8Brlebv': {
         name: 'Ill-defined or cause unknown - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 45,
         group: 3
@@ -322,6 +362,7 @@ const diseases_obj_yll = [{
     'Ft4sC50UywO': {
         name: 'Congenital anomalies - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 39,
         group: 2
@@ -329,6 +370,7 @@ const diseases_obj_yll = [{
     'Tb3Xvv9wUA4': {
         name: 'Venomous deaths - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 40,
         group: 2
@@ -336,6 +378,7 @@ const diseases_obj_yll = [{
     'te717AMOBPU': {
         name: 'Interpersonal violence - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 41,
         group: 2
@@ -343,6 +386,7 @@ const diseases_obj_yll = [{
     'kJb0YxZ3fC7': {
         name: 'Road traffic accidents - YLL',
         data: [],
+        val: 0,
         color: "",
         index: 42,
         group: 2
@@ -350,6 +394,7 @@ const diseases_obj_yll = [{
     'WlkD7uIrJS1': {
         name: 'Tuberculosis YLL',
         data: [],
+        val: 0,
         color: "",
         index: 12,
         group: 0
@@ -359,6 +404,7 @@ const diseases_obj_deaths = [{
     'VUm3woORMNB': {
         name: "Congenital anomalies (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 36,
         group: 2
@@ -366,6 +412,7 @@ const diseases_obj_deaths = [{
     'Ij1ozoYgNiV': {
         name: "Heart diseases (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 13,
         group: 1
@@ -373,6 +420,7 @@ const diseases_obj_deaths = [{
     'KjyPR5oK8KF': {
         name: "Maternal conditions (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 0,
         group: 0
@@ -380,6 +428,7 @@ const diseases_obj_deaths = [{
     'yKYmGtoLvuO': {
         name: "Oral and Upper aerodigestive cancers (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 14,
         group: 1
@@ -387,6 +436,7 @@ const diseases_obj_deaths = [{
     'vQLeSv0U8zm': {
         name: "Skin, Sense Organ, Oral conditions (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 15,
         group: 1
@@ -398,6 +448,7 @@ const diseases_obj_deaths = [{
     'EI8xZCX8bCA': {
         name: "Cerebrovascular disease (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 16,
         group: 1
@@ -405,6 +456,7 @@ const diseases_obj_deaths = [{
     'HoTW2c63jQZ': {
         name: "Other infectious and parasitic diseases (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 1,
         group: 0
@@ -412,6 +464,7 @@ const diseases_obj_deaths = [{
     'WUzmQKiWNOt': {
         name: "Malaria (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 2,
         group: 0
@@ -419,6 +472,7 @@ const diseases_obj_deaths = [{
     'X8fpBqisVaW': {
         name: "Gastro-oesophageal diseases (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 17,
         group: 1
@@ -426,6 +480,7 @@ const diseases_obj_deaths = [{
     'MpZbNyRQPSP': {
         name: "Chronic respiratory diseases (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 18,
         group: 1
@@ -433,6 +488,7 @@ const diseases_obj_deaths = [{
     'ZZIrvfpFn1S': {
         name: "Ill-defined or cause unknown (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 45,
         group: 3
@@ -440,12 +496,14 @@ const diseases_obj_deaths = [{
     'QZKKmntYWnK': {
         name: "Liver and alcohol related diseases (deaths)",
         data: [],
+        val: 0,
         group: 1,
-        index : 19
+        index: 19
     },
     'uDP7MrmByBK': {
         name: "Rheumatic heart disease (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 20,
         group: 1
@@ -453,6 +511,7 @@ const diseases_obj_deaths = [{
     'hGi1Pq8H3ix': {
         name: "Liver cancer (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 21,
         group: 1
@@ -460,6 +519,7 @@ const diseases_obj_deaths = [{
     'IwliRMQtcwI': {
         name: "Nephritis and Nephrosis (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 22,
         group: 1
@@ -467,12 +527,14 @@ const diseases_obj_deaths = [{
     'v3x2vzgTp7a': {
         name: "Snakebite and other venemous (deaths)",
         data: [],
+        val: 0,
         group: 2,
-        index :37
+        index: 37
     },
     'KRNbMneERb7': {
         name: "Meningitis/encephalitis (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 3,
         group: 0
@@ -480,6 +542,7 @@ const diseases_obj_deaths = [{
     'G88aHJhkSyR': {
         name: "All other cancers (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 23,
         group: 1
@@ -487,6 +550,7 @@ const diseases_obj_deaths = [{
     'NKpDx4DLbCX': {
         name: "Road Traffic accidents (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 38,
         group: 2
@@ -494,6 +558,7 @@ const diseases_obj_deaths = [{
     'jB5NguyWFz6': {
         name: "Ischemic Heart disease (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 24,
         group: 1
@@ -501,12 +566,14 @@ const diseases_obj_deaths = [{
     'MszRYeCv7tb': {
         name: "Other Neuropsychiatric conditions (deaths)",
         data: [],
+        val: 0,
         group: 1,
-        index : 25
+        index: 25
     },
     'P1bxpIcNaJe': {
         name: "Musculoskeletal disorders (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 26,
         group: 1
@@ -514,6 +581,7 @@ const diseases_obj_deaths = [{
     'T11thVOCxbC': {
         name: "Drowning (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 39,
         group: 2
@@ -521,6 +589,7 @@ const diseases_obj_deaths = [{
     'GyJw0WaL92N': {
         name: "Cervix & uterus cancers (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 27,
         group: 1
@@ -528,6 +597,7 @@ const diseases_obj_deaths = [{
     'kh9RIuLy8tg': {
         name: "Falls (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 40,
         group: 2
@@ -535,6 +605,7 @@ const diseases_obj_deaths = [{
     'eHvuTO8pQiF': {
         name: "Epilepsy (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 28,
         group: 1
@@ -542,6 +613,7 @@ const diseases_obj_deaths = [{
     'EHDA6YRi77G': {
         name: "Other digestive cancer (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 29,
         group: 1
@@ -549,6 +621,7 @@ const diseases_obj_deaths = [{
     'rjqa3BQE649': {
         name: "Fever of unknown origin (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 4,
         group: 0
@@ -556,6 +629,7 @@ const diseases_obj_deaths = [{
     'EX9IN3ypvdY': {
         name: "Hepatitis (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 5,
         group: 0
@@ -563,6 +637,7 @@ const diseases_obj_deaths = [{
     'JF3BEE0kYoJ': {
         name: "Diabetes, Endocrine and immune disorders (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 30,
         group: 1
@@ -570,6 +645,7 @@ const diseases_obj_deaths = [{
     'pDz4OePMon1': {
         name: "Sexually-transmitted infections incl. HIV/AIDS (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 6,
         group: 0
@@ -577,6 +653,7 @@ const diseases_obj_deaths = [{
     'Uq5cNdR3bl8': {
         name: "Venomous deaths (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 41,
         group: 2
@@ -584,6 +661,7 @@ const diseases_obj_deaths = [{
     'trGfGTQGj5J': {
         name: "Self-inflicted injuries (suicide) (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 42,
         group: 2
@@ -591,6 +669,7 @@ const diseases_obj_deaths = [{
     'sVmArtwPXJX': {
         name: "Leukemia,lymphoma and other hemotopoietic malignancies (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 31,
         group: 1
@@ -598,6 +677,7 @@ const diseases_obj_deaths = [{
     'XFL2f8OlAaM': {
         name: "Interpersonal violence (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 43,
         group: 2
@@ -605,6 +685,7 @@ const diseases_obj_deaths = [{
     'QKXrL8lZetJ': {
         name: "Diarrhoeal diseases (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 7,
         group: 0
@@ -612,6 +693,7 @@ const diseases_obj_deaths = [{
     'DpboXWZn1kz': {
         name: "Stomach cancer (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 32,
         group: 1
@@ -619,6 +701,7 @@ const diseases_obj_deaths = [{
     'hhZ2dn7aLRx': {
         name: "Respiratory infections (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 8,
         group: 0
@@ -626,6 +709,7 @@ const diseases_obj_deaths = [{
     'N8pnKAkSuS9': {
         name: "Nutritional deficiencies (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 9,
         group: 0
@@ -633,6 +717,7 @@ const diseases_obj_deaths = [{
     'WclEXSqNL8q': {
         name: "Other digestive diseases (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 33,
         group: 1
@@ -640,6 +725,7 @@ const diseases_obj_deaths = [{
     'wxcHhR9gF2v': {
         name: "Perinatal conditions (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 10,
         group: 0
@@ -647,6 +733,7 @@ const diseases_obj_deaths = [{
     'eTAKBjIkwaz': {
         name: "All other injuries (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 44,
         group: 2
@@ -654,13 +741,15 @@ const diseases_obj_deaths = [{
     'vGvSM6QeW8v': {
         name: "Tuberculosis (deaths)",
         data: [],
+        val: 0,
         color: "",
-        index:11,
+        index: 11,
         group: 0
     },
     'RwB0sPs9WL1': {
         name: "Lung & airway cancers (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 34,
         group: 1
@@ -668,6 +757,7 @@ const diseases_obj_deaths = [{
     'ykL5JPlWrC3': {
         name: "Selected vaccine preventable diseases (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 12,
         group: 0
@@ -675,6 +765,7 @@ const diseases_obj_deaths = [{
     'rR11LCFjkoT': {
         name: "Breast cancer (deaths)",
         data: [],
+        val: 0,
         color: "",
         index: 35,
         group: 1
@@ -685,6 +776,7 @@ const diseases_obj_yld = [{
     'cBGfQMmf14S': {
         name: "Hepatitis - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 0,
         group: 0
@@ -692,6 +784,7 @@ const diseases_obj_yld = [{
     'd0HG4Jex0Sv': {
         name: "Rheumatic heart disease - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 13,
         group: 1
@@ -699,6 +792,7 @@ const diseases_obj_yld = [{
     'WK5CwUWJeuz': {
         name: "Maternal conditions - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 1,
         group: 0
@@ -706,6 +800,7 @@ const diseases_obj_yld = [{
     'pzNN8VLUYa6': {
         name: "Skin, sense organs and Oral conditions - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 14,
         group: 1
@@ -713,6 +808,7 @@ const diseases_obj_yld = [{
     'xqH3j6yJj2Q': {
         name: "Liver cancer - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 15,
         group: 1
@@ -720,6 +816,7 @@ const diseases_obj_yld = [{
     'aOrC0GcrCVT': {
         name: "Sexually-transmitted infections incl. HIV/AIDS - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 2,
         group: 0
@@ -727,6 +824,7 @@ const diseases_obj_yld = [{
     'oF5uiIRpvgf': {
         name: "Interpersonal violence - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 36,
         group: 2
@@ -734,6 +832,7 @@ const diseases_obj_yld = [{
     'oPcKTUUPxMv': {
         name: "Venomous deaths - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 37,
         group: 2
@@ -741,6 +840,7 @@ const diseases_obj_yld = [{
     'kLxYWOjvia5': {
         name: "Chronic respiratory diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 16,
         group: 1
@@ -748,6 +848,7 @@ const diseases_obj_yld = [{
     'UVzGycrQd5s': {
         name: "Epilepsy - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 17,
         group: 1
@@ -755,6 +856,7 @@ const diseases_obj_yld = [{
     'qEs4931bbzH': {
         name: "Other digestive diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 18,
         group: 1
@@ -762,6 +864,7 @@ const diseases_obj_yld = [{
     'wmMIOwY7zOQ': {
         name: "Musculoskeletal disorders - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 19,
         group: 1
@@ -769,6 +872,7 @@ const diseases_obj_yld = [{
     'wu9HKrW7NCs': {
         name: "Cervix & uterus cancers - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 20,
         group: 1
@@ -776,6 +880,7 @@ const diseases_obj_yld = [{
     'YX1PqtOLQPB': {
         name: "Congenital anomalies - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 38,
         group: 2
@@ -783,6 +888,7 @@ const diseases_obj_yld = [{
     'HmQgoDfATlx': {
         name: "Perinatal conditions - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 3,
         group: 0
@@ -790,6 +896,7 @@ const diseases_obj_yld = [{
     'FWpn1mpMVAH': {
         name: "Nephritis and nephrosis - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 21,
         group: 1
@@ -797,6 +904,7 @@ const diseases_obj_yld = [{
     'F1aGfaHeIH0': {
         name: "Falls - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 39,
         group: 2
@@ -804,6 +912,7 @@ const diseases_obj_yld = [{
     'QrYqHe9G8oO': {
         name: "Liver diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 22,
         group: 1
@@ -811,6 +920,7 @@ const diseases_obj_yld = [{
     'nPWTo6eIfXG': {
         name: "Ill-defined or cause unknown - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 44,
         group: 3
@@ -818,6 +928,7 @@ const diseases_obj_yld = [{
     'eGOdxT55PxY': {
         name: "Heart diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 23,
         group: 1
@@ -825,6 +936,7 @@ const diseases_obj_yld = [{
     'sZogSMHVw8o': {
         name: "Respiratory infections - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 4,
         group: 0
@@ -832,6 +944,7 @@ const diseases_obj_yld = [{
     'CZuCLz8ZkGh': {
         name: "Other digestive cancers - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 24,
         group: 1
@@ -839,6 +952,7 @@ const diseases_obj_yld = [{
     'pjiyF1CgTdq': {
         name: "Nutritional deficiencies - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 5,
         group: 0
@@ -846,6 +960,7 @@ const diseases_obj_yld = [{
     'zd2aCwJGvOH': {
         name: "Tuberculosis YLD",
         data: [],
+        val: 0,
         color: "",
         index: 6,
         group: 0
@@ -853,6 +968,7 @@ const diseases_obj_yld = [{
     'avpol7zKA8v': {
         name: "Diarrhoeal diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 7,
         group: 0
@@ -860,6 +976,7 @@ const diseases_obj_yld = [{
     'aJgBZ0baQDM': {
         name: "Self-inflicted injuries (suicide) - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 40,
         group: 2
@@ -867,6 +984,7 @@ const diseases_obj_yld = [{
     'CPSynCWa3F3': {
         name: "Breast cancer - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 25,
         group: 1
@@ -874,6 +992,7 @@ const diseases_obj_yld = [{
     'pIZiJ1IGrM2': {
         name: "Fever of unknown origin - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 8,
         group: 0
@@ -881,6 +1000,7 @@ const diseases_obj_yld = [{
     'Hqgx3Gr87Qz': {
         name: "Oral and upper aerodigestive cancers - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 26,
         group: 1
@@ -888,6 +1008,7 @@ const diseases_obj_yld = [{
     'LwsahLjmCuA': {
         name: "Drowning - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 41,
         group: 2
@@ -895,6 +1016,7 @@ const diseases_obj_yld = [{
     'FQ0sR0qweYg': {
         name: "All other cancers - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 27,
         group: 1
@@ -902,6 +1024,7 @@ const diseases_obj_yld = [{
     'NFRkMwepFNF': {
         name: "Leukemia,lymphoma and oth. hemotopoietic malignancies - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 28,
         group: 1
@@ -909,6 +1032,7 @@ const diseases_obj_yld = [{
     'JgBf1i8mTl7': {
         name: "Geneto-urintary diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 29,
         group: 1
@@ -916,6 +1040,7 @@ const diseases_obj_yld = [{
     'ppbHUdxuwKI': {
         name: "Diabetes, endocrine and immune disorders - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 30,
         group: 1
@@ -923,6 +1048,7 @@ const diseases_obj_yld = [{
     'i7YMxsvWjRP': {
         name: "Gastro-oesophageal diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 31,
         group: 1
@@ -930,6 +1056,7 @@ const diseases_obj_yld = [{
     'gnbdk2vc0uW': {
         name: "Stomach cancer - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 32,
         group: 1
@@ -937,6 +1064,7 @@ const diseases_obj_yld = [{
     'pLvYReT9ZWZ': {
         name: "Lung & airway cancers - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 33,
         group: 1
@@ -944,6 +1072,7 @@ const diseases_obj_yld = [{
     'hgPrC3bMBnS': {
         name: "Selected vaccine preventable diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 9,
         group: 0
@@ -951,6 +1080,7 @@ const diseases_obj_yld = [{
     'W5vIBAz8UrL': {
         name: "Meningitis/encephalitis - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 10,
         group: 0
@@ -958,6 +1088,7 @@ const diseases_obj_yld = [{
     'TpXDC1IENWI': {
         name: "Other infectious and parasitic diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 11,
         group: 0
@@ -965,12 +1096,14 @@ const diseases_obj_yld = [{
     'CQLiH0SNXxv': {
         name: "Other neuropsychiatric conditions (excl. epilepsy) - YLD",
         data: [],
+        val: 0,
         group: 1,
         index: 34
     },
     'whnTaAL6FF4': {
         name: "Malaria - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 12,
         group: 0
@@ -978,6 +1111,7 @@ const diseases_obj_yld = [{
     'fNFwiFlIZJj': {
         name: "Cerebrovascular diseases - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 35,
         group: 1
@@ -985,6 +1119,7 @@ const diseases_obj_yld = [{
     'uP0MRaB6mQw': {
         name: "All other injuries - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 42,
         group: 2
@@ -992,6 +1127,7 @@ const diseases_obj_yld = [{
     'lG7TfAsy7CB': {
         name: "Road traffic accidents - YLD",
         data: [],
+        val: 0,
         color: "",
         index: 43,
         group: 2
@@ -1002,6 +1138,7 @@ const diseases_obj_daly = [{
     "OcJVS6d9JYV": {
         name: "Diabetes, endocrine and immune disorders - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 13,
         group: 1
@@ -1009,6 +1146,7 @@ const diseases_obj_daly = [{
     "JsYEGdPYKXV": {
         name: "Epilepsy - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 14,
         group: 1
@@ -1016,6 +1154,7 @@ const diseases_obj_daly = [{
     "IxZrLmK9onl": {
         name: "Liver diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 15,
         group: 1
@@ -1023,6 +1162,7 @@ const diseases_obj_daly = [{
     "nLSIZCh2DSI": {
         name: "Fever of unknown origin - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 0,
         group: 0
@@ -1030,6 +1170,7 @@ const diseases_obj_daly = [{
     "YcSgwuKbLVM": {
         name: "Diarrhoeal diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 1,
         group: 0
@@ -1037,6 +1178,7 @@ const diseases_obj_daly = [{
     "Zy9AZUbeJdu": {
         name: "Cervix & uterus cancers - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 16,
         group: 1
@@ -1044,6 +1186,7 @@ const diseases_obj_daly = [{
     "cmCvW0dqYIU": {
         name: "Cerebrovascular diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 17,
         group: 1
@@ -1051,6 +1194,7 @@ const diseases_obj_daly = [{
     "QrzJPtwAXVm": {
         name: "Venomous deaths - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 36,
         group: 2
@@ -1058,6 +1202,7 @@ const diseases_obj_daly = [{
     "tFs20dNflp1": {
         name: "Heart diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 18,
         group: 1
@@ -1065,6 +1210,7 @@ const diseases_obj_daly = [{
     "YxmshxPQfFT": {
         name: "Drowning - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 37,
         group: 2
@@ -1072,6 +1218,7 @@ const diseases_obj_daly = [{
     "QRUZa2NHY35": {
         name: "Skin, sense organs and Oral conditions - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 19,
         group: 1
@@ -1079,6 +1226,7 @@ const diseases_obj_daly = [{
     "WK6PFCzY5ey": {
         name: "Other neuropsychiatric conditions (excl. epilepsy) - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 20,
         group: 1
@@ -1086,6 +1234,7 @@ const diseases_obj_daly = [{
     "FtDFPXEUzVS": {
         name: "Hepatitis - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 2,
         group: 0
@@ -1093,6 +1242,7 @@ const diseases_obj_daly = [{
     "cbvHNRyXPLX": {
         name: "Other infectious and parasitic diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 3,
         group: 0
@@ -1100,6 +1250,7 @@ const diseases_obj_daly = [{
     "x0bg1YZkRL7": {
         name: "Other digestive diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 21,
         group: 1
@@ -1107,6 +1258,7 @@ const diseases_obj_daly = [{
     "pf9fXcVMch1": {
         name: "Leukemia,lymphoma and oth. hemotopoietic malignancies - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 22,
         group: 1
@@ -1114,6 +1266,7 @@ const diseases_obj_daly = [{
     "lXK2YGC8Wnm": {
         name: "Chronic respiratory diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 23,
         group: 1
@@ -1121,6 +1274,7 @@ const diseases_obj_daly = [{
     "E4ThmXrKE83": {
         name: "Meningitis/encephalitis - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 4,
         group: 0
@@ -1128,6 +1282,7 @@ const diseases_obj_daly = [{
     "xtKp6I7IW26": {
         name: "All other injuries - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 38,
         group: 2
@@ -1135,6 +1290,7 @@ const diseases_obj_daly = [{
     "sBzkGMgeqz5": {
         name: "Stomach cancer - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 24,
         group: 1
@@ -1142,6 +1298,7 @@ const diseases_obj_daly = [{
     "Ken3MHrMEUR": {
         name: "Nephritis and nephrosis - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 25,
         group: 1
@@ -1149,6 +1306,7 @@ const diseases_obj_daly = [{
     "xJTNZfIyiF7": {
         name: "Road traffic accidents - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 39,
         group: 2
@@ -1156,6 +1314,7 @@ const diseases_obj_daly = [{
     "OaP6C0RHURO": {
         name: "Liver cancer - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 26,
         group: 1
@@ -1163,6 +1322,7 @@ const diseases_obj_daly = [{
     "g57Aq6ENncW": {
         name: "Nutritional deficiencies - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 5,
         group: 0
@@ -1170,6 +1330,7 @@ const diseases_obj_daly = [{
     "ed41dKPKdhx": {
         name: "Maternal conditions - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 12,
         group: 0
@@ -1177,6 +1338,7 @@ const diseases_obj_daly = [{
     "p1eQckB6I12": {
         name: "Musculoskeletal disorders - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 27,
         group: 1
@@ -1184,6 +1346,7 @@ const diseases_obj_daly = [{
     "dFv9IGNFyq5": {
         name: "Selected vaccine preventable diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 6,
         group: 0
@@ -1191,6 +1354,7 @@ const diseases_obj_daly = [{
     "s3E5MECaJga": {
         name: "Rheumatic heart disease - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 28,
         group: 1
@@ -1198,6 +1362,7 @@ const diseases_obj_daly = [{
     "GaYrrMmz1KB": {
         name: "Lung & airway cancers - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 29,
         group: 1
@@ -1205,6 +1370,7 @@ const diseases_obj_daly = [{
     "x6OFcxMCTVw": {
         name: "Respiratory infections - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 7,
         group: 0
@@ -1212,6 +1378,7 @@ const diseases_obj_daly = [{
     "VuEOD18STGS": {
         name: "Perinatal conditions - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 8,
         group: 0
@@ -1219,6 +1386,7 @@ const diseases_obj_daly = [{
     "ipm4P5vdH3O": {
         name: "Congenital anomalies - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 40,
         group: 2
@@ -1226,6 +1394,7 @@ const diseases_obj_daly = [{
     "gxhQpCbFB3Q": {
         name: "All other cancers - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 30,
         group: 1
@@ -1233,6 +1402,7 @@ const diseases_obj_daly = [{
     "mHrDw0dGvc9": {
         name: "Other digestive cancers - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 31,
         group: 1
@@ -1240,6 +1410,7 @@ const diseases_obj_daly = [{
     "wPKc8aPWoI2": {
         name: "Tuberculosis DALY",
         data: [],
+        val: 0,
         color: "",
         index: 9,
         group: 0
@@ -1247,6 +1418,7 @@ const diseases_obj_daly = [{
     "sXDbduD9Sei": {
         name: "Oral and upper aerodigestive cancers - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 32,
         group: 1
@@ -1254,6 +1426,7 @@ const diseases_obj_daly = [{
     "uqUmzU6bjbF": {
         name: "Malaria - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 10,
         group: 0
@@ -1261,6 +1434,7 @@ const diseases_obj_daly = [{
     "yIyNAOM1u9Z": {
         name: "Breast cancer - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 33,
         group: 1
@@ -1268,6 +1442,7 @@ const diseases_obj_daly = [{
     "CCPvTbThNQC": {
         name: "Sexually-transmitted infections incl. HIV/AIDS - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 11,
         group: 0
@@ -1275,6 +1450,7 @@ const diseases_obj_daly = [{
     "OaeHix9duCn": {
         name: "Self-inflicted injuries (suicide) - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 41,
         group: 2
@@ -1282,6 +1458,7 @@ const diseases_obj_daly = [{
     "FyUxNHcmGQb": {
         name: "Interpersonal violence - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 42,
         group: 2
@@ -1289,6 +1466,7 @@ const diseases_obj_daly = [{
     "MgPog0EwzQi": {
         name: "Ill-defined or cause unknown - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 44,
         group: 3
@@ -1296,6 +1474,7 @@ const diseases_obj_daly = [{
     "vmoQPXY2pVk": {
         name: "Geneto-urintary diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 34,
         group: 1
@@ -1303,6 +1482,7 @@ const diseases_obj_daly = [{
     "A5iw1YRUUoG": {
         name: "Gastro-oesophageal diseases - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 35,
         group: 1
@@ -1310,6 +1490,7 @@ const diseases_obj_daly = [{
     "hz3xiC028bl": {
         name: "Falls - DALY",
         data: [],
+        val: 0,
         color: "",
         index: 43,
         group: 2

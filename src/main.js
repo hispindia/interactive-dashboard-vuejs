@@ -7,6 +7,7 @@ import HighchartsVue from 'highcharts-vue'
 import Highcharts from 'highcharts'
 import mapInit from 'highcharts/modules/map'
 import stockInit from 'highcharts/modules/stock'
+import treemapInit from 'highcharts/modules/treemap'
 import exportingInit from 'highcharts/modules/exporting'
 import Router from 'vue-router'
 // import addWorldMap from './indiamap'
@@ -14,6 +15,7 @@ import Router from 'vue-router'
 stockInit(Highcharts)
 exportingInit(Highcharts)
 mapInit(Highcharts)
+treemapInit(Highcharts)
 // addWorldMap(Highcharts)
 Vue.use(HighchartsVue)
 Vue.use(Router)
