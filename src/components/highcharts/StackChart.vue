@@ -16,6 +16,7 @@ export default {
     EventBus.$on("ou-created", this.setSelectedOu);
     EventBus.$on("ou-changed", this.setSelectedOu);
     EventBus.$on("param-stackChart", this.setSelections);
+    EventBus.$on("percent", this.changeChart);
   },
   watch: {
     ou: function() {
@@ -34,14 +35,32 @@ export default {
       this.getApiData();
     },
     measureFilter: function(value) {
-      if (value == variables.yll) this.diseases = variables.diseases_yll;
-      else if (value == variables.yld) this.diseases = variables.diseases_yld;
-      else if (value == variables.daly) this.diseases = variables.diseases_daly;
-      else this.diseases = variables.diseases_deaths;
+      if (value == variables.yll && !this.diseaseFlag)
+        this.diseases = variables.diseases_yll;
+      else if (value == variables.yld && !this.diseaseFlag)
+        this.diseases = variables.diseases_yld;
+      else if (value == variables.daly && !this.diseaseFlag)
+        this.diseases = variables.diseases_daly;
+      else if (value == variables.deaths && !this.diseaseFlag)
+        this.diseases = variables.diseases_deaths;
+      else {
+      }
       this.getApiData();
     }
   },
   methods: {
+    changeChart: function(v) {
+      if (v == "percent") {
+        this.chartOptions.plotOptions.column.stacking = "percent";
+        this.chartOptions.tooltip.pointFormat =
+          "{series.name}: {point.y}<br/>Total: {point.stackTotal}<br/> Percentage: {point.percentage:.0f}%";
+      } else {
+        this.chartOptions.plotOptions.column.stacking = "normal";
+        this.chartOptions.tooltip.pointFormat =
+          "{series.name}: {point.y}<br/>Total: {point.stackTotal}";
+      }
+      this.getApiData();
+    },
     setColors: function() {
       var count1 = 1,
         count2 = 1,
@@ -51,20 +70,10 @@ export default {
         var key = Object.keys(this.diseases[0])[g];
         var index = this.diseases[0][key].group;
         if (index == 0) {
-          this.diseases[0][key].color = this.getColorShades(
-            128,
-            0,
-            0,
-            count1
-          );
+          this.diseases[0][key].color = this.getColorShades(128, 0, 0, count1);
           count1++;
         } else if (index == 1) {
-          this.diseases[0][key].color = this.getColorShades(
-            0,
-            128,
-            0,
-            count2
-          );
+          this.diseases[0][key].color = this.getColorShades(0, 128, 0, count2);
           count2++;
         } else if (index == 2) {
           this.diseases[0][key].color = this.getColorShades(
@@ -75,23 +84,29 @@ export default {
           );
           count3++;
         } else {
-          this.diseases[0][key].color = this.getColorShades(
-            0,
-            0,
-            255,
-            count4
-          );
+          this.diseases[0][key].color = this.getColorShades(0, 0, 255, count4);
           count4++;
         }
       }
     },
     getColorShades: function(r, g, b, x) {
-      var o =  x>3 && x<6 ? 0.9 : x>=6 && x<10 ? 0.75 : x>=10 && x<16 ? 0.60 : x>=16 && x<20 ? 0.45 : x>=20 ? 0.3 : 1;
-      x = x+4;
+      var o =
+        x > 3 && x < 6
+          ? 0.9
+          : x >= 6 && x < 10
+          ? 0.75
+          : x >= 10 && x < 16
+          ? 0.6
+          : x >= 16 && x < 20
+          ? 0.45
+          : x >= 20
+          ? 0.3
+          : 1;
+      x = x + 4;
       r = (x * r) / 10;
       g = (x * g) / 10;
       b = (x * b) / 10;
-      return "rgb(" + r  + "," + g + "," + b + "," + o + ")";
+      return "rgb(" + r + "," + g + "," + b + "," + o + ")";
     },
     handleShowHide: function() {
       $(".bottom-options").removeClass("selected-option");
@@ -111,12 +126,15 @@ export default {
       } else if (params.filter == "site") {
         this.siteFilter = params.value;
       } else if (params.filter == "measure") {
+        this.diseaseFlag = false;
         this.measureFilter = params.value;
       } else {
+        this.diseaseFlag = true;
+        this.measureFilter = params.value.id;
       }
     },
     setSelectedOu: function(params) {
-      if(params.ou === undefined)return;
+      if (params.ou === undefined) return;
       params.ou != "" ? (this.ou = params.ou) : this.ou;
       this.setSelections(params);
     },
@@ -361,6 +379,7 @@ export default {
   },
   data() {
     return {
+      diseaseFlag: false,
       width: "",
       selections: "age",
       diseases: variables.diseases_yll,
@@ -416,10 +435,12 @@ export default {
         tooltip: {
           headerFormat: "<b>{point.x}</b><br/>",
           pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}"
+          // pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}<br/> Percentage: {point.percentage:.0f}%"
         },
         plotOptions: {
           column: {
             stacking: "normal",
+            // stacking: "percent",
             borderWidth: 0,
             dataLabels: {
               enabled: false,

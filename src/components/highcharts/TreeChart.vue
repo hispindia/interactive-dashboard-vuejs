@@ -10,6 +10,7 @@ import Highcharts from "highcharts";
 export default {
   data() {
     return {
+      diseaseFlag: false,
       diseases: variables.diseases_yll,
       genderFilter: variables.gender_main_var,
       ageFilter: variables.age_main_var,
@@ -21,6 +22,9 @@ export default {
       mapOptions: {
         chart: {
           type: "treemap"
+        },
+        title : {
+          text : "Diseases Tree Map"
         },
         series: [
           {
@@ -86,10 +90,13 @@ export default {
       this.loadApi();
     },
     measureFilter: function(value) {
-      if (value == variables.yll) this.diseases = variables.diseases_yll;
-      else if (value == variables.yld) this.diseases = variables.diseases_yld;
-      else if (value == variables.daly) this.diseases = variables.diseases_daly;
-      else this.diseases = variables.diseases_deaths;
+      if (value == variables.yll && !this.diseaseFlag) this.diseases = variables.diseases_yll;
+      else if (value == variables.yld && !this.diseaseFlag) this.diseases = variables.diseases_yld;
+      else if (value == variables.daly && !this.diseaseFlag) this.diseases = variables.diseases_daly;
+      else if(value == variables.deaths && !this.diseaseFlag) this.diseases = variables.diseases_deaths;
+      else{
+
+      }
       this.loadApi();
     }
   },
@@ -161,8 +168,11 @@ export default {
       } else if (params.filter == "site") {
         this.siteFilter = params.value;
       } else if (params.filter == "measure") {
+         this.diseaseFlag = false;
         this.measureFilter = params.value;
       } else {
+         this.diseaseFlag = true;
+        this.measureFilter = params.value.id;
       }
     },
     setApis: function() {

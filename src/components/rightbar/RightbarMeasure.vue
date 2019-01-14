@@ -58,6 +58,7 @@ export default {
   methods :{
     sendFilter : function(){
       EventBus.$emit("filters", {value : this.selected, filter:"measure"});
+      EventBus.$emit("diseasechange", this.selected);
     },
     reset : function(){
       this.selected = "YLL"
@@ -73,3 +74,4 @@ export default {
   }
 };
 </script>
+

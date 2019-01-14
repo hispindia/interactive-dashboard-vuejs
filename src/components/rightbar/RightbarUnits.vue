@@ -25,7 +25,7 @@
                 type="radio"
                 name="units"
                 autocomplete="off"
-                value="% age"
+                value="percent"
               > % age
         </div>
       </div>
@@ -33,12 +33,26 @@
   <!-- Units toggle bar end-->
 </template>
 <script>
+import { EventBus } from "../../event-bus";
+import variables from "../../config.js";
+
 export default {
   name: "RightbarUnits",
   data() {
     return {
       selected: "Count"
     };
+  },
+  methods : {
+    sendChart : function(){
+     if(this.selected == "percent") EventBus.$emit("percent", "percent");
+     else  EventBus.$emit("percent" , "count");
+    }
+  },
+  watch : {
+    selected : function(){
+      this.sendChart();
+    }
   }
 };
 </script>

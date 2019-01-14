@@ -35,10 +35,13 @@ export default {
       this.getApiData();
     },
     measureFilter: function(value) {
-      if (value == variables.yll) this.diseases = variables.diseases_yll;
-      else if (value == variables.yld) this.diseases = variables.diseases_yld;
-      else if (value == variables.daly) this.diseases = variables.diseases_daly;
-      else this.diseases = variables.diseases_deaths;
+      if (value == variables.yll && !this.diseaseFlag) this.diseases = variables.diseases_yll;
+      else if (value == variables.yld && !this.diseaseFlag) this.diseases = variables.diseases_yld;
+      else if (value == variables.daly && !this.diseaseFlag) this.diseases = variables.diseases_daly;
+      else if(value == variables.deaths && !this.diseaseFlag) this.diseases = variables.diseases_deaths;
+      else{
+
+      }
       this.getApiData();
     }
   },
@@ -112,8 +115,11 @@ export default {
       } else if (params.filter == "site") {
         this.siteFilter = params.value;
       } else if (params.filter == "measure") {
+        this.diseaseFlag = false;
         this.measureFilter = params.value;
       } else {
+         this.diseaseFlag = true;
+        this.measureFilter = params.value.id;
       }
     },
     setSelectedOu: function(params) {
@@ -363,6 +369,7 @@ export default {
   },
   data() {
     return {
+      diseaseFlag : false,
       width: "",
       selections: "age",
       diseases: variables.diseases_yll,

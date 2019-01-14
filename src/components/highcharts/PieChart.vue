@@ -35,10 +35,13 @@ export default {
       this.getApiData();
     },
     measureFilter: function(value) {
-      if (value == variables.yll) this.diseases = variables.diseases_yll;
-      else if (value == variables.yld) this.diseases = variables.diseases_yld;
-      else if (value == variables.daly) this.diseases = variables.diseases_daly;
-      else this.diseases = variables.diseases_deaths;
+     if (value == variables.yll && !this.diseaseFlag) this.diseases = variables.diseases_yll;
+      else if (value == variables.yld && !this.diseaseFlag) this.diseases = variables.diseases_yld;
+      else if (value == variables.daly && !this.diseaseFlag) this.diseases = variables.diseases_daly;
+      else if(value == variables.deaths && !this.diseaseFlag) this.diseases = variables.diseases_deaths;
+      else{
+
+      }
       this.getApiData();
     }
   },
@@ -108,8 +111,11 @@ export default {
       } else if (params.filter == "site") {
         this.siteFilter = params.value;
       } else if (params.filter == "measure") {
+        this.diseaseFlag = false;
         this.measureFilter = params.value;
       } else {
+         this.diseaseFlag = true;
+        this.measureFilter = params.value.id;
       }
     },
     setSelectedOu: function(params) {
@@ -161,8 +167,10 @@ export default {
     sortDataByGender: function(dataloop) {
       $("#btnGender").addClass("selected-option");
       //   let temp = JSON.parse(JSON.stringify(variables.gender_categories_forpie));
-      var male = 0;
-      var female = 0;
+      var male = 0,
+        maledata = { categories: [], data: [] };
+      var female = 0,
+        femaledata = { categories: [], data: [] };
       for (let i = 0, len = dataloop.length; i < len; i++) {
         var disease_id = dataloop[i][0];
         var value =
@@ -170,14 +178,20 @@ export default {
             ? parseInt(dataloop[i][6])
             : parseInt(dataloop[i][5]);
         var gender_id = dataloop[i][2];
-        gender_id == variables.gender_male_id
-          ? (male += value)
-          : (female += value);
+        if (gender_id == variables.gender_male_id) {
+          male += value;
+          maledata.categories.push(this.diseases[0][disease_id].name);
+          maledata.data.push(value);
+        } else {
+          female += value;
+          femaledata.categories.push(this.diseases[0][disease_id].name);
+          femaledata.data.push(value);
+        }
         if (i == len - 1) {
           var vm = this;
           var temp = [];
-          temp.push({ name: "Male", y: male, sliced: true, selected: true });
-          temp.push({ name: "Female", y: female });
+          temp.push({ y: male, sliced: true, selected: true, drilldown :{ name: "Male", categories : [...maledata.categories], data : [...maledata.data] }});
+          temp.push({ y: female, drilldown :{ name: "Female", categories : [...femaledata.categories], data : [...femaledata.data] }});
           setTimeout(function() {
             vm.chartOptions.series[0].data = [...temp];
             // vm.chartOptions.xAxis.categories = [...variables.gender_categories_];
@@ -205,17 +219,28 @@ export default {
         var age_id = dataloop[i][3];
         age_id == variables.age_0_4_id
           ? (age_04 += value)
-          : age_id == variables.age_5_14_id ? (age_514 += value) :
-          age_id == variables.age_15_29_id ? (age_1529 += value) :
-          age_id == variables.age_30_49_id ? (age_3049 += value) :
-          age_id == variables.age_50_59_id ? (age_5059 += value) :
-          age_id == variables.age_60_69_id ? (age_6069 += value) :
-          age_id == variables.age_70_79_id ? (age_7079 += value) :
-          age_80above += value;
+          : age_id == variables.age_5_14_id
+          ? (age_514 += value)
+          : age_id == variables.age_15_29_id
+          ? (age_1529 += value)
+          : age_id == variables.age_30_49_id
+          ? (age_3049 += value)
+          : age_id == variables.age_50_59_id
+          ? (age_5059 += value)
+          : age_id == variables.age_60_69_id
+          ? (age_6069 += value)
+          : age_id == variables.age_70_79_id
+          ? (age_7079 += value)
+          : (age_80above += value);
         if (i == len - 1) {
           var vm = this;
           var temp = [];
-          temp.push({ name: "0-4 years", y: age_04, sliced: true, selected: true });
+          temp.push({
+            name: "0-4 years",
+            y: age_04,
+            sliced: true,
+            selected: true
+          });
           temp.push({ name: "5-14 years", y: age_514 });
           temp.push({ name: "15-29 years", y: age_1529 });
           temp.push({ name: "30-49 years", y: age_3049 });
@@ -338,6 +363,7 @@ export default {
   },
   data() {
     return {
+      diseaseFlag : false,
       width: "",
       selections: "age",
       diseases: variables.diseases_yll,
@@ -395,7 +421,8 @@ export default {
         },
         tooltip: {
           headerFormat: "<b>{point.x}</b><br/>",
-          pointFormat: "{series.name}: {point.y}<br><b>{point.name}</b>: {point.percentage:.1f} %"
+          pointFormat:
+            "{series.name}: {point.y}<br><b>{point.name}</b>: {point.percentage:.1f} %"
         },
         plotOptions: {
           pie: {

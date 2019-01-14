@@ -10,6 +10,7 @@ import { EventBus } from "../../event-bus";
 export default {
   data() {
     return {
+      diseaseFlag : false,
       measureFilter: variables.yll,
       mapOptions: {
         chart: {
@@ -56,10 +57,13 @@ export default {
   },
   watch: {
     measureFilter: function(value) {
-      if (value == variables.yll) this.diseases = variables.diseases_yll;
-      else if (value == variables.yld) this.diseases = variables.diseases_yld;
-      else if (value == variables.daly) this.diseases = variables.diseases_daly;
-      else this.diseases = variables.diseases_deaths;
+       if (value == variables.yll && !this.diseaseFlag) this.diseases = variables.diseases_yll;
+      else if (value == variables.yld && !this.diseaseFlag) this.diseases = variables.diseases_yld;
+      else if (value == variables.daly && !this.diseaseFlag) this.diseases = variables.diseases_daly;
+      else if(value == variables.deaths && !this.diseaseFlag) this.diseases = variables.diseases_deaths;
+      else{
+
+      }
       this.loadMapData();
     }
   },
@@ -69,9 +73,12 @@ export default {
   },
   methods: {
     setFilters: function(params) {
-      if (params.filter == "measure") {
+       if (params.filter == "measure") {
+        this.diseaseFlag = false;
         this.measureFilter = params.value;
-      } else {
+      } else if( params.filter == "disease") {
+         this.diseaseFlag = true;
+        this.measureFilter = params.value.id;
       }
     },
     loadMapData: function() {

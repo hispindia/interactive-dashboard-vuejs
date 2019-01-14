@@ -1336,7 +1336,7 @@ const diseases_obj_daly = [{
         group: 0
     },
     "p1eQckB6I12": {
-        name: "Musculoskeletal disorders - DALY",
+        name: "Musculoskeletal diˀ DALY",
         data: [],
         val: 0,
         color: "",

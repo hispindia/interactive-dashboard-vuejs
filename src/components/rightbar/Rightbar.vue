@@ -7,6 +7,8 @@
     </div>
     <RightbarMeasure/>
     <!-- <br> -->
+    <RightbarDisease/>
+    <!-- <br> -->
     <RightbarGender/>
     <!-- <br> -->
     <RightbarSite/>
@@ -23,6 +25,7 @@ import RightbarGender from "./RightbarGender";
 import RightbarMeasure from "./RightbarMeasure";
 import RightbarSite from "./RightbarSite";
 import RightbarUnits from "./RightbarUnits";
+import RightbarDisease from "./RightbarDisease";
 
 export default {
   name: "Rightbar",
@@ -36,7 +39,8 @@ export default {
     RightbarGender,
     RightbarMeasure,
     RightbarSite,
-    RightbarUnits
+    RightbarUnits,
+    RightbarDisease
   }
 };
 </script>
