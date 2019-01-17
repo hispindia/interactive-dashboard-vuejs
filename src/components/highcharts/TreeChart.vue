@@ -219,7 +219,7 @@ export default {
           this.mapOptions.series[0].data = [];
           var dataloop = "";
           response.data.rows.length == 0
-            ? (tthis.mapOptions.series[0].data = [])
+            ? (this.chartOptions.series = [],alert("No data at this organisation Unit!"), $("#loader").hide())          
             : (dataloop = response.data.rows);
 
           this.loadMapData(dataloop);
