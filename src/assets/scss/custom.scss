@@ -1,93 +1,103 @@
-
-#header{
+#headerapp {
     font-size: 30px;
     font-family: "Roboto";
     background-color: #FF9100;
-    color:black;
+    color: black;
 }
 
-#rightbar{
+#rightbar {
     background-color: #FFB74D;
     min-height: 100%;
-    max-width:19vw;
-    transition : 300ms ease;
+    max-width: 19vw;
+    transition: 300ms ease;
 }
-#leftbar{
+
+#leftbar {
     background-color: #FFB74D;
     min-height: 100%;
-    max-width:19vw;
-    transition : 300ms ease;
+    max-width: 19vw;
+    transition: 300ms ease;
 }
-#center-container{
+
+#center-container {
     // height: 100%;  
-    max-width:90vw;
-    min-width:60vw;
-    margin: 0 auto; 
+    max-width: 90vw;
+    min-width: 60vw;
+    margin: 0 auto;
 }
 
-.div-content{
-    width:100%;
+.div-content {
+    width: 100%;
 }
 
-#rightbar-icon{
-    padding:30px 15px;
+#rightbar-icon {
+    padding: 30px 15px;
     font-size: 36px !important;
-    cursor:pointer;
-    color:black;
+    cursor: pointer;
+    color: black;
 }
 
-#leftbar-icon{
-    padding:30px 15px;
+#leftbar-icon {
+    padding: 30px 15px;
     font-size: 36px !important;
-    cursor:pointer;
-    color:black;
+    cursor: pointer;
+    color: black;
 }
 
-.rightbar-menu{
+.rightbar-menu {
     padding: 10px;
     font-size: 14px;
     background: #fff;
     min-width: 18vw;
     margin: 0.5rem;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
-.collapse-div{
-    max-width:4vw !important;
-    .rightbar-menu-main{
+
+.collapse-div {
+    max-width: 4vw !important;
+
+    .rightbar-menu-main {
         display: none;
     }
-    .leftbar-menu-main{
+
+    .leftbar-menu-main {
         display: none;
     }
 }
 
-.gender-toggle > label > input{
+.gender-toggle>label>input {
     -webkit-appearance: button !important;
-    width:40px;
-    height:28px;
+    width: 40px;
+    height: 28px;
 }
 
-#btnAge, #btnGender, #btnSite, #btnLocation {
+#btnAge,
+#btnGender,
+#btnSite,
+#btnLocation {
     display: inline-block;
-    margin:0.2rem;
+    margin: 0.2rem;
 }
 
-#btnSite, #btnLocation{
+#btnSite,
+#btnLocation {
     display: none;
 }
 
-.hidediv{
-    display:none;
+.hidediv {
+    display: none;
 }
 
 //highcharts
 
-.highcharts-container{
-    width:100% !important;
+.highcharts-container {
+    width: 100% !important;
     border-radius: 0 20px 20px 20px;
 }
 
-.highcharts-legend{
+.highcharts-legend {
     display: none;
     border-radius: 20px;
 }
+
+

@@ -1,6 +1,7 @@
 <template>
   <div class="container-fluid no-gutters main" style="overflow-x:hidden;background-color: #FFF3E0;">
-    <Header/>
+    <DhisHeader/>
+    <HeaderApp/>
     <div class="row" style="display: flex">
       <Leftbar/>
       <Loader/>
@@ -11,7 +12,8 @@
 </template>
 
 <script>
-import Header from "./components/Header";
+import DhisHeader from "./components/d2header/DhisHeader";
+import HeaderApp from "./components/HeaderApp";
 import Leftbar from "./components/Leftbar";
 import Rightbar from "./components/rightbar/Rightbar";
 import CenterContainer from "./components/centercontainer/CenterContainer";
@@ -20,7 +22,8 @@ import Loader from "./components/Loader";
 export default {
   name: "App",
   components: {
-    Header,
+    DhisHeader,
+    HeaderApp,
     Leftbar,
     Rightbar,
     CenterContainer,
