@@ -443,7 +443,11 @@ const diseases_obj_deaths = [{
     },
     'dhFdGBrCOL0': {
         name: "Other Genitorurintary diseases (deaths)",
-        data: []
+        data: [],
+        val: 0,
+        color: "",
+        index: 45,
+        group: 3
     },
     'EI8xZCX8bCA': {
         name: "Cerebrovascular disease (deaths)",
@@ -490,7 +494,7 @@ const diseases_obj_deaths = [{
         data: [],
         val: 0,
         color: "",
-        index: 45,
+        index: 46,
         group: 3
     },
     'QZKKmntYWnK': {

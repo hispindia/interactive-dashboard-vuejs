@@ -10,7 +10,7 @@
                 type="radio"
                 name="units"
                 autocomplete="off"
-                value="Count"
+                value="count"
                 checked
               > Count
               <input
@@ -18,7 +18,7 @@
                 type="radio"
                 name="units"
                 autocomplete="off"
-                value="Rate"
+                value="rate"
               > Rate
               <input
                 v-model="selected"
@@ -40,13 +40,14 @@ export default {
   name: "RightbarUnits",
   data() {
     return {
-      selected: "Count"
+      selected: "count"
     };
   },
   methods : {
     sendChart : function(){
-     if(this.selected == "percent") EventBus.$emit("percent", "percent");
-     else  EventBus.$emit("percent" , "count");
+     if(this.selected == "percent") EventBus.$emit("chartChange", "percent");
+     else if(this.selected == "count") EventBus.$emit("chartChange" , "count");
+     else { EventBus.$emit("chartChange" , "rate"); }
     }
   },
   watch : {

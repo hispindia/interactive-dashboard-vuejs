@@ -16,13 +16,15 @@ export default {
     EventBus.$on("ou-created", this.setSelectedOu);
     EventBus.$on("ou-changed", this.setSelectedOu);
     EventBus.$on("param-stackChart", this.setSelections);
-    EventBus.$on("percent", this.changeChart);
+    EventBus.$on("chartChange", this.changeChart);
   },
   watch: {
     ou: function() {
       this.getApiData();
     },
-    selections: function() {
+    selections: function(v) {
+      this.chartOptions.title.text =
+        "Stacked Diseases aggregated chart : " + v + "-wise";
       this.getApiData();
     },
     genderFilter: function() {
@@ -35,29 +37,40 @@ export default {
       this.getApiData();
     },
     measureFilter: function(value) {
-      if (value == variables.yll && !this.diseaseFlag)
+      if (value == variables.yll && !this.diseaseFlag) {
         this.diseases = variables.diseases_yll;
-      else if (value == variables.yld && !this.diseaseFlag)
+        this.chartOptions.yAxis.title.text = "YLL Counts";
+      } else if (value == variables.yld && !this.diseaseFlag) {
         this.diseases = variables.diseases_yld;
-      else if (value == variables.daly && !this.diseaseFlag)
+        this.chartOptions.yAxis.title.text = "YLD Counts";
+      } else if (value == variables.daly && !this.diseaseFlag) {
         this.diseases = variables.diseases_daly;
-      else if (value == variables.deaths && !this.diseaseFlag)
+        this.chartOptions.yAxis.title.text = "DALY Counts";
+      } else if (value == variables.deaths && !this.diseaseFlag) {
         this.diseases = variables.diseases_deaths;
-      else {
+        this.chartOptions.yAxis.title.text = "Deaths Counts";
+      } else {
       }
       this.getApiData();
     }
+    // chartType :function(v){
+    //   if(v=="rate") this.getPopulationData();
+    // }
   },
   methods: {
     changeChart: function(v) {
       if (v == "percent") {
+        this.chartType = "percent";
         this.chartOptions.plotOptions.column.stacking = "percent";
         this.chartOptions.tooltip.pointFormat =
           "{series.name}: {point.y}<br/>Total: {point.stackTotal}<br/> Percentage: {point.percentage:.0f}%";
-      } else {
+      } else if (v == "count") {
+        this.chartType = "count";
         this.chartOptions.plotOptions.column.stacking = "normal";
         this.chartOptions.tooltip.pointFormat =
           "{series.name}: {point.y}<br/>Total: {point.stackTotal}";
+      } else {
+        this.chartType = "rate";
       }
       this.getApiData();
     },
@@ -154,6 +167,9 @@ export default {
           this.ou == variables.indiaOuId
             ? this.selections == "location"
               ? this.defaultIndiaApi
+              : this.measureFilter == variables.yld ||
+                this.measureFilter == variables.daly
+              ? this.statesApi
               : this.indiaApi
             : this.statesApi
         )
@@ -163,47 +179,196 @@ export default {
           this.chartOptions.series = [];
           var dataloop = "";
           response.data.rows.length == 0
-            ? (this.chartOptions.series = [],alert("No data at this organisation Unit!"), $("#loader").hide())
+            ? ((this.chartOptions.series = []),
+              alert("No data at this organisation Unit!"),
+              $("#loader").hide())
             : (dataloop = response.data.rows);
-
-          this.selections == "gender"
-            ? this.sortDataByGender(dataloop)
-            : this.selections == "age"
-            ? this.sortDataByAge(dataloop)
-            : this.selections == "location"
-            ? this.sortDataByLoc(dataloop)
-            : this.sortDataBySite(dataloop);
+          var vm = this;
+          if (this.chartType == "rate") {
+            if (this.selections == "gender") {
+              this.getPopulationData("gender");
+              setTimeout(function() {
+                vm.sortDataByGender(dataloop);
+              }, 2000);
+            } else if (this.selections == "age") {
+              this.getPopulationData("age");
+              setTimeout(function() {
+                vm.sortDataByAge(dataloop);
+              }, 2000);
+            } else if (this.selections == "site") {
+              this.getPopulationData("site");
+              setTimeout(function() {
+                vm.sortDataBySite(dataloop);
+              }, 2000);
+            } else {
+              this.sortDataByLoc(dataloop);
+            }
+          } else {
+            this.selections == "gender"
+              ? this.sortDataByGender(dataloop)
+              : this.selections == "age"
+              ? this.sortDataByAge(dataloop)
+              : this.selections == "location"
+              ? this.sortDataByLoc(dataloop)
+              : this.sortDataBySite(dataloop);
+          }
         })
         .catch(error => {
           console.log(error);
         });
     },
+    getPopulationData: function(type) {
+      // $("#loader").show();
+      var data_flag = false;
+      var gender_population = {
+        male: 0,
+        female: 0,
+        both: 0
+      };
+      var age_population = {
+        age0_4: 0,
+        age5_14: 0,
+        age15_29: 0,
+        age30_49: 0,
+        age50_59: 0,
+        age60_69: 0,
+        age70_79: 0,
+        age80_above: 0
+      };
+      var site_population = {
+        urban: 0,
+        rural: 0,
+        both: 0
+      };
+      var vm = this;
+      axios
+        .get(
+          "../../analytics.json?dimension=pe:2015&dimension=" +
+            variables.gender_id +
+            ":" +
+            this.genderFilter +
+            "&dimension=" +
+            variables.age_id +
+            ":" +
+            this.ageFilter +
+            "&dimension=" +
+            variables.site_id +
+            ":" +
+            this.siteFilter +
+            "&dimension=ou:" +
+            this.ou +
+            "&dimension=dx:gNaskBzw5Nq&displayProperty=NAME&outputIdScheme=UID"
+        )
+        .then(response => {
+          var data = response.data.rows;
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            var value = Number(data[i][6]);
+            if (type == "gender") {
+              if (data[i][2] == variables.gender_male_id) {
+                gender_population.male = value;
+                gender_population.both += value;
+              } else if (data[i][2] == variables.gender_female_id) {
+                gender_population.female = value;
+                gender_population.both += value;
+              }
+            } else if (type == "age") {
+              if (data[i][3] == variables.age_0_4_id) {
+                age_population.age0_4 = value;
+              } else if (data[i][3] == variables.age_5_14_id) {
+                age_population.age5_14 = value;
+              } else if (data[i][3] == variables.age_15_29_id) {
+                age_population.age15_29 = value;
+              } else if (data[i][3] == variables.age_30_49_id) {
+                age_population.age30_49 = value;
+              } else if (data[i][3] == variables.age_50_59_id) {
+                age_population.age50_59 = value;
+              } else if (data[i][3] == variables.age_60_69_id) {
+                age_population.age60_69 = value;
+              } else if (data[i][3] == variables.age_70_79_id) {
+                age_population.age70_79 = value;
+              } else {
+                age_population.age80_above = value;
+              }
+            } else {
+              if (data[i][4] == variables.site_urban_id) {
+                site_population.urban = value;
+                site_population.both += value;
+              } else if (data[i][4] == variables.site_rural_id) {
+                site_population.rural = value;
+                site_population.both += value;
+              }
+            }
+            if (i == data.length - 1) {
+              if (type == "gender") vm.populationdata = gender_population;
+              if (type == "age") vm.populationdata = age_population;
+              if (type == "site") vm.populationdata = site_population;
+            }
+          }
+        });
+    },
     sortDataByGender: function(dataloop) {
       $("#btnGender").addClass("selected-option");
       let temp = JSON.parse(JSON.stringify(this.diseases));
+      // if (this.chartType == "rate") this.getPopulationData("gender");
       for (let i = 0, len = dataloop.length; i < len; i++) {
         var disease_id = dataloop[i][0];
         var value =
           this.ou == variables.indiaOuId
-            ? parseFloat(dataloop[i][6])
+            ? this.measureFilter == variables.yld ||
+              this.measureFilter == variables.daly
+              ? parseFloat(dataloop[i][5])
+              : parseFloat(dataloop[i][6])
             : parseFloat(dataloop[i][5]);
         var gender_id = dataloop[i][2];
-        gender_id == variables.gender_male_id
-          ? temp[0][disease_id].data[0] === undefined
-            ? (temp[0][disease_id].data[0] = value)
-            : (temp[0][disease_id].data[0] += value)
-          : temp[0][disease_id].data[1] === undefined
-          ? (temp[0][disease_id].data[1] = value)
-          : (temp[0][disease_id].data[1] += value);
+        if (this.chartType != "rate") {
+          gender_id == variables.gender_male_id
+            ? temp[0][disease_id].data[0] === undefined
+              ? (temp[0][disease_id].data[0] = value)
+              : (temp[0][disease_id].data[0] += value)
+            : temp[0][disease_id].data[1] === undefined
+            ? (temp[0][disease_id].data[1] = value)
+            : (temp[0][disease_id].data[1] += value);
 
-        temp[0][disease_id].data[2] === undefined
-          ? (temp[0][disease_id].data[2] = value)
-          : (temp[0][disease_id].data[2] += value);
+          temp[0][disease_id].data[2] === undefined
+            ? (temp[0][disease_id].data[2] = value)
+            : (temp[0][disease_id].data[2] += value);
+        } else {
+          gender_id == variables.gender_male_id
+            ? temp[0][disease_id].data[0] === undefined
+              ? (temp[0][disease_id].data[0] = value / this.populationdata.male)
+              : (temp[0][disease_id].data[0] +=
+                  value / this.populationdata.male)
+            : temp[0][disease_id].data[1] === undefined
+            ? (temp[0][disease_id].data[1] = value / this.populationdata.female)
+            : (temp[0][disease_id].data[1] +=
+                value / this.populationdata.female);
+
+          temp[0][disease_id].data[2] === undefined
+            ? (temp[0][disease_id].data[2] = value / this.populationdata.both)
+            : (temp[0][disease_id].data[2] += value / this.populationdata.both);
+        }
 
         if (i == len - 1) {
           var vm = this;
           setTimeout(function() {
             vm.chartOptions.series = [...Object.values(temp[0])];
+            var temparr = vm.chartOptions.series;
+            vm.chartOptions.series = [
+              ...temparr.map(temparr => {
+                if (temparr.data.length == 0) {
+                  temparr.data = [null, null, null];
+                  return temparr;
+                } else if (temparr.data.length != 0) {
+                  let tarr = temparr.data;
+                  for (let a = 0; a < 3; a++) {
+                    if (tarr[a] === undefined) tarr[a] = null;
+                  }
+                  temparr.data = [...tarr];
+                  return temparr;
+                }
+              })
+            ];
             vm.chartOptions.xAxis.categories = [...variables.gender_categories];
             $("#loader").hide();
           }, 2000);
@@ -217,49 +382,125 @@ export default {
         var disease_id = dataloop[i][0];
         var value =
           this.ou == variables.indiaOuId
-            ? parseFloat(dataloop[i][6])
+            ? this.measureFilter == variables.yld ||
+              this.measureFilter == variables.daly
+              ? parseFloat(dataloop[i][5])
+              : parseFloat(dataloop[i][6])
             : parseFloat(dataloop[i][5]);
         var age_id_match = dataloop[i][3];
-        if (age_id_match == variables.age_0_4_id) {
-          console.log(value + " --- " + disease_id + " -- " + age_id_match);
-        }
 
-        age_id_match == variables.age_0_4_id
-          ? temp[0][disease_id].data[0] === undefined
-            ? (temp[0][disease_id].data[0] = value)
-            : (temp[0][disease_id].data[0] += value)
-          : age_id_match == variables.age_5_14_id
-          ? temp[0][disease_id].data[1] === undefined
-            ? (temp[0][disease_id].data[1] = value)
-            : (temp[0][disease_id].data[1] += value)
-          : age_id_match == variables.age_15_29_id
-          ? temp[0][disease_id].data[2] === undefined
-            ? (temp[0][disease_id].data[2] = value)
-            : (temp[0][disease_id].data[2] += value)
-          : age_id_match == variables.age_30_49_id
-          ? temp[0][disease_id].data[3] === undefined
-            ? (temp[0][disease_id].data[3] = value)
-            : (temp[0][disease_id].data[3] += value)
-          : age_id_match == variables.age_50_59_id
-          ? temp[0][disease_id].data[4] === undefined
-            ? (temp[0][disease_id].data[4] = value)
-            : (temp[0][disease_id].data[4] += value)
-          : age_id_match == variables.age_60_69_id
-          ? temp[0][disease_id].data[5] === undefined
-            ? (temp[0][disease_id].data[5] = value)
-            : (temp[0][disease_id].data[5] += value)
-          : age_id_match == variables.age_70_79_id
-          ? temp[0][disease_id].data[6] === undefined
-            ? (temp[0][disease_id].data[6] = value)
-            : (temp[0][disease_id].data[6] += value)
-          : temp[0][disease_id].data[7] === undefined
-          ? (temp[0][disease_id].data[7] = value)
-          : (temp[0][disease_id].data[7] += value);
+        if (this.chartType != "rate") {
+          age_id_match == variables.age_0_4_id
+            ? temp[0][disease_id].data[0] === undefined
+              ? (temp[0][disease_id].data[0] = value)
+              : (temp[0][disease_id].data[0] += value)
+            : age_id_match == variables.age_5_14_id
+            ? temp[0][disease_id].data[1] === undefined
+              ? (temp[0][disease_id].data[1] = value)
+              : (temp[0][disease_id].data[1] += value)
+            : age_id_match == variables.age_15_29_id
+            ? temp[0][disease_id].data[2] === undefined
+              ? (temp[0][disease_id].data[2] = value)
+              : (temp[0][disease_id].data[2] += value)
+            : age_id_match == variables.age_30_49_id
+            ? temp[0][disease_id].data[3] === undefined
+              ? (temp[0][disease_id].data[3] = value)
+              : (temp[0][disease_id].data[3] += value)
+            : age_id_match == variables.age_50_59_id
+            ? temp[0][disease_id].data[4] === undefined
+              ? (temp[0][disease_id].data[4] = value)
+              : (temp[0][disease_id].data[4] += value)
+            : age_id_match == variables.age_60_69_id
+            ? temp[0][disease_id].data[5] === undefined
+              ? (temp[0][disease_id].data[5] = value)
+              : (temp[0][disease_id].data[5] += value)
+            : age_id_match == variables.age_70_79_id
+            ? temp[0][disease_id].data[6] === undefined
+              ? (temp[0][disease_id].data[6] = value)
+              : (temp[0][disease_id].data[6] += value)
+            : temp[0][disease_id].data[7] === undefined
+            ? (temp[0][disease_id].data[7] = value)
+            : (temp[0][disease_id].data[7] += value);
+        } else {
+          age_id_match == variables.age_0_4_id
+            ? temp[0][disease_id].data[0] === undefined
+              ? (temp[0][disease_id].data[0] =
+                  value / this.populationdata.age0_4)
+              : (temp[0][disease_id].data[0] +=
+                  value / this.populationdata.age0_4)
+            : age_id_match == variables.age_5_14_id
+            ? temp[0][disease_id].data[1] === undefined
+              ? (temp[0][disease_id].data[1] =
+                  value / this.populationdata.age5_14)
+              : (temp[0][disease_id].data[1] +=
+                  value / this.populationdata.age5_14)
+            : age_id_match == variables.age_15_29_id
+            ? temp[0][disease_id].data[2] === undefined
+              ? (temp[0][disease_id].data[2] =
+                  value / this.populationdata.age15_29)
+              : (temp[0][disease_id].data[2] +=
+                  value / this.populationdata.age15_29)
+            : age_id_match == variables.age_30_49_id
+            ? temp[0][disease_id].data[3] === undefined
+              ? (temp[0][disease_id].data[3] =
+                  value / this.populationdata.age30_49)
+              : (temp[0][disease_id].data[3] +=
+                  value / this.populationdata.age30_49)
+            : age_id_match == variables.age_50_59_id
+            ? temp[0][disease_id].data[4] === undefined
+              ? (temp[0][disease_id].data[4] =
+                  value / this.populationdata.age50_59)
+              : (temp[0][disease_id].data[4] +=
+                  value / this.populationdata.age50_59)
+            : age_id_match == variables.age_60_69_id
+            ? temp[0][disease_id].data[5] === undefined
+              ? (temp[0][disease_id].data[5] =
+                  value / this.populationdata.age60_69)
+              : (temp[0][disease_id].data[5] +=
+                  value / this.populationdata.age60_69)
+            : age_id_match == variables.age_70_79_id
+            ? temp[0][disease_id].data[6] === undefined
+              ? (temp[0][disease_id].data[6] =
+                  value / this.populationdata.age70_79)
+              : (temp[0][disease_id].data[6] +=
+                  value / this.populationdata.age70_79)
+            : temp[0][disease_id].data[7] === undefined
+            ? (temp[0][disease_id].data[7] =
+                value / this.populationdata.age80_above)
+            : (temp[0][disease_id].data[7] +=
+                value / this.populationdata.age80_above);
+        }
 
         if (i == len - 1) {
           var vm = this;
           setTimeout(function() {
             vm.chartOptions.series = [...Object.values(temp[0])];
+            var temparr = vm.chartOptions.series;
+            vm.chartOptions.series = [
+              ...temparr.map(temparr => {
+                if (temparr.data.length == 0) {
+                  temparr.data = [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ];
+                  return temparr;
+                } else if (temparr.data.length != 0) {
+                  let tarr = temparr.data;
+                  for (let a = 0; a < 8; a++) {
+                    if (tarr[a] === undefined) tarr[a] = null;
+                  }
+                  temparr.data = [...tarr];
+                  return temparr;
+                }
+              })
+            ];
+            console.log(vm.chartOptions.series.filter(x => x));
             vm.chartOptions.xAxis.categories = [...variables.age_categories];
             $("#loader").hide();
           }, 2000);
@@ -273,7 +514,10 @@ export default {
         var disease_id = dataloop[i][0];
         var value =
           this.ou == variables.indiaOuId
-            ? parseFloat(dataloop[i][6])
+            ? this.measureFilter == variables.yld ||
+              this.measureFilter == variables.daly
+              ? parseFloat(dataloop[i][5])
+              : parseFloat(dataloop[i][6])
             : parseFloat(dataloop[i][5]);
         var site_id_match = dataloop[i][4];
         site_id_match == variables.site_urban_id
@@ -292,6 +536,22 @@ export default {
           var vm = this;
           setTimeout(function() {
             vm.chartOptions.series = [...Object.values(temp[0])];
+            var temparr = vm.chartOptions.series;
+            vm.chartOptions.series = [
+              ...temparr.map(temparr => {
+                if (temparr.data.length == 0) {
+                  temparr.data = [null, null, null];
+                  return temparr;
+                } else if (temparr.data.length != 0) {
+                  let tarr = temparr.data;
+                  for (let a = 0; a < 3; a++) {
+                    if (tarr[a] === undefined) tarr[a] = null;
+                  }
+                  temparr.data = [...tarr];
+                  return temparr;
+                }
+              })
+            ];
             vm.chartOptions.xAxis.categories = [...variables.site_categories];
             $("#loader").hide();
           }, 2000);
@@ -379,6 +639,8 @@ export default {
   },
   data() {
     return {
+      populationdata: "",
+      chartType: "",
       diseaseFlag: false,
       width: "",
       selections: "age",
@@ -403,7 +665,7 @@ export default {
           type: "column"
         },
         title: {
-          text: "Stacked column chart"
+          text: "Stacked Diseases aggregated chart : age-wise"
         },
         xAxis: {
           categories: []
@@ -411,7 +673,7 @@ export default {
         yAxis: {
           min: 0,
           title: {
-            text: "YLL counts"
+            text: "YLL Counts"
           },
           stackLabels: {
             enabled: true,
@@ -457,6 +719,7 @@ export default {
     EventBus.$off("ou-changed", this.getApiData);
     EventBus.$off("param-stackChart", this.getApiData);
     EventBus.$off("filters", this.setFilters);
+    EventBus.$off("chartChange", this.changeChart);
   }
 };
 </script>

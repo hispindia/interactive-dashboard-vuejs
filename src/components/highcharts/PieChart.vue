@@ -35,12 +35,15 @@ export default {
       this.getApiData();
     },
     measureFilter: function(value) {
-     if (value == variables.yll && !this.diseaseFlag) this.diseases = variables.diseases_yll;
-      else if (value == variables.yld && !this.diseaseFlag) this.diseases = variables.diseases_yld;
-      else if (value == variables.daly && !this.diseaseFlag) this.diseases = variables.diseases_daly;
-      else if(value == variables.deaths && !this.diseaseFlag) this.diseases = variables.diseases_deaths;
-      else{
-
+      if (value == variables.yll && !this.diseaseFlag)
+        this.diseases = variables.diseases_yll;
+      else if (value == variables.yld && !this.diseaseFlag)
+        this.diseases = variables.diseases_yld;
+      else if (value == variables.daly && !this.diseaseFlag)
+        this.diseases = variables.diseases_daly;
+      else if (value == variables.deaths && !this.diseaseFlag)
+        this.diseases = variables.diseases_deaths;
+      else {
       }
       this.getApiData();
     }
@@ -114,7 +117,7 @@ export default {
         this.diseaseFlag = false;
         this.measureFilter = params.value;
       } else {
-         this.diseaseFlag = true;
+        this.diseaseFlag = true;
         this.measureFilter = params.value.id;
       }
     },
@@ -149,7 +152,9 @@ export default {
           this.chartOptions.series[0].data = [];
           var dataloop = "";
           response.data.rows.length == 0
-            ? (this.chartOptions.series = [],alert("No data at this organisation Unit!"), $("#loader").hide())
+            ? ((this.chartOptions.series = []),
+              alert("No data at this organisation Unit!"),
+              $("#loader").hide())
             : (dataloop = response.data.rows);
 
           this.selections == "gender"
@@ -167,10 +172,11 @@ export default {
     sortDataByGender: function(dataloop) {
       $("#btnGender").addClass("selected-option");
       //   let temp = JSON.parse(JSON.stringify(variables.gender_categories_forpie));
+      let temp = JSON.parse(JSON.stringify(this.diseases));
       var male = 0,
-        maledata = { categories: [], data: [] };
+        maledata = [];
       var female = 0,
-        femaledata = { categories: [], data: [] };
+        femaledata = [];
       for (let i = 0, len = dataloop.length; i < len; i++) {
         var disease_id = dataloop[i][0];
         var value =
@@ -180,21 +186,31 @@ export default {
         var gender_id = dataloop[i][2];
         if (gender_id == variables.gender_male_id) {
           male += value;
-          maledata.categories.push(this.diseases[0][disease_id].name);
-          maledata.data.push(value);
+          maledata.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightgreen"
+          });
         } else {
           female += value;
-          femaledata.categories.push(this.diseases[0][disease_id].name);
-          femaledata.data.push(value);
+          femaledata.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightblue"
+          });
         }
         if (i == len - 1) {
           var vm = this;
-          var temp = [];
-          temp.push({ y: male, sliced: true, selected: true, drilldown :{ name: "Male", categories : [...maledata.categories], data : [...maledata.data] }});
-          temp.push({ y: female, drilldown :{ name: "Female", categories : [...femaledata.categories], data : [...femaledata.data] }});
+          var tempArr = [];
+          var tempOuter = [];
+          tempArr.push({ y: male, name: "Male", color: "green" });
+          tempArr.push({ y: female, name: "Female", color: "blue" });
+          tempOuter = [...maledata, ...femaledata];
           setTimeout(function() {
-            vm.chartOptions.series[0].data = [...temp];
-            // vm.chartOptions.xAxis.categories = [...variables.gender_categories_];
+            vm.chartOptions.series[0].data = [...tempArr];
+            vm.chartOptions.series[1].data = [...tempOuter];
+            console.log(tempArr);
+            console.log(tempOuter);
             $("#loader").hide();
           }, 2000);
         }
@@ -202,14 +218,23 @@ export default {
     },
     sortDataByAge: function(dataloop) {
       $("#btnAge").addClass("selected-option");
-      var age_04 = 0;
-      var age_514 = 0;
-      var age_1529 = 0;
-      var age_3049 = 0;
-      var age_5059 = 0;
-      var age_6069 = 0;
-      var age_7079 = 0;
-      var age_80above = 0;
+      let temp = JSON.parse(JSON.stringify(this.diseases));
+      var age_04 = 0,
+        age_04_data = [];
+      var age_514 = 0,
+        age_514_data = [];
+      var age_1529 = 0,
+        age_1529_data = [];
+      var age_3049 = 0,
+        age_3049_data = [];
+      var age_5059 = 0,
+        age_5059_data = [];
+      var age_6069 = 0,
+        age_6069_data = [];
+      var age_7079 = 0,
+        age_7079_data = [];
+      var age_80above = 0,
+        age_80above_data = [];
       for (let i = 0, len = dataloop.length; i < len; i++) {
         var disease_id = dataloop[i][0];
         var value =
@@ -217,40 +242,92 @@ export default {
             ? parseInt(dataloop[i][6])
             : parseInt(dataloop[i][5]);
         var age_id = dataloop[i][3];
-        age_id == variables.age_0_4_id
-          ? (age_04 += value)
-          : age_id == variables.age_5_14_id
-          ? (age_514 += value)
-          : age_id == variables.age_15_29_id
-          ? (age_1529 += value)
-          : age_id == variables.age_30_49_id
-          ? (age_3049 += value)
-          : age_id == variables.age_50_59_id
-          ? (age_5059 += value)
-          : age_id == variables.age_60_69_id
-          ? (age_6069 += value)
-          : age_id == variables.age_70_79_id
-          ? (age_7079 += value)
-          : (age_80above += value);
+        if (age_id == variables.age_0_4_id) {
+          age_04 += value;
+          age_04_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightgreen"
+          });
+        } else if (age_id == variables.age_5_14_id) {
+          age_514 += value;
+          age_514_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightblue"
+          });
+        } else if (age_id == variables.age_15_29_id) {
+          age_1529 += value;
+          age_1529_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightyellow"
+          });
+        } else if (age_id == variables.age_30_49_id) {
+          age_3049 += value;
+          age_3049_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightpink"
+          });
+        } else if (age_id == variables.age_50_59_id) {
+          age_5059 += value;
+          age_5059_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightgray"
+          });
+        } else if (age_id == variables.age_60_69_id) {
+          age_6069 += value;
+          age_6069_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightcoral"
+          });
+        } else if (age_id == variables.age_70_79_id) {
+          age_7079 += value;
+          age_7079_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightskyblue"
+          });
+        } else {
+          age_80above += value;
+          age_80above_data.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightcyan"
+          });
+        }
         if (i == len - 1) {
           var vm = this;
-          var temp = [];
-          temp.push({
-            name: "0-4 years",
-            y: age_04,
-            sliced: true,
-            selected: true
+          var tempArr = [];
+          var tempOuter = [];
+          tempArr.push({ name: "0-4 years", y: age_04, color: "green" });
+          tempArr.push({ name: "5-14 years", y: age_514, color: "blue" });
+          tempArr.push({ name: "15-29 years", y: age_1529, color: "yellow" });
+          tempArr.push({ name: "30-49 years", y: age_3049, color: "pink" });
+          tempArr.push({ name: "50-59 years", y: age_5059, color: "gray" });
+          tempArr.push({ name: "60-69 years", y: age_6069, color: "coral" });
+          tempArr.push({ name: "70-70 years", y: age_7079, color: "skyblue" });
+          tempArr.push({
+            name: "80 years and above",
+            y: age_80above,
+            color: "cyan"
           });
-          temp.push({ name: "5-14 years", y: age_514 });
-          temp.push({ name: "15-29 years", y: age_1529 });
-          temp.push({ name: "30-49 years", y: age_3049 });
-          temp.push({ name: "50-59 years", y: age_5059 });
-          temp.push({ name: "60-69 years", y: age_6069 });
-          temp.push({ name: "70-70 years", y: age_7079 });
-          temp.push({ name: "80 years and above", y: age_80above });
+          tempOuter = [
+            ...age_04_data,
+            ...age_514_data,
+            ...age_1529_data,
+            ...age_3049_data,
+            ...age_5059_data,
+            ...age_6069_data,
+            ...age_7079_data,
+            ...age_80above_data
+          ];
           setTimeout(function() {
-            vm.chartOptions.series[0].data = [...temp];
-            // vm.chartOptions.xAxis.categories = [...variables.gender_categories_];
+            vm.chartOptions.series[0].data = [...tempArr];
+            vm.chartOptions.series[1].data = [...tempOuter];
             $("#loader").hide();
           }, 2000);
         }
@@ -258,8 +335,11 @@ export default {
     },
     sortDataBySite: function(dataloop) {
       $("#btnSite").addClass("selected-option");
-      var urban = 0;
-      var rural = 0;
+      let temp = JSON.parse(JSON.stringify(this.diseases));
+      var urban = 0,
+        urbandata = [];
+      var rural = 0,
+        ruraldata = [];
       for (let i = 0, len = dataloop.length; i < len; i++) {
         var disease_id = dataloop[i][0];
         var value =
@@ -267,16 +347,31 @@ export default {
             ? parseInt(dataloop[i][6])
             : parseInt(dataloop[i][5]);
         var site_id = dataloop[i][4];
-        site_id == variables.site_urban_id
-          ? (urban += value)
-          : (rural += value);
+        if (site_id == variables.site_urban_id) {
+          urban += value;
+          urbandata.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightgreen"
+          });
+        } else {
+          rural += value;
+          ruraldata.push({
+            name: temp[0][disease_id].name,
+            y: value,
+            color: "lightblue"
+          });
+        }
         if (i == len - 1) {
           var vm = this;
-          var temp = [];
-          temp.push({ name: "Urban", y: urban, sliced: true, selected: true });
-          temp.push({ name: "Rural", y: rural });
+          var tempArr = [];
+          var tempOuter = [];
+          tempArr.push({ name: "Urban", y: urban, color: "green" });
+          tempArr.push({ name: "Rural", y: rural, color: "blue" });
+          tempOuter = [...urbandata,...ruraldata];
           setTimeout(function() {
-            vm.chartOptions.series[0].data = [...temp];
+            vm.chartOptions.series[0].data = [...tempArr];
+            vm.chartOptions.series[1].data = [...tempOuter];
             $("#loader").hide();
           }, 2000);
         }
@@ -305,6 +400,7 @@ export default {
           }
           setTimeout(function() {
             vm.chartOptions.series[0].data = [...temp_arr];
+            vm.chartOptions.series[1].data = [];
             // console.log(vm.mapOptions.series[0].data);
             $("#loader").hide();
           }, 2000);
@@ -363,7 +459,7 @@ export default {
   },
   data() {
     return {
-      diseaseFlag : false,
+      diseaseFlag: false,
       width: "",
       selections: "age",
       diseases: variables.diseases_yll,
@@ -384,64 +480,53 @@ export default {
       colors: [],
       chartOptions: {
         chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
           type: "pie"
         },
         title: {
           text: "Pie chart"
         },
-        xAxis: {
-          categories: []
-        },
         yAxis: {
-          min: 0,
           title: {
             text: "YLL counts"
-          },
-          stackLabels: {
-            enabled: true,
-            style: {
-              fontWeight: "bold",
-              color: "gray"
-            }
           }
         },
-        legend: {
-          align: "left",
-          x: 0,
-          verticalAlign: "top",
-          y: 25,
-          floating: true,
-          backgroundColor: "white",
-          borderColor: "#CCC",
-          borderWidth: 1,
-          shadow: false
-        },
         tooltip: {
-          headerFormat: "<b>{point.x}</b><br/>",
-          pointFormat:
-            "{series.name}: {point.y}<br><b>{point.name}</b>: {point.percentage:.1f} %"
+          valueSuffix: ""
         },
         plotOptions: {
           pie: {
-            allowPointSelect: true,
-            cursor: "pointer",
-            dataLabels: {
-              enabled: true,
-              format: "<b>{point.name}</b>: {point.y}",
-              style: {
-                color: "black"
-              }
-            }
+            shadow: false,
+            center: ["50%", "50%"]
           }
         },
         series: [
           {
             name: "Total Patients",
-            colorByPoint: true,
-            data: []
+            data: [],
+            size: "90%",
+            turboThreshold: 0,
+            dataLabels: {
+              distance: -150,
+              color: "white",
+              style: {
+                fontSize: "16px"
+              }
+            }
+          },
+          {
+            name: "Diseases",
+            data: [],
+            size: "90%",
+            innerSize: "60%",
+            turboThreshold: 0,
+            dataLabels: {
+              formatter: function() {
+                // display only if larger than 2000000
+                return this.y > 2000000
+                  ? "<b>" + this.point.name + ":</b> " + this.y
+                  : null;
+              }
+            }
           }
         ]
       }
@@ -456,8 +541,9 @@ export default {
 };
 </script>
 <style scoped>
-.stock {
-  width: 70%;
+.chart {
+  width: 90%;
+  height: 90%;
   margin: 0 auto;
 }
 </style>

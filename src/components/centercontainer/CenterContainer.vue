@@ -38,6 +38,7 @@
           data-toggle="tooltip"
           data-placement="right"
           title="Show legends"
+          v-if="currentView!='pieChart'"
         >
           <i class="material-icons">filter_list</i>
         </button>
