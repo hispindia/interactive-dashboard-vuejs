@@ -261,7 +261,7 @@ export default {
         )
         .then(response => {
           var data = response.data.rows;
-          console.log(data);
+          // console.log(data);
           for (let i = 0; i < data.length; i++) {
             var value = Number(data[i][6]);
             if (type == "gender") {
@@ -500,7 +500,7 @@ export default {
                 }
               })
             ];
-            console.log(vm.chartOptions.series.filter(x => x));
+            // console.log(vm.chartOptions.series.filter(x => x));
             vm.chartOptions.xAxis.categories = [...variables.age_categories];
             $("#loader").hide();
           }, 2000);

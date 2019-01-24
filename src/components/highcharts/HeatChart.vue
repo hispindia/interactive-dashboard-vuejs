@@ -7,18 +7,18 @@ import variables from "../../config.js";
 import axios from "axios";
 import { EventBus } from "../../event-bus";
 import Highcharts from "highcharts";
+import { mount } from "@vue/test-utils";
 export default {
   data() {
     return {
-      
       diseases: variables.diseases_yll,
       measureFilter: variables.yll,
       defaultIndiaApi: "",
       mapOptions: {
         chart: {
           type: "heatmap",
-          marginTop: 40,
-          marginBottom: 80,
+          marginTop: 150,
+          marginBottom: 40,
           plotBorderWidth: 1
         },
 
@@ -28,12 +28,39 @@ export default {
 
         xAxis: {
           categories: [],
-        //   opposite : true
+          className: "xAxis",
+          title: "States",
+           events: {
+              click: function(event) {
+                alert("x axis")
+              }
+            },
+          labels: {
+            formatter: function() {
+              return "<span v-bind:class='newclass'>" + this.value + "</span>";
+            },
+            style: {
+              cursor: "pointer"
+            },
+            useHTML: true,
+            events: {
+              click: function(event) {
+                alert("x axis")
+              }
+            }
+          },
+          opposite: true
         },
 
         yAxis: {
           categories: [],
-          title: null
+          className: "yaxis",
+          title: "Diseases",
+          labels: {
+            formatter: function() {
+              return "<b>" + this.value + "</b>";
+            }
+          }
         },
 
         colorAxis: {
@@ -57,9 +84,9 @@ export default {
             return (
               "<b>" +
               this.series.xAxis.categories[this.point.x] +
-              "</b> sold <br><b>" +
-              this.point.g +
-              "</b> items on <br><b>" +
+              "<br>" +
+              this.point.value +
+              "<br>" +
               this.series.yAxis.categories[this.point.y] +
               "</b>"
             );
@@ -70,10 +97,35 @@ export default {
           {
             name: "Heat Map",
             borderWidth: 1,
+            className: "seriesmap",
+            id : 'series',
+            useHTML: true,
             data: [],
             dataLabels: {
               enabled: true,
-              color: "#000000"
+              color: "#000000",
+              formatter: function() {
+                return this.point.point;
+              }
+            },
+            animation :{
+              duration:1000,
+            },
+            events: {
+              click: function(event) {
+                  
+              }
+            },
+            point:{
+
+            },
+            turboThreshold: 0,
+            states : {
+              hover:{
+                halo:{
+                  fill: 'gray',
+                }
+              }
             }
           }
         ]
@@ -102,56 +154,38 @@ export default {
     EventBus.$on("filters", this.setFilters);
   },
   methods: {
-      setColors: function() {
-      var count1 = 1,
-        count2 = 1,
-        count3 = 1,
-        count4 = 1;
-      for (let g = 0; g < Object.keys(this.diseases[0]).length; g++) {
-        var key = Object.keys(this.diseases[0])[g];
-        var index = this.diseases[0][key].group;
-        if (index == 0) {
-          this.diseases[0][key].color = this.getColorShades(
-            128,
-            0,
-            0,
-            count1
-          );
-          count1++;
-        } else if (index == 1) {
-          this.diseases[0][key].color = this.getColorShades(
-            0,
-            128,
-            0,
-            count2
-          );
-          count2++;
-        } else if (index == 2) {
-          this.diseases[0][key].color = this.getColorShades(
-            255,
-            165,
-            0,
-            count3
-          );
-          count3++;
-        } else {
-          this.diseases[0][key].color = this.getColorShades(
-            0,
-            0,
-            255,
-            count4
-          );
-          count4++;
-        }
+    reloadSorting: function() {
+      alert("settings");
+    },
+    setColors: function(index, count) {
+      if (index == 0) {
+        return this.getColorShades(128, 0, 0, count);
+      } else if (index == 1) {
+        return this.getColorShades(0, 128, 0, count);
+      } else if (index == 2) {
+        return this.getColorShades(255, 165, 0, count);
+      } else {
+        return this.getColorShades(0, 0, 255, count);
       }
     },
     getColorShades: function(r, g, b, x) {
-      var o =  x>3 && x<6 ? 0.9 : x>=6 && x<10 ? 0.75 : x>=10 && x<16 ? 0.60 : x>=16 && x<20 ? 0.45 : x>=20 ? 0.3 : 1;
-      x = x+4;
+      var o =
+        x > 3 && x < 6
+          ? 0.9
+          : x >= 6 && x < 10
+          ? 0.75
+          : x >= 10 && x < 16
+          ? 0.6
+          : x >= 16 && x < 20
+          ? 0.45
+          : x >= 20
+          ? 0.3
+          : 1;
+      x = x + 4;
       r = (x * r) / 10;
       g = (x * g) / 10;
       b = (x * b) / 10;
-      return "rgb(" + r  + "," + g + "," + b + "," + o + ")";
+      return "rgb(" + r + "," + g + "," + b + "," + o + ")";
     },
     getApiData: function() {
       $("#loader").show();
@@ -159,11 +193,13 @@ export default {
       axios
         .get(this.defaultIndiaApi)
         .then(response => {
-            this.setColors();
+          this.setColors();
           this.mapOptions.series[0].data = [];
           var dataloop = "";
           response.data.rows.length == 0
-            ? (this.chartOptions.series = [],alert("No data at this organisation Unit!"), $("#loader").hide())            
+            ? ((this.chartOptions.series = []),
+              alert("No data at this organisation Unit!"),
+              $("#loader").hide())
             : (dataloop = response.data.rows);
           this.sortDataByLoc(dataloop);
         })
@@ -175,52 +211,127 @@ export default {
       //   $("#btnLocation").addClass("selected-option");
       let temp = JSON.parse(JSON.stringify(this.diseases));
       var temp_arr = [];
-      var temp_x = [];
-      var temp_y = [];
-      var x = 0;
-      for (let j = 0; j < Object.keys(variables.stateNames[0]).length; j++) {
-        var turn_flag = false;
-        var y = 0;
-        for (let i = 0, len = dataloop.length; i < len; i++) {
-          var disease_id = dataloop[i][0];
-          var value = parseFloat(dataloop[i][3]);
-          var stateData = dataloop[i][2];
+      for (let i = 0, len = dataloop.length; i < len; i++) {
+        var disease_id = dataloop[i][0];
+        var value = parseFloat(dataloop[i][3]);
+        var stateData = dataloop[i][2];
+        if (temp_arr[stateData + "_" + disease_id] === undefined)
+          temp_arr[stateData + "_" + disease_id] = value;
+        else temp_arr[stateData + "_" + disease_id] += value;
 
-          if (stateData == Object.keys(variables.stateNames[0])[j]) {
-            var stateName =
-              variables.stateNames[0][Object.keys(variables.stateNames[0])[j]];
-            if (!temp_x.includes(stateName)) temp_x[stateName] = stateName;
-            if (!temp_y.includes((this.diseases[0][disease_id].name))) temp_y[this.diseases[0][disease_id].name] = this.diseases[0][disease_id].name ;
-            // temp_arr.push([x, y, value]);
-            temp_arr.push({
-                x : x,
-                y : y,
-                name : this.diseases[0][disease_id].index,
-                g : value,
-                value : this.diseases[0][disease_id].index,
-                color : this.diseases[0][disease_id].color,
-            });
-            turn_flag = true;
-            y += 1;
+        if (i == dataloop.length - 1) {
+          // console.log(temp_arr);
+          var map_arr = [];
+          var temp_x = [];
+          var temp_y = [];
+          let disease_arr = this.measureFilter.split(";");
+          let states = [...variables.stateNames];
+          for (let i = 0, len = Object.keys(states[0]).length; i < len; i++) {
+            var statename = Object.keys(states[0])[i];
+            temp_x[i] = states[0][statename];
+            for (let k = 0, lenn = disease_arr.length; k < lenn; k++) {
+              var disease_id = disease_arr[k];
+              temp_y[k] = temp[0][disease_id].name;
+              var matrix_val =
+                temp_arr[statename + "_" + disease_id] === undefined
+                  ? 0
+                  : temp_arr[statename + "_" + disease_id];
+              var color = temp[0][disease_id].color;
+              var index = temp[0][disease_id].index;
+              map_arr.push({
+                x: i,
+                y: k,
+                value: matrix_val,
+                color: color,
+                ref: disease_id,
+                point: "",
+                index: index
+              });
+            }
           }
-        }
-        if (turn_flag) {
-             x += 1;
-        }
-
-        if (j == Object.keys(variables.stateNames[0]).length - 1) {
+          var array_with_labels = this.getPointLabels(map_arr);
+          var temp_arr = this.getMatrixSorted(1, array_with_labels);
+          var updated_y = this.updateYaxis(1, temp_arr);
           var vm = this;
-          console.log(temp_arr);
-          console.log(temp_x);
-          console.log(temp_y);
           setTimeout(function() {
+            // console.log(temp_arr);
             vm.mapOptions.series[0].data = [...temp_arr];
             vm.mapOptions.xAxis.categories = [...Object.values(temp_x)];
-            vm.mapOptions.yAxis.categories = [...Object.values(temp_y)];
+            vm.mapOptions.yAxis.categories = [...updated_y];
             $("#loader").hide();
           }, 2000);
         }
       }
+    },
+    updateYaxis: function(n, arr) {
+      let singlesort = arr.filter(x => (x.x == n ? x : null));
+      let tempy = [];
+      for (let l = 0; l < singlesort.length; l++) {
+        tempy[l] = this.diseases[0][singlesort[l].ref].name.split("- YLL")[0];
+      }
+      return tempy;
+    },
+    getPointLabels: function(arr) {
+      let states = [...variables.stateNames];
+      var sortedMapArray = [];
+      for (let e = 0; e < Object.keys(states[0]).length; e++) {
+        let singlesort = arr
+          .filter(x => (x.x == e ? x : null))
+          .sort(function(a, b) {
+            if (a.value > b.value) {
+              return -1;
+            } else {
+              1;
+            }
+          });
+        for (let l = 0; l < singlesort.length; l++) {
+          singlesort[l].point = l + 1;
+          singlesort[l].color = this.setColors(
+            Math.floor(l / 4),
+            Math.floor(l / 4) + l
+          );
+        }
+        sortedMapArray.push(...singlesort);
+        if (e == Object.keys(states[0]).length - 1) {
+          return sortedMapArray;
+        }
+      }
+    },
+    getMatrixSorted: function(n, map_arr) {
+      let states = [...variables.stateNames];
+      let afterSort = map_arr
+        .filter(x => (x.x == n ? x : null))
+        .sort(function(a, b) {
+          if (a.value < b.value) {
+            return -1;
+          } else {
+            1;
+          }
+        });
+      var sortedMapArray = [];
+      for (let e = 0; e < Object.keys(states[0]).length; e++) {
+        let singlesort = this.getSorted(
+          map_arr.filter(x => (x.x == e ? x : null)),
+          afterSort
+        );
+        // console.log(singlesort);
+        sortedMapArray.push(...singlesort);
+        if (e == Object.keys(states[0]).length - 1) {
+          return sortedMapArray;
+        }
+      }
+    },
+    getSorted: function(a, b) {
+      var temparr = [];
+      for (let g = 0; g < b.length; g++) {
+        for (let f = 0; f < a.length; f++) {
+          if (b[g].ref == a[f].ref) {
+            temparr[g] = a[f];
+            temparr[g].y = g;
+          }
+        }
+      }
+      return temparr;
     },
     setApis: function() {
       this.defaultIndiaApi =
