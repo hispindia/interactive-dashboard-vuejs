@@ -102,4 +102,12 @@
 
 .xAxis span:hover {
     font-weight: 600;
-  }
+}
+
+.highcharts-axis-line,.highcharts-grid-line, .highcharts-tick{
+    display:none;
+}
+
+.selected-xaxis{
+    font-weight: bold;
+}

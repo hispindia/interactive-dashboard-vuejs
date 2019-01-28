@@ -1,5 +1,5 @@
 <template>
-  <highcharts :options="mapOptions" class="map"></highcharts>
+  <highcharts :options="mapOptions" class="heatmap" ref="heatmap"></highcharts>
 </template>
 
 <script>
@@ -7,10 +7,12 @@ import variables from "../../config.js";
 import axios from "axios";
 import { EventBus } from "../../event-bus";
 import Highcharts from "highcharts";
-import { mount } from "@vue/test-utils";
+import clicks from "../../catch-clicks";
+// import HighchartsCustomEvents from "highcharts-custom-events";
 export default {
   data() {
     return {
+      map_arr:[],
       diseases: variables.diseases_yll,
       measureFilter: variables.yll,
       defaultIndiaApi: "",
@@ -19,7 +21,8 @@ export default {
           type: "heatmap",
           marginTop: 150,
           marginBottom: 40,
-          plotBorderWidth: 1
+          plotBorderWidth: 0,
+          borderColor: "white"
         },
 
         title: {
@@ -30,24 +33,21 @@ export default {
           categories: [],
           className: "xAxis",
           title: "States",
-           events: {
-              click: function(event) {
-                alert("x axis")
-              }
-            },
+
           labels: {
             formatter: function() {
-              return "<span v-bind:class='newclass'>" + this.value + "</span>";
+              return (
+                "<span class='xaxis-labels' id='" +
+                this.value.split(" ").join("") +
+                "'>" +
+                this.value +
+                "</span>"
+              );
             },
             style: {
               cursor: "pointer"
             },
-            useHTML: true,
-            events: {
-              click: function(event) {
-                alert("x axis")
-              }
-            }
+            useHTML: true
           },
           opposite: true
         },
@@ -96,9 +96,10 @@ export default {
         series: [
           {
             name: "Heat Map",
-            borderWidth: 1,
+            borderWidth: 4,
+            borderColor: "white",
             className: "seriesmap",
-            id : 'series',
+            id: "series",
             useHTML: true,
             data: [],
             dataLabels: {
@@ -108,22 +109,18 @@ export default {
                 return this.point.point;
               }
             },
-            animation :{
-              duration:1000,
+            animation: {
+              duration: 1000
             },
             events: {
-              click: function(event) {
-                  
-              }
+              click: function(event) {}
             },
-            point:{
-
-            },
+            point: {},
             turboThreshold: 0,
-            states : {
-              hover:{
-                halo:{
-                  fill: 'gray',
+            states: {
+              hover: {
+                halo: {
+                  fill: "gray"
                 }
               }
             }
@@ -152,10 +149,24 @@ export default {
   mounted() {
     this.getApiData();
     EventBus.$on("filters", this.setFilters);
+    EventBus.$on("catchclicks", this.updateChart);
+    clicks.setClassToCatchClicks("xaxis-labels");
   },
   methods: {
-    reloadSorting: function() {
-      alert("settings");
+    updateChart: function(v) {
+      $("#loader").show();
+      let sn = variables.stateNamesAndId[0][v];
+      let n = (Object.keys(variables.stateNamesAndId[0])).indexOf(v);
+      var map_arr = this.map_arr;
+      // var array_with_labels = this.getPointLabels(map_arr);
+      var temp_arr = this.getMatrixSorted(n, map_arr);
+      var updated_y = this.updateYaxis(n, temp_arr);
+      var vm = this;
+      setTimeout(function() {
+        vm.mapOptions.series[0].data = [...temp_arr];
+        vm.mapOptions.yAxis.categories = [...updated_y];
+        $("#loader").hide();
+      }, 2000);
     },
     setColors: function(index, count) {
       if (index == 0) {
@@ -207,7 +218,7 @@ export default {
           console.log(error);
         });
     },
-    sortDataByLoc: function(dataloop) {
+    sortDataByLoc: function(dataloop, n) {
       //   $("#btnLocation").addClass("selected-option");
       let temp = JSON.parse(JSON.stringify(this.diseases));
       var temp_arr = [];
@@ -252,6 +263,7 @@ export default {
           var array_with_labels = this.getPointLabels(map_arr);
           var temp_arr = this.getMatrixSorted(1, array_with_labels);
           var updated_y = this.updateYaxis(1, temp_arr);
+          this.map_arr = temp_arr;
           var vm = this;
           setTimeout(function() {
             // console.log(temp_arr);
@@ -341,11 +353,15 @@ export default {
         this.measureFilter +
         "&displayProperty=NAME&outputIdScheme=UID";
     }
+  },
+  destroyed() {
+    EventBus.$on("filters", this.setFilters);
+    EventBus.$on("catchclicks", this.updateChart);
   }
 };
 </script>
  <style scoped>
-.map {
+.heatmap {
   min-height: 1200px;
 }
 </style>

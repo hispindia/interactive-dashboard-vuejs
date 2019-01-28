@@ -1748,7 +1748,47 @@ const stateNames = [{
     "N2K15gP6SKn": "Uttar Pradesh",
     "osxywsmbdA9": "Uttarakhand",
     "JQq12xOtj1a": "West Bengal",
+}]
 
+const stateNamesAndId = [{
+ "AndamanandNicobar":"J1qTQ3TKlNU",
+ "AndhraPradesh":"ft1FqZHkEIV",
+ "ArunachalPradesh":"UBKSsG72Cg8",
+ "Assam":"nCTGAP1pUqK",
+ "Bihar":"z8g8gAEeird",
+ "Chandigarh":"xHmXn2gn3rS",
+ "Chhattisgarh":"x2yMjFqOh5R",
+ "DadraandNagarHaveli":"AOxuENOsJFH",
+ "DamanandDiu":"YE9KMXV2qC3",
+ "Delhi":"dBKf3LDpfYl",
+ "Goa":"N40kwU7hERO",
+ "Gujarat":"kBajdL7waFu",
+ "Haryana":"XJMaF0ZzGo1",
+ "HimachalPradesh":"wTQrXc3kOgA",
+ "JammuandKashmir":"y85LzeVqQNo",
+ "Jharkhand":"YkAq1G0JN6Y",
+ "Karnataka":"qA92TbABPdT",
+ "Kerala":    "TABbglhSurr",
+ "Lakshadweep":"B8ffozIh5D0",
+ "MadhyaPradesh":    "BBnVIaukxaN",
+ "Maharashtra":"x5TafwbmlFt",
+ "Manipur":"KfUK7GlZqiu",
+ "Meghalaya":"XX7mkLtUkZT",
+ "Mizoram":"A64ajbtzogd",
+ "Nagaland":"ITt5l6I85Uf",
+ "NortheasternclusterStates":"n5C3pZ1QbDV",
+ "Odisha":"XzbGlw8pVXQ",
+ "OtherremainingsmallstatesandUTs":"Cbw7y8SiYyW",
+ "Puducherry":"VTNC2rB3AzO",
+ "Punjab":    "nAEXiUnvksD",
+ "Rajasthan":"WwBDw1qLQfH",
+ "Sikkim":"yWmW9qcMVwZ",
+ "TamilNadu":"yBFfg3amqn7",
+ "Telangana":"BvnPG4cWtyx",
+ "Tripura":    "DrcfNamsJRj",
+ "UttarPradesh":"N2K15gP6SKn",
+ "Uttarakhand":"osxywsmbdA9",
+ "WestBengal":"JQq12xOtj1a"
 }]
 
 export default {
@@ -1789,5 +1829,6 @@ export default {
     statesMapData: statesMapData,
     allouIDs: allouIDs,
     statesMapName: statesMapName,
-    stateNames: stateNames
+    stateNames: stateNames,
+    stateNamesAndId: stateNamesAndId
 }
