@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid no-gutters main" style="overflow-x:hidden;background-color: #FFF3E0;">
+  <div class="container-fluid no-gutters main" style="overflow-x:hidden;background-color: #f7f7f7;">
     <d2headerBar></d2headerBar>
     <HeaderApp/>
     <div class="row" style="display: flex">
@@ -18,7 +18,8 @@ import Leftbar from "./components/Leftbar";
 import Rightbar from "./components/rightbar/Rightbar";
 import CenterContainer from "./components/centercontainer/CenterContainer";
 import Loader from "./components/Loader";
-import d2headerBar from 'dhis2-header-vue'
+import d2headerBar from 'dhis2-header-vue';
+import clicks from './catch-clicks'
 
 export default {
   name: "App",
@@ -29,6 +30,9 @@ export default {
     Rightbar,
     CenterContainer,
     Loader
+  },
+  mounted(){
+    clicks.setClassToCatchClicks("xaxis-labels");
   }
 };
 </script>

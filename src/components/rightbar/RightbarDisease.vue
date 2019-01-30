@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       diseases: [],
-      selected : ""
+      diseasesTemp: [{id:'',text:'Select/unselect disease',value:''}],
+      selected : {id:'',text:'Select/unselect disease',value:''}
     };
   },
   methods: {
@@ -33,7 +34,7 @@ export default {
       EventBus.$emit("filters", { value: this.selected, filter: "disease" });
     },
     changeDropDown: function(m) {
-      this.diseases = [];
+      this.diseases = [...this.diseasesTemp];
       if (m == variables.yll) {
         for (
           var i = 0;

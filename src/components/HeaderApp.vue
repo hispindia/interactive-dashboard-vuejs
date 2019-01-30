@@ -1,8 +1,8 @@
 <template>
   <div class="row">
-    <div id="headerapp" class="col text-left p-2 m-0"><i class="material-icons header-icons" @click="goToDashboard">home</i></div>
+    <div id="headerapp" class="col text-left p-2 m-0"></div>
     <div id="headerapp" class="col text-center p-2 m-0">{{heading}}</div>
-    <div id="headerapp" class="col text-right p-2 m-0"><i class="material-icons header-icons">sync</i><i class="material-icons header-icons">settings</i></div>
+    <div id="headerapp" class="col text-right p-2 m-0"></div>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
   name: "HeaderApp",
   data() {
     return {
-      heading: "Interactive Dashboard",
+      heading: "Analytics tool",
       dashboard : "dhis-web-dashboard"
     };
   },
@@ -25,8 +25,8 @@ export default {
 </script>
 <style scoped>
 .header-icons {
-  padding:5px;
-  font-size: 36px;
+  padding:2px;
+  font-size: 25px;
   cursor: pointer;
 }
 </style>

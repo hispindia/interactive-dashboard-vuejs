@@ -8,7 +8,6 @@ import axios from "axios";
 import { EventBus } from "../../event-bus";
 import Highcharts from "highcharts";
 import clicks from "../../catch-clicks";
-// import HighchartsCustomEvents from "highcharts-custom-events";
 export default {
   data() {
     return {

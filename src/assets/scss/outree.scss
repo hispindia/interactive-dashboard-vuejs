@@ -5,6 +5,7 @@
     min-width: 18vw;
     max-width: 18vw;
     border-radius: 20px;
+    border: 1px solid lightgray;
     padding-top: 20px;
     background: white;
 }
@@ -26,12 +27,12 @@ ul li a {
 }
 ul li a:hover{
     text-decoration: none;
-    color:#FF8000;
+    color:rgb(39, 102, 150);
 }
 
 .selected-org-unit > a {
     font-weight: bold;
-    color: #FF8000 !important;
+    color: rgb(39, 102, 150) !important;
 }
 
 .selectedou{
@@ -41,4 +42,5 @@ ul li a:hover{
     min-height: 34px;
     text-align: center;
     border-radius: 20px;
+    border: 1px solid lightgray;
 }

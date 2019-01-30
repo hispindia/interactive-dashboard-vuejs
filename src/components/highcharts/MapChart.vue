@@ -12,6 +12,7 @@ export default {
     return {
       diseaseFlag : false,
       measureFilter: variables.yll,
+      measureFilterTemp: variables.yll,
       mapOptions: {
         chart: {
           map: mapdata
@@ -76,9 +77,15 @@ export default {
        if (params.filter == "measure") {
         this.diseaseFlag = false;
         this.measureFilter = params.value;
-      } else if( params.filter == "disease") {
-         this.diseaseFlag = true;
-        this.measureFilter = params.value.id;
+        this.measureFilterTemp = params.value;
+      } else {
+        if (params.value.id != "") {
+          this.diseaseFlag = true;
+          this.measureFilter = params.value.id;
+        } else {
+          this.diseaseFlag = false;
+          this.measureFilter = this.measureFilterTemp;
+        }
       }
     },
     loadMapData: function() {

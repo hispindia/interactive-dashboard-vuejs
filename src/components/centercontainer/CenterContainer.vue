@@ -171,7 +171,7 @@ export default {
 }
 
 .selected-option {
-  background-color: darkgray;
+  background-color: rgb(39, 102, 150);
 }
 button {
   padding: 10px 20px;

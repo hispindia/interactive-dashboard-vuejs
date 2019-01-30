@@ -53,9 +53,6 @@ export default {
       }
       this.getApiData();
     }
-    // chartType :function(v){
-    //   if(v=="rate") this.getPopulationData();
-    // }
   },
   methods: {
     changeChart: function(v) {
@@ -141,9 +138,15 @@ export default {
       } else if (params.filter == "measure") {
         this.diseaseFlag = false;
         this.measureFilter = params.value;
+        this.measureFilterTemp = params.value;
       } else {
-        this.diseaseFlag = true;
-        this.measureFilter = params.value.id;
+        if (params.value.id != "") {
+          this.diseaseFlag = true;
+          this.measureFilter = params.value.id;
+        } else {
+          this.diseaseFlag = false;
+          this.measureFilter = this.measureFilterTemp;
+        }
       }
     },
     setSelectedOu: function(params) {
@@ -157,7 +160,6 @@ export default {
       this.ageFilter = variables.age_main_var;
       this.siteFilter = variables.site_main_var;
       this.measureFilter = variables.yll;
-      // EventBus.$emit("reset");
     },
     getApiData: function() {
       $("#loader").show();
@@ -649,6 +651,7 @@ export default {
       ageFilter: variables.age_main_var,
       siteFilter: variables.site_main_var,
       measureFilter: variables.yll,
+      measureFilterTemp : variables.yll,
       ou: "",
       statesApi: "",
       defaultIndiaApi:

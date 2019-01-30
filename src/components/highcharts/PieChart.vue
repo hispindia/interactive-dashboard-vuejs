@@ -116,9 +116,15 @@ export default {
       } else if (params.filter == "measure") {
         this.diseaseFlag = false;
         this.measureFilter = params.value;
+        this.measureFilterTemp = params.value;
       } else {
-        this.diseaseFlag = true;
-        this.measureFilter = params.value.id;
+        if (params.value.id != "") {
+          this.diseaseFlag = true;
+          this.measureFilter = params.value.id;
+        } else {
+          this.diseaseFlag = false;
+          this.measureFilter = this.measureFilterTemp;
+        }
       }
     },
     setSelectedOu: function(params) {
@@ -467,6 +473,7 @@ export default {
       ageFilter: variables.age_main_var,
       siteFilter: variables.site_main_var,
       measureFilter: variables.yll,
+      measureFilterTemp : variables.yll,
       ou: variables.indiaOuId,
       statesApi: "",
       defaultIndiaApi:

@@ -41,6 +41,7 @@ var clicks = {
 $('body').click(function (e) {
     var target = $(e.target);
     if (target !== undefined) {
+        
         if (target[0].className.includes(clicks.globalClass)) {
             clicks.toggleClass(target[0].id);
             vm.callAnotherComponent(target[0].id);
