@@ -1,4 +1,5 @@
 import { EventBus } from "./event-bus";
+
 import Vue from 'vue';
 var vm = new Vue({
     el: "#hidden",

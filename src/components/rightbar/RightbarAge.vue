@@ -1,7 +1,7 @@
 <template>
   <!-- Age Dropdown start-->
       <div class="row justify-content-center p-1 rightbar-menu-main rightbarage hidediv">
-        <div class="class rightbar-menu">
+        <div class="class col rightbar-menu">
             Age : &ensp; &ensp;
             <select
               class="age-button"

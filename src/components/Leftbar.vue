@@ -1,16 +1,16 @@
 <template>
   <!-- import { watch } from 'fs'; -->
-  <div id="leftbar" class="col collapse-div">
+  <div id="leftbar" class="col-2 collapse-div">
     <div class="row justify-content-end">
       <div class="class">
         <i class="material-icons" id="leftbar-icon" v-on:click="slideLeft">menu</i>
       </div>
     </div>
     <div class="row justify-content-center p-1 leftbar-menu-main">
-      <div class="class selectedou" v-bind:id='selectedOu'>{{selectedOuName}}</div>
+      <div class="col class selectedou" v-bind:id="selectedOu">{{selectedOuName}}</div>
     </div>
     <div class="row justify-content-center p-1 leftbar-menu-main">
-      <div class="class outree">
+      <div class="col class outree">
         <div id="orgUnitTree" v-on:click="handleClicks">
           <ul></ul>
         </div>
@@ -24,36 +24,51 @@ import axios from "axios";
 import mapData from "./highcharts/MapChart";
 import { EventBus } from "../event-bus";
 import variables from "../config";
+import Highcharts from "highcharts";
+import { setTimeout } from "timers";
 
 export default {
   name: "Leftbar",
+    data() {
+    return {
+      selectedOu: "",
+      selectedOuName: "",
+      previousou: "",
+      switch: true,
+    };
+  },
   methods: {
     slideLeft: function() {
       $("#leftbar").toggleClass("collapse-div");
+      if (this.switch) {
+        window.dispatchEvent(new Event("resize"));
+        this.switch != this.switch;
+      }
     },
     getOU: function() {
       selection.load();
-      this.$data.selectedOu = selection.getSelected();
-      this.$data.selectedOuName = this.getOuName(this.$data.selectedOu);
+      this.selectedOu = selection.getSelected();
+      this.selectedOuName = this.getOuName(this.selectedOu);
     },
     handleClicks: function(event) {
       // console.log(event);
       var tagid = event.path[1].id;
-      this.$data.selectedOu = tagid.split("orgUnit")[1];
-      if (this.$data.selectedOu !== undefined) {
-        this.$data.selectedOuName = this.getOuName(this.$data.selectedOu);
-        if (this.$data.selectedOu == variables.indiaOuId) $(".rightbarsite").removeClass("hidediv");
+      this.selectedOu = tagid.split("orgUnit")[1];
+      if (this.selectedOu !== undefined) {
+        this.selectedOuName = this.getOuName(this.selectedOu);
+        if (this.selectedOu == variables.indiaOuId)
+          $(".rightbarsite").removeClass("hidediv");
         else {
           $(".rightbarsite").addClass("hidediv");
         }
         EventBus.$emit("ou-changed", {
-          ou: this.$data.selectedOu,
+          ou: this.selectedOu,
           type: "age"
         });
         $("#" + tagid).toggleClass("selected-org-unit");
-        if (this.$data.previousou != "")
-          $("#" + this.$data.previousou).toggleClass("selected-org-unit");
-        this.$data.previousou = tagid;
+        if (this.previousou != "")
+          $("#" + this.previousou).toggleClass("selected-org-unit");
+        this.previousou = tagid;
       }
     },
     getOuName: function(ou) {
@@ -72,16 +87,10 @@ export default {
     this.getOU();
   },
 
-  updated(){
-      EventBus.$emit("ou-created", { ou: this.$data.selectedOu, type: "age" });
+  updated() {
+    EventBus.$emit("ou-created", { ou: this.$data.selectedOu, type: "age" });
   },
 
-  data() {
-    return {
-      selectedOu: "",
-      selectedOuName: "",
-      previousou: ""
-    };
-  }
+
 };
 </script>

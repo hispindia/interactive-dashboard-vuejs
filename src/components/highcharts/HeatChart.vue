@@ -1,5 +1,5 @@
 <template>
-  <highcharts :options="mapOptions" class="heatmap" ref="heatmap"></highcharts>
+  <highcharts id='allcharts' :options="mapOptions" class="heatmap" ref="heatmap"></highcharts>
 </template>
 
 <script>
@@ -152,6 +152,12 @@ export default {
     clicks.setClassToCatchClicks("xaxis-labels");
   },
   methods: {
+    handleShowHide: function() {
+        $(".rightbarsite").addClass("hidediv");  
+        $(".rightbargender").addClass("hidediv");  
+        $(".rightbarage").addClass("hidediv");  
+        $(".rightbarunit").addClass("hidediv");  
+    },
     updateChart: function(v) {
       $("#loader").show();
       let sn = variables.stateNamesAndId[0][v];
@@ -199,6 +205,7 @@ export default {
     },
     getApiData: function() {
       $("#loader").show();
+      this.handleShowHide();
       this.setApis();
       axios
         .get(this.defaultIndiaApi)
@@ -361,6 +368,6 @@ export default {
 </script>
  <style scoped>
 .heatmap {
-  min-height: 1200px;
+  min-height: 1200px !important;
 }
 </style>

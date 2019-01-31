@@ -10,7 +10,7 @@
     background-color: rgb(39, 102, 150);
     min-height: 100%;
     // border-left: 2px solid lightgray;
-    max-width: 19vw;
+    // max-width: 19vw;
     transition: 500ms ease;
 }
 
@@ -18,7 +18,7 @@
     background-color: rgb(39, 102, 150);
     // border-right:2px solid lightgray;
     min-height: 100%;
-    max-width: 19vw;
+    // max-width: 19vw;
     transition: 500ms ease;
 }
 
@@ -51,7 +51,7 @@
     padding: 10px;
     font-size: 14px;
     background: #fff;
-    min-width: 18vw;
+    min-width: 16vw;
     margin: 0.5rem;
     border-radius: 20px;
     border: 1px solid lightgray;
@@ -96,7 +96,12 @@
 
 .highcharts-container {
     width: 100% !important;
+    margin:auto;
     border-radius: 0 20px 20px 20px;
+}
+
+.highcharts-container:not(.heatmap){
+    height: 90%;
 }
 
 .highcharts-legend {
@@ -114,4 +119,8 @@
 
 .selected-xaxis{
     font-weight: bold;
+}
+.highcharts-root{
+    // height:100% !important;
+    width: 100% !important;
 }

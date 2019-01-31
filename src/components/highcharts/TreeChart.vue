@@ -1,5 +1,5 @@
 <template>
-  <highcharts :options="mapOptions" class="map"></highcharts>
+  <highcharts id='allcharts' :options="mapOptions" class="map"></highcharts>
 </template>
 
 <script>

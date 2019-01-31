@@ -1,5 +1,5 @@
 <template>
-  <highcharts class="chart" :options="chartOptions"></highcharts>
+  <highcharts id='allcharts' class="chart" :options="chartOptions"></highcharts>
 </template>
 
 
@@ -728,7 +728,8 @@ export default {
 </script>
 <style scoped>
 .stock {
-  width: 70%;
+  width: 100%;
+  height:80vm;
   margin: 0 auto;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="rightbar" class="col collapse-div">
+  <div id="rightbar" class="col-2 collapse-div">
     <div class="row justify-content-start">
       <div class="class">
         <i class="material-icons" id="rightbar-icon" v-on:click="slideRight">menu</i>

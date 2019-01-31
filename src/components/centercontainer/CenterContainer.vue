@@ -36,7 +36,7 @@
           <button @click="select('heatChart')" :class="{btnActive: selected === 'heatChart'}" data-toggle="tooltip"
           data-placement="bottom"
           title="Heat Chart">
-            <img src="" alt="Heat Chart" width="60px" height="60px">
+            <img src="../../assets/images/heatmap.png" alt="Heat Chart" width="60px" height="60px">
           </button>
         </div>
       </div>
@@ -122,6 +122,7 @@ export default {
       $(".rightbar-menu-main").removeClass("hidediv");
       if (t == "age") {
         $(".rightbarage").addClass("hidediv");
+        console.log($(".selectedou").attr('id'));
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
           type: "age"

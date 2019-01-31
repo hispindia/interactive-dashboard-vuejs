@@ -1,7 +1,7 @@
 <template>
   <!-- Disease Dropdown start-->
   <div class="row justify-content-center p-1 rightbar-menu-main rightbardisease">
-    <div class="class rightbar-menu">
+    <div class="class col rightbar-menu">
       Diseases : &ensp; &ensp;
       <select
         class="disease-button"

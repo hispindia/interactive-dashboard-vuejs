@@ -2,11 +2,11 @@
     overflow: scroll;
     height: 60vh;
     color:black;
-    min-width: 18vw;
-    max-width: 18vw;
+    min-width: 16vw;
+    // max-width: 18vw;
     border-radius: 20px;
     border: 1px solid lightgray;
-    padding-top: 20px;
+    padding-top: 20px 0;
     background: white;
 }
 
@@ -38,7 +38,7 @@ ul li a:hover{
 .selectedou{
     background: white;
     padding: 5px;
-    min-width:18vw;
+    min-width:16vw;
     min-height: 34px;
     text-align: center;
     border-radius: 20px;

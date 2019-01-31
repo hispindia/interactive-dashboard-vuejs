@@ -2,8 +2,8 @@
   <!-- Units toggle bar start-->
   <!-- <div class="row justify-content-center m-2">
     <div class="class"> -->
-      <div class="row justify-content-center p-1 rightbar-menu-main">
-        <div class="class rightbar-menu">
+      <div class="row justify-content-center p-1 rightbarunit rightbar-menu-main">
+        <div class="class col rightbar-menu">
             Unit : &ensp; &ensp;
              <input
                 v-model="selected"
@@ -11,12 +11,14 @@
                 name="units"
                 autocomplete="off"
                 value="count"
+                class="countunit"
                 checked
               > Count
               <input
                 v-model="selected"
                 type="radio"
                 name="units"
+                class="rateunit"
                 autocomplete="off"
                 value="rate"
               > Rate
@@ -24,6 +26,7 @@
                 v-model="selected"
                 type="radio"
                 name="units"
+                class="percentunit"
                 autocomplete="off"
                 value="percent"
               > % age

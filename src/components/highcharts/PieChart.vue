@@ -1,5 +1,5 @@
 <template>
-  <highcharts class="chart" :options="chartOptions" :updateArgs="updateArgs"></highcharts>
+  <highcharts id='allcharts' class="chart" :options="chartOptions" :updateArgs="updateArgs"></highcharts>
 </template>
 
 

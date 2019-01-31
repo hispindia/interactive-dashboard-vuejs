@@ -2,7 +2,7 @@
   <!-- Gender toggle bar start-->
   
       <div class="row justify-content-center p-1 rightbar-menu-main rightbargender">
-        <div class="class rightbar-menu">
+        <div class="class col rightbar-menu">
             Gender : &ensp;
             <input
               class="btn btn-secondary active"
