@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       populationdata: "",
-      chartType: "",
+      chartType: "count",
       diseaseFlag: false,
       selections: "age",
       diseases: variables.diseases_yll,
@@ -149,7 +149,7 @@ export default {
                 for (let j = 0; j < Object.keys(temp[0]).length; j++) {
                   temp_arr.push([
                     variables.statesMapName[0][Object.keys(temp[0])[j]].name,
-                    temp[0][Object.keys(temp[0])[j]].data
+                    temp[0][Object.keys(temp[0])[j]].data === undefined ? temp[0][Cbw7y8SiYyW].data : temp[0][Object.keys(temp[0])[j]].data
                   ]);
                 }
                 setTimeout(function() {
@@ -174,13 +174,13 @@ export default {
               var temp_arr = [];
               for (let j = 0; j < Object.keys(temp[0]).length; j++) {
                 temp_arr.push([
-                  variables.statesMapName[0][Object.keys(temp[0])[j]].name,
-                  temp[0][Object.keys(temp[0])[j]].data
+                  variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
+                  temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data
                 ]);
               }
+              console.log(temp_arr);
               setTimeout(function() {
                 vm.mapOptions.series[0].data = [...temp_arr];
-                // console.log(vm.mapOptions.series[0].data);
                 $("#loader").hide();
               }, 2000);
             }

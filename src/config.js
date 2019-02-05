@@ -1605,6 +1605,9 @@ const statesMapData = [{
     'JQq12xOtj1a': {
         data: 0
     },
+    'Cbw7y8SiYyW': {
+        data: 0
+    }
 }];
 
 
@@ -1624,7 +1627,7 @@ const statesMapName = [{
     },
     // 'xHmXn2gn3rS': 'in-', chandigarh
     'x2yMjFqOh5R': {
-        name: 'in-ch'
+        name: 'in-ct'
     },
     'AOxuENOsJFH': {
         name: 'in-dn'
