@@ -151,6 +151,7 @@ export default {
   watch : {
     selected : function(v){
        this.sendParams("age");
+       EventBus.$emit('reset');
     }
   },
   mounted() {

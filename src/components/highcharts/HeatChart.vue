@@ -19,7 +19,8 @@ export default {
         chart: {
           type: "heatmap",
           marginTop: 150,
-          marginBottom: 40,
+          // spacingTop:100,
+          marginBottom: 50,
           plotBorderWidth: 0,
           borderColor: "white"
         },
@@ -156,6 +157,7 @@ export default {
         $(".rightbarsite").addClass("hidediv");  
         $(".rightbargender").addClass("hidediv");  
         $(".rightbarage").addClass("hidediv");  
+        $(".rightbardisease").addClass("hidediv");  
         $(".rightbarunit").addClass("hidediv");  
     },
     updateChart: function(v) {

@@ -134,7 +134,7 @@ export default {
         this.genderFilter = params.value;
       } else if (params.filter == "age") {
         this.ageFilter = params.value;
-        $(".rightbarage").addClass("hidediv");
+        // $(".rightbarage").addClass("hidediv");
       } else if (params.filter == "site") {
         this.siteFilter = params.value;
       } else if (params.filter == "measure") {

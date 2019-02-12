@@ -50,7 +50,7 @@ export default {
       EventBus.$emit("filters", {value : this.selected, filter:"site"});
     },
     reset : function(){
-      this.selected = "Both-GkHE9YVFkpE;Vl6ZLaCt2mW"
+      this.selected = this.both
     }
   },
   watch : {

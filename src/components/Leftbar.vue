@@ -1,6 +1,6 @@
 <template>
   <!-- import { watch } from 'fs'; -->
-  <div id="leftbar" class="col-2 collapse-div">
+  <div id="leftbar" class="col-2 fixed-left collapse-div">
     <div class="row justify-content-end">
       <div class="class">
         <i class="material-icons" id="leftbar-icon" v-on:click="slideLeft">menu</i>
@@ -35,23 +35,22 @@ export default {
       selectedOuName: "",
       previousou: "",
       switch: true,
+      baseOu : "",
     };
   },
   methods: {
     slideLeft: function() {
       $("#leftbar").toggleClass("collapse-div");
-      if (this.switch) {
-        window.dispatchEvent(new Event("resize"));
-        this.switch != this.switch;
-      }
     },
     getOU: function() {
       selection.load();
       this.selectedOu = selection.getSelected();
-      this.selectedOuName = this.getOuName(this.selectedOu);
+      if(this.selectedOu.length == 0)this.getBaseOu();
+      else{
+        this.getOuName(this.selectedOu);
+      }
     },
     handleClicks: function(event) {
-      // console.log(event);
       var tagid = event.path[1].id;
       this.selectedOu = tagid.split("orgUnit")[1];
       if (this.selectedOu !== undefined) {
@@ -80,15 +79,26 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    getBaseOu: function(ou) {
+      axios
+        .get("../../me.json?fields=organisationUnits[id,name]")
+        .then(response => {
+          this.selectedOu = response.data.organisationUnits[0].id;
+          this.selectedOuName = response.data.organisationUnits[0].name;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
 
-  created() {
+  beforeMount() {
     this.getOU();
   },
 
-  updated() {
-    EventBus.$emit("ou-created", { ou: this.$data.selectedOu, type: "age" });
+  beforeUpdate() {
+    EventBus.$emit("ou-created", { ou: this.selectedOu, type: "age" });
   },
 
 

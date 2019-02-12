@@ -51,12 +51,18 @@ export default {
      if(this.selected == "percent") EventBus.$emit("chartChange", "percent");
      else if(this.selected == "count") EventBus.$emit("chartChange" , "count");
      else { EventBus.$emit("chartChange" , "rate"); }
+    },
+    reset : function(){
+      this.selected = 'count'
     }
   },
   watch : {
     selected : function(){
       this.sendChart();
     }
+  },
+  mounted(){
+    EventBus.$on("reset", this.reset);
   }
 };
 </script>

@@ -30,6 +30,9 @@ export default {
     };
   },
   methods: {
+    reset : function(){
+      this.selected = {id:'',text:'Select/unselect disease',value:''}
+    },
     sendFilter: function() {
       EventBus.$emit("filters", { value: this.selected, filter: "disease" });
     },
@@ -118,6 +121,7 @@ export default {
   mounted() {
     this.changeDropDown(variables.yll);
     EventBus.$on("diseasechange", this.changeDropDown);
+    EventBus.$on("reset", this.reset);
   }
 };
 </script>
