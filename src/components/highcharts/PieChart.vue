@@ -1,5 +1,5 @@
 <template>
-  <highcharts id='allcharts' class="chart" :options="chartOptions" :updateArgs="updateArgs"></highcharts>
+  <highcharts id="allcharts" class="chart" :options="chartOptions" :updateArgs="updateArgs"></highcharts>
 </template>
 
 
@@ -374,7 +374,7 @@ export default {
           var tempOuter = [];
           tempArr.push({ name: "Urban", y: urban, color: "green" });
           tempArr.push({ name: "Rural", y: rural, color: "blue" });
-          tempOuter = [...urbandata,...ruraldata];
+          tempOuter = [...urbandata, ...ruraldata];
           setTimeout(function() {
             vm.chartOptions.series[0].data = [...tempArr];
             vm.chartOptions.series[1].data = [...tempOuter];
@@ -405,7 +405,20 @@ export default {
             });
           }
           setTimeout(function() {
+            vm.chartOptions.series[0] = 
+              {
+                data: [],
+                dataLabels: {
+                  distance:20,
+                  color:'black',
+                  style: {
+                    fontSize: "12px"
+                  }
+                }
+              }
+            ;
             vm.chartOptions.series[0].data = [...temp_arr];
+            vm.chartOptions.plotOptions.pie.allowPointSelect = true;
             vm.chartOptions.series[1].data = [];
             // console.log(vm.mapOptions.series[0].data);
             $("#loader").hide();
@@ -473,7 +486,7 @@ export default {
       ageFilter: variables.age_main_var,
       siteFilter: variables.site_main_var,
       measureFilter: variables.yll,
-      measureFilterTemp : variables.yll,
+      measureFilterTemp: variables.yll,
       ou: variables.indiaOuId,
       statesApi: "",
       defaultIndiaApi:
@@ -498,10 +511,14 @@ export default {
           }
         },
         tooltip: {
-          valueSuffix: ""
+          valueSuffix: "",
+          cursor: "pointer",
+          headerFormat:
+            "<b>Percentage :</b> {point.name}</b>: {point.percentage:.1f} % - "
         },
         plotOptions: {
           pie: {
+            allowPointSelect: false,
             shadow: false,
             center: ["50%", "50%"]
           }
@@ -529,9 +546,7 @@ export default {
             dataLabels: {
               formatter: function() {
                 // display only if larger than 2000000
-                return this.y > 2000000
-                  ? "<b>" + this.point.name + ":</b> " + this.y
-                  : null;
+                return null;
               }
             }
           }

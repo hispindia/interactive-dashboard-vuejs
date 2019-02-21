@@ -340,17 +340,17 @@ export default {
         } else {
           gender_id == variables.gender_male_id
             ? temp[0][disease_id].data[0] === undefined
-              ? (temp[0][disease_id].data[0] = value / this.populationdata.male)
+              ? (temp[0][disease_id].data[0] = (value / this.populationdata.male) * 10000)
               : (temp[0][disease_id].data[0] +=
-                  value / this.populationdata.male)
+                  (value / this.populationdata.male) * 10000)
             : temp[0][disease_id].data[1] === undefined
-            ? (temp[0][disease_id].data[1] = value / this.populationdata.female)
+            ? (temp[0][disease_id].data[1] = (value / this.populationdata.female) * 10000)
             : (temp[0][disease_id].data[1] +=
-                value / this.populationdata.female);
+               ( value / this.populationdata.female) * 10000);
 
           temp[0][disease_id].data[2] === undefined
-            ? (temp[0][disease_id].data[2] = value / this.populationdata.both)
-            : (temp[0][disease_id].data[2] += value / this.populationdata.both);
+            ? (temp[0][disease_id].data[2] = (value / this.populationdata.both) * 10000)
+            : (temp[0][disease_id].data[2] += (value / this.populationdata.both) * 10000);
         }
 
         if (i == len - 1) {
@@ -429,50 +429,50 @@ export default {
           age_id_match == variables.age_0_4_id
             ? temp[0][disease_id].data[0] === undefined
               ? (temp[0][disease_id].data[0] =
-                  value / this.populationdata.age0_4)
+                (  value / this.populationdata.age0_4) * 10000)
               : (temp[0][disease_id].data[0] +=
-                  value / this.populationdata.age0_4)
+                (  value / this.populationdata.age0_4) * 10000)
             : age_id_match == variables.age_5_14_id
             ? temp[0][disease_id].data[1] === undefined
               ? (temp[0][disease_id].data[1] =
-                  value / this.populationdata.age5_14)
+                (  value / this.populationdata.age5_14) * 10000)
               : (temp[0][disease_id].data[1] +=
-                  value / this.populationdata.age5_14)
+                (  value / this.populationdata.age5_14) * 10000)
             : age_id_match == variables.age_15_29_id
             ? temp[0][disease_id].data[2] === undefined
               ? (temp[0][disease_id].data[2] =
-                  value / this.populationdata.age15_29)
+                (  value / this.populationdata.age15_29) * 10000)
               : (temp[0][disease_id].data[2] +=
-                  value / this.populationdata.age15_29)
+                (  value / this.populationdata.age15_29) * 10000)
             : age_id_match == variables.age_30_49_id
             ? temp[0][disease_id].data[3] === undefined
               ? (temp[0][disease_id].data[3] =
-                  value / this.populationdata.age30_49)
+                (  value / this.populationdata.age30_49) * 10000)
               : (temp[0][disease_id].data[3] +=
-                  value / this.populationdata.age30_49)
+                 ( value / this.populationdata.age30_49) * 10000)
             : age_id_match == variables.age_50_59_id
             ? temp[0][disease_id].data[4] === undefined
               ? (temp[0][disease_id].data[4] =
-                  value / this.populationdata.age50_59)
+                (  value / this.populationdata.age50_59) * 10000)
               : (temp[0][disease_id].data[4] +=
-                  value / this.populationdata.age50_59)
+                (  value / this.populationdata.age50_59) * 10000)
             : age_id_match == variables.age_60_69_id
             ? temp[0][disease_id].data[5] === undefined
               ? (temp[0][disease_id].data[5] =
-                  value / this.populationdata.age60_69)
+                (  value / this.populationdata.age60_69) * 10000)
               : (temp[0][disease_id].data[5] +=
-                  value / this.populationdata.age60_69)
+                (  value / this.populationdata.age60_69) * 10000)
             : age_id_match == variables.age_70_79_id
             ? temp[0][disease_id].data[6] === undefined
               ? (temp[0][disease_id].data[6] =
-                  value / this.populationdata.age70_79)
+                 ( value / this.populationdata.age70_79) * 10000)
               : (temp[0][disease_id].data[6] +=
-                  value / this.populationdata.age70_79)
+                 ( value / this.populationdata.age70_79) * 10000)
             : temp[0][disease_id].data[7] === undefined
             ? (temp[0][disease_id].data[7] =
-                value / this.populationdata.age80_above)
+                (value / this.populationdata.age80_above) * 10000)
             : (temp[0][disease_id].data[7] +=
-                value / this.populationdata.age80_above);
+                (value / this.populationdata.age80_above) * 10000);
         }
 
         if (i == len - 1) {
