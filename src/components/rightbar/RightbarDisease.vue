@@ -25,13 +25,13 @@ export default {
   data() {
     return {
       diseases: [],
-      diseasesTemp: [{id:'',text:'Select/unselect disease',value:''}],
-      selected : {id:'',text:'Select/unselect disease',value:''}
+      diseasesTemp: [{id:'',text:'All causes',value:''}],
+      selected : {id:'',text:'All causes',value:''}
     };
   },
   methods: {
     reset : function(){
-      this.selected = {id:'',text:'Select/unselect disease',value:''}
+      this.selected = {id:'',text:'All causes',value:''}
     },
     sendFilter: function() {
       EventBus.$emit("filters", { value: this.selected, filter: "disease" });

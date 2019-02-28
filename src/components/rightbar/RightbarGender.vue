@@ -49,6 +49,7 @@ export default {
   methods :{
     sendFilter : function(){
       EventBus.$emit("filters", {value : this.selected, filter:"gender"});
+      document.getElementById("headertext-gender").innerHTML = "Gender - " + (this.selected==this.male ? "male" : this.selected==this.female ? "female" : "both")+ ", ";
     },
     reset : function(){
       this.selected = this.both

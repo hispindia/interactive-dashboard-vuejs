@@ -48,6 +48,7 @@ export default {
   methods :{
     sendFilter : function(){
       EventBus.$emit("filters", {value : this.selected.id, filter:"age"});
+      document.getElementById("headertext-age").innerHTML = "Age -" +this.selected.text + ", ";
     },
     reset : function(){
       this.selected = { text: "All" , id : data.age_main_var}

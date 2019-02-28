@@ -1,5 +1,5 @@
 <template>
-  <highcharts id='allcharts' :options="mapOptions" class="heatmap" ref="heatmap"></highcharts>
+  <highcharts id="allcharts" :options="mapOptions" class="heatmap" ref="heatmap"></highcharts>
 </template>
 
 <script>
@@ -8,10 +8,11 @@ import axios from "axios";
 import { EventBus } from "../../event-bus";
 import Highcharts from "highcharts";
 import clicks from "../../catch-clicks";
+import { setTimeout } from "timers";
 export default {
   data() {
     return {
-      map_arr:[],
+      map_arr: [],
       diseases: variables.diseases_yll,
       measureFilter: variables.yll,
       defaultIndiaApi: "",
@@ -23,6 +24,9 @@ export default {
           marginBottom: 50,
           plotBorderWidth: 0,
           borderColor: "white"
+        },
+        animation: {
+          duration: 1000
         },
 
         title: {
@@ -123,6 +127,9 @@ export default {
                   fill: "gray"
                 }
               }
+            },
+            animation: {
+              duration: 1000
             }
           }
         ]
@@ -154,16 +161,16 @@ export default {
   },
   methods: {
     handleShowHide: function() {
-        $(".rightbarsite").addClass("hidediv");  
-        $(".rightbargender").addClass("hidediv");  
-        $(".rightbarage").addClass("hidediv");  
-        $(".rightbardisease").addClass("hidediv");  
-        $(".rightbarunit").addClass("hidediv");  
+      $(".rightbarsite").addClass("hidediv");
+      $(".rightbargender").addClass("hidediv");
+      $(".rightbarage").addClass("hidediv");
+      $(".rightbardisease").addClass("hidediv");
+      $(".rightbarunit").addClass("hidediv");
     },
     updateChart: function(v) {
       $("#loader").show();
       let sn = variables.stateNamesAndId[0][v];
-      let n = (Object.keys(variables.stateNamesAndId[0])).indexOf(v);
+      let n = Object.keys(variables.stateNamesAndId[0]).indexOf(v);
       var map_arr = this.map_arr;
       // var array_with_labels = this.getPointLabels(map_arr);
       var temp_arr = this.getMatrixSorted(n, map_arr);
@@ -173,17 +180,22 @@ export default {
         vm.mapOptions.series[0].data = [...temp_arr];
         vm.mapOptions.yAxis.categories = [...updated_y];
         $("#loader").hide();
-      }, 2000);
+      }, 100);
+      setTimeout(function() {
+        let element = document.getElementById(v);
+        element.classList.add("selected-xaxis");
+        $("#loader").hide();
+      }, 1000);
     },
     setColors: function(index, count) {
       if (index == 0) {
-        return this.getColorShades(128, 0, 0, count);
-      } else if (index == 1) {
-        return this.getColorShades(0, 128, 0, count);
-      } else if (index == 2) {
         return this.getColorShades(255, 165, 0, count);
+      } else if (index == 1) {
+        return this.getColorShades(128,0, 0, count);
+      } else if (index == 2) {
+        return this.getColorShades(0, 128, 0, count);
       } else {
-        return this.getColorShades(0, 0, 255, count);
+        return this.getColorShades(0, 191, 255, count);
       }
     },
     getColorShades: function(r, g, b, x) {
@@ -278,8 +290,12 @@ export default {
             vm.mapOptions.series[0].data = [...temp_arr];
             vm.mapOptions.xAxis.categories = [...Object.values(temp_x)];
             vm.mapOptions.yAxis.categories = [...updated_y];
+          }, 100);
+          setTimeout(function() {
+            let element = document.getElementById("AndhraPradesh");
+            element.classList.add("selected-xaxis");
             $("#loader").hide();
-          }, 2000);
+          }, 1000);
         }
       }
     },

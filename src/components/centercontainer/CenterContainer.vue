@@ -28,6 +28,11 @@
           title="Pie Chart">
             <img src="../../assets/images/piechart.png" alt="Pie Chart" width="60px" height="60px">
           </button>
+          <button @click="select('donutChart')" :class="{btnActive: selected === 'donutChart'}" data-toggle="tooltip"
+          data-placement="bottom"
+          title="Donut Chart">
+            <img src="../../assets/images/donutchart.png" alt="Donut Chart" width="60px" height="60px">
+          </button>
           <button @click="select('treeChart')" :class="{btnActive: selected === 'treeChart'}" data-toggle="tooltip"
           data-placement="bottom"
           title="Tree Chart">
@@ -40,6 +45,9 @@
           </button>
         </div>
       </div>
+    </div>
+    <div class="row justify-content-center py-1 my-1">
+      <div class="text-center col" ><p id="headertext-chart" class="headertext"></p><p id="headertext-age" class="headertext"></p><p id="headertext-gender" class="headertext"></p><p id="headertext-meausre" class="headertext"></p><p id="headertext-site" class="headertext"></p><p id="headertext-unit" class="headertext"></p></div>
     </div>
     <div class="row">
       <div id="cc" class="col div-content" ref="cc">
@@ -91,6 +99,7 @@ import StackChart from "../highcharts/StackChart";
 import MapChart from "../highcharts/MapChart";
 import PointChart from "../highcharts/PointChart";
 import PieChart from "../highcharts/PieChart";
+import DonutChart from "../highcharts/DonutChart";
 import TreeChart from "../highcharts/TreeChart";
 import HeatChart from "../highcharts/HeatChart";
 import { EventBus } from "../../event-bus";
@@ -103,16 +112,24 @@ export default {
     mapChart: MapChart,
     PointChart: PointChart,
     PieChart: PieChart,
+    donutChart: DonutChart,
     TreeChart: TreeChart,
     HeatChart: HeatChart
   },
   methods: {
     select(elem) {
       this.currentView = elem;
-      this.activate(elem);
+      this.activate(elem);    
     },
     activate(elem) {
       this.selected = elem;
+      if(elem == "stackChart")this.selectname = "Stacked Chart"
+      else if(elem == "mapChart")this.selectname = "Map"
+      else if(elem == "pointChart")this.selectname = "Point Chart"
+      else if(elem == "pieChart")this.selectname = "Pie Chart"
+      else if(elem == "donutChart")this.selectname = "Donut Chart"
+      else if(elem == "treeChart")this.selectname = "Tree Chart"
+      else this.selectname = "Heat Map";
     },
     showhidelegend: function() {
       $(".highcharts-legend").toggle();
@@ -134,7 +151,6 @@ export default {
           type: "gender"
         });
       } else if (t == "location") {
-        // $(".rightbarlocation").addClass("hidediv");
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
           type: "location"
@@ -152,6 +168,7 @@ export default {
     selected : function(v){
        this.sendParams("age");
        EventBus.$emit('reset');
+       document.getElementById("headertext-chart").innerHTML = this.selectname + ", ";
     }
   },
   mounted() {
@@ -160,7 +177,8 @@ export default {
   data() {
     return {
       selected: "stackChart",
-      currentView: "stackChart"
+      currentView: "stackChart",
+      selectname : "Stack Chart"
     };
   }
 };
@@ -206,5 +224,8 @@ button:active {
   color: #6fcd98;
   opacity: 1 !important;
   background: white;
+}
+.headertext{
+  display:inline;
 }
 </style>

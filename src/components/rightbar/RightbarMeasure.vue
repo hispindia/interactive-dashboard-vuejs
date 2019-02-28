@@ -42,6 +42,7 @@ export default {
     sendFilter: function() {
       EventBus.$emit("filters", { value: this.selected, filter: "measure" });
       EventBus.$emit("diseasechange", this.selected);
+      document.getElementById("headertext-measure").innerHTML = "Meausre - " + (this.selected==this.yll ? "YLL" : this.selected==this.yld ? "YLD" : this.selected==this.daly ? "DALY" : "DEATHS") + ", ";
     },
     reset: function() {
       this.selected = variables.yll;

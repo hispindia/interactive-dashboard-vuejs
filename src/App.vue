@@ -2,9 +2,11 @@
   <div class="container-fluid no-gutters main" style="overflow-x:hidden;background-color: #f7f7f7;">
     <d2headerBar></d2headerBar>
     <HeaderApp/>
+    
     <div class="row" style="display: flex">
       <Leftbar/>
       <Loader/>
+      
       <CenterContainer/>
       <Rightbar/>
     </div>
@@ -39,5 +41,4 @@ export default {
 <style lang="scss">
   // Import Main styles for this application
   @import 'assets/scss/style';
-  // @import './a';
 </style>

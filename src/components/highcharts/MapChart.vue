@@ -112,18 +112,6 @@ export default {
       var defaultIndiaApi =
         "../../analytics.json?dimension=pe:2015&dimension=ou:" +
         variables.allouIDs +
-        // "&dimension=dx:" +
-        //  variables.gender_id +
-        // ":" +
-        // this.genderFilter +
-        // "&dimension=" +
-        // variables.age_id +
-        // ":" +
-        // this.ageFilter +
-        // "&dimension=" +
-        // variables.site_id +
-        // ":" +
-        // this.siteFilter +
         "&dimension=dx:" +
         this.measureFilter +
         "&displayProperty=NAME&outputIdScheme=UID";

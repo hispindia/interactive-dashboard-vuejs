@@ -44,8 +44,8 @@ $('body').click(function (e) {
     if (target !== undefined) {
         
         if (target[0].className.includes(clicks.globalClass)) {
-            clicks.toggleClass(target[0].id);
             vm.callAnotherComponent(target[0].id);
+            clicks.toggleClass(target[0].id);
         }
     }
 });

@@ -80,22 +80,27 @@ export default {
       for (let g = 0; g < Object.keys(this.diseases[0]).length; g++) {
         var key = Object.keys(this.diseases[0])[g];
         var index = this.diseases[0][key].group;
-        if (index == 0) {
-          this.diseases[0][key].color = this.getColorShades(128, 0, 0, count1);
-          count1++;
-        } else if (index == 1) {
-          this.diseases[0][key].color = this.getColorShades(0, 128, 0, count2);
-          count2++;
-        } else if (index == 2) {
+            if (index == 0) {
           this.diseases[0][key].color = this.getColorShades(
             255,
             165,
             0,
-            count3
+            count1
           );
+          count1++;
+        } else if (index == 1) {
+          this.diseases[0][key].color = this.getColorShades(128, 0, 0, count2);
+          count2++;
+        } else if (index == 2) {
+          this.diseases[0][key].color = this.getColorShades(0, 128, 0, count3);
           count3++;
         } else {
-          this.diseases[0][key].color = this.getColorShades(0, 0, 255, count4);
+          this.diseases[0][key].color = this.getColorShades(
+            0,
+            191,
+            255,
+            count4
+          );
           count4++;
         }
       }
@@ -694,16 +699,12 @@ export default {
         },
         tooltip: {
           headerFormat: "<b>{point.x}</b><br/>",
-          pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}"
+          pointFormat: "{series.name}: {point.y}"
         },
         plotOptions: {
           column: {
             stacking: "normal",
             borderWidth: 0,
-            dataLabels: {
-              enabled: false,
-              color: "white"
-            }
           }
         },
         series: [

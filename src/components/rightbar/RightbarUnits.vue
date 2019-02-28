@@ -51,6 +51,7 @@ export default {
      if(this.selected == "percent") EventBus.$emit("chartChange", "percent");
      else if(this.selected == "count") EventBus.$emit("chartChange" , "count");
      else { EventBus.$emit("chartChange" , "rate"); }
+      document.getElementById("headertext-unit").innerHTML = "unit - " + this.selected + ", ";
     },
     reset : function(){
       this.selected = 'count'

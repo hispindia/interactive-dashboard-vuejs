@@ -15,7 +15,7 @@ export default {
     EventBus.$on("filters", this.setFilters);
     EventBus.$on("ou-created", this.setSelectedOu);
     EventBus.$on("ou-changed", this.setSelectedOu);
-    EventBus.$on("param-pieChart", this.setSelections);
+    EventBus.$on("param-donutChart", this.setSelections);
     this.getApiData();
   },
   watch: {
@@ -216,9 +216,12 @@ export default {
           var tempOuter = [];
           tempArr.push({ y: male, name: "Male", color: "green" });
           tempArr.push({ y: female, name: "Female", color: "blue" });
-          // tempOuter = [...maledata, ...femaledata];
+          tempOuter = [...maledata, ...femaledata];
           setTimeout(function() {
             vm.chartOptions.series[0].data = [...tempArr];
+            vm.chartOptions.series[1].data = [...tempOuter];
+            console.log(tempArr);
+            console.log(tempOuter);
             $("#loader").hide();
           }, 2000);
         }
@@ -323,8 +326,19 @@ export default {
             y: age_80above,
             color: "cyan"
           });
+          tempOuter = [
+            ...age_04_data,
+            ...age_514_data,
+            ...age_1529_data,
+            ...age_3049_data,
+            ...age_5059_data,
+            ...age_6069_data,
+            ...age_7079_data,
+            ...age_80above_data
+          ];
           setTimeout(function() {
             vm.chartOptions.series[0].data = [...tempArr];
+            vm.chartOptions.series[1].data = [...tempOuter];
             $("#loader").hide();
           }, 2000);
         }
@@ -365,8 +379,10 @@ export default {
           var tempOuter = [];
           tempArr.push({ name: "Urban", y: urban, color: "green" });
           tempArr.push({ name: "Rural", y: rural, color: "blue" });
+          tempOuter = [...urbandata, ...ruraldata];
           setTimeout(function() {
             vm.chartOptions.series[0].data = [...tempArr];
+            vm.chartOptions.series[1].data = [...tempOuter];
             $("#loader").hide();
           }, 2000);
         }
@@ -394,8 +410,22 @@ export default {
             });
           }
           setTimeout(function() {
+            vm.chartOptions.series[0] = 
+              {
+                data: [],
+                dataLabels: {
+                  distance:20,
+                  color:'black',
+                  style: {
+                    fontSize: "12px"
+                  }
+                }
+              }
+            ;
             vm.chartOptions.series[0].data = [...temp_arr];
-            // vm.chartOptions.plotOptions.pie.allowPointSelect = true;
+            vm.chartOptions.plotOptions.pie.allowPointSelect = true;
+            vm.chartOptions.series[1].data = [];
+            // console.log(vm.mapOptions.series[0].data);
             $("#loader").hide();
           }, 2000);
         }
@@ -478,7 +508,7 @@ export default {
           type: "pie"
         },
         title: {
-          text: "Pie chart"
+          text: "Donut chart"
         },
         yAxis: {
           title: {
@@ -493,14 +523,37 @@ export default {
         },
         plotOptions: {
           pie: {
-            allowPointSelect: true,
+            allowPointSelect: false,
             shadow: false,
+            center: ["50%", "50%"]
           }
         },
         series: [
           {
             name: "Patients",
-            data: []
+            data: [],
+            size: "90%",
+            turboThreshold: 0,
+            dataLabels: {
+              distance: -150,
+              color: "white",
+              style: {
+                fontSize: "16px"
+              }
+            }
+          },
+          {
+            name: "Diseases",
+            data: [],
+            size: "90%",
+            innerSize: "60%",
+            turboThreshold: 0,
+            dataLabels: {
+              formatter: function() {
+                // display only if larger than 2000000
+                return null;
+              }
+            }
           }
         ]
       }
@@ -509,7 +562,7 @@ export default {
   destroyed() {
     EventBus.$off("ou-created", this.getApiData);
     EventBus.$off("ou-changed", this.getApiData);
-    EventBus.$off("param-pieChart", this.getApiData);
+    EventBus.$off("param-donutChart", this.getApiData);
     EventBus.$off("filters", this.setFilters);
   }
 };
