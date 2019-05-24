@@ -6,6 +6,7 @@ const daly_id = "gxhQpCbFB3Q;xtKp6I7IW26;yIyNAOM1u9Z;cmCvW0dqYIU;Zy9AZUbeJdu;lXK
 
 const death_id = "G88aHJhkSyR;eTAKBjIkwaz;rR11LCFjkoT;EI8xZCX8bCA;GyJw0WaL92N;MpZbNyRQPSP;VUm3woORMNB;JF3BEE0kYoJ;QKXrL8lZetJ;T11thVOCxbC;eHvuTO8pQiF;kh9RIuLy8tg;rjqa3BQE649;X8fpBqisVaW;Ij1ozoYgNiV;EX9IN3ypvdY;ZZIrvfpFn1S;XFL2f8OlAaM;jB5NguyWFz6;sVmArtwPXJX;QZKKmntYWnK;hGi1Pq8H3ix;RwB0sPs9WL1;WUzmQKiWNOt;KjyPR5oK8KF;KRNbMneERb7;P1bxpIcNaJe;IwliRMQtcwI;N8pnKAkSuS9;yKYmGtoLvuO;dhFdGBrCOL0;MszRYeCv7tb;EHDA6YRi77G;WclEXSqNL8q;HoTW2c63jQZ;wxcHhR9gF2v;hhZ2dn7aLRx;uDP7MrmByBK;NKpDx4DLbCX;ykL5JPlWrC3;trGfGTQGj5J;pDz4OePMon1;vQLeSv0U8zm;v3x2vzgTp7a;DpboXWZn1kz;vGvSM6QeW8v;Uq5cNdR3bl8;";
 
+
 const age_id = "kTkbVocs2qt";
 const age_0_4_id = "LJglh3dKkBF";
 const age_5_14_id = "Y80cGPh9cA9";
@@ -399,6 +400,365 @@ const diseases_obj_yll = [{
         index: 12,
         group: 0
     },
+}]
+const ages_obj = [{
+    'LJglh3dKkBF': {
+        name: '0-4 Years',
+        data: [],
+        val: 0,
+        color: "",
+        index:0,
+        group: 1
+    },
+    'Y80cGPh9cA9': {
+        name: '5-14 Years',
+        data: [],
+        val: 0,
+        color: "",
+        index: 1,
+        group: 0
+    },
+    'ppIxci61gTu': {
+        name: '15-29 Years',
+        data: [],
+        val: 0,
+        color: "",
+        index: 2,
+        group: 0
+    },
+    'yvdQkzHuq2E': {
+        name: '30-49 Years',
+        data: [],
+        val: 0,
+        color: "",
+        index: 3,
+        group: 0
+    },
+    'fohLv27MtjN': {
+        name: '50-59 Years',
+        data: [],
+        val: 0,
+        color: "",
+        index: 4,
+        group: 0
+    },
+    'FPQcIz7kBvD': {
+        name: '60-69 Years',
+        data: [],
+        val: 0,
+        color: "",
+        index: 5,
+        group: 0
+    },
+    'fuZTseIa9nS': {
+        name: '70-79 Years',
+        data: [],
+        val: 0,
+        color: "",
+        index: 6,
+        group: 0
+    },
+    'rHmIMu8bVmy': {
+        name: '80 Years & Above',
+        data: [],
+        val: 0,
+        color: "",
+        index: 7,
+        group: 0
+    },
+}]
+const diseases_group = [{
+    'cbEjdFMYLh0': {
+        name: "Communicable, maternal, perinatal and nutritional conditions",
+        data: [],
+        val: 0,
+        color: "",
+        index: 0,
+        group: 2
+    },
+    'S4yHg2jEMXI': {
+        name: "Ill-defined or cause unknown",
+        data: [],
+        val: 0,
+        color: "",
+        index: 1,
+        group: 1
+    },
+    'MGK3XaVs7MT': {
+        name: "Injuries",
+        data: [],
+        val: 0,
+        color: "",
+        index: 2,
+        group: 0
+    },
+    'M98SAuHB7LJ': {
+        name: "Noncommunicable diseases",
+        data: [],
+        val: 0,
+        color: "",
+        index: 3,
+        group: 1
+    }
+}]
+const diseases_group_1 = [{
+    'KjyPR5oK8KF': {
+        name: "Maternal conditions (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 0,
+        group: 2
+    },
+    'LdRpJ0ydVJQ': {
+        name: "Sexually-transmitted infections incl. HIV/AIDS (median)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 1,
+        group: 1
+    },
+    'hhZ2dn7aLRx': {
+        name: "Respiratory infections (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 2,
+        group: 0
+    },
+    'rjqa3BQE649': {
+        name: "Fever of unknown origin (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 3,
+        group: 1
+    },
+    'EX9IN3ypvdY': {
+        name: "Hepatitis (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 4,
+        group: 1
+    },
+    'vGvSM6QeW8v': {
+        name: "Tuberculosis (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 5,
+        group: 1
+    },
+    'wxcHhR9gF2v': {
+        name: "Perinatal conditions (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 6,
+        group: 1
+    },
+    'WUzmQKiWNOt': {
+        name: "Malaria (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 7,
+        group: 1
+    },
+    'KRNbMneERb7': {
+        name: "Meningitis/encephalitis (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 8,
+        group: 1
+    },
+    'pDz4OePMon1': {
+        name: "Sexually-transmitted infections incl. HIV/AIDS (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 9,
+        group: 1
+    },
+    'HoTW2c63jQZ': {
+        name: "Other infectious and parasitic diseases (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 10,
+        group: 1
+    },
+    'ykL5JPlWrC3': {
+        name: "Selected vaccine preventable diseases (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 11,
+        group: 1
+    },
+    'N8pnKAkSuS9': {
+        name: "Nutritional deficiencies (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 13,
+        group: 1
+    },
+    'QKXrL8lZetJ': {
+        name: "Diarrhoeal diseases (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 12,
+        group: 1
+    }
+}]
+
+const diseases_group_4 = [{
+    'X8fpBqisVaW': {
+        name: "Gastro-oesophageal diseases (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 0,
+        group: 2
+    },
+    'QZKKmntYWnK': {
+        name: "Liver and alcohol related diseases (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 1,
+        group: 1
+    },
+    'dhFdGBrCOL0': {
+        name: "Other Genitorurintary diseases (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 2,
+        group: 0
+    },
+    'uDP7MrmByBK': {
+        name: "Rheumatic heart disease (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 3,
+        group: 1
+    },
+    'P1bxpIcNaJe': {
+        name: "Musculoskeletal disorders (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 4,
+        group: 1
+    },
+    'rR11LCFjkoT': {
+        name: "Breast cancer (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 5,
+        group: 1
+    },
+    'sVmArtwPXJX': {
+        name: "Leukemia,lymphoma and other hemotopoietic malignancies (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 6,
+        group: 1
+    },
+    'MpZbNyRQPSP': {
+        name: "Chronic respiratory diseases (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 7,
+        group: 1
+    },
+    'vQLeSv0U8zm': {
+        name: "Skin, Sense Organ, Oral conditions (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 8,
+        group: 1
+    }
+}]
+
+const diseases_group_3 = [{
+    'Uq5cNdR3bl8': {
+        name: "Venomous deaths (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 0,
+        group: 2
+    },
+    'kh9RIuLy8tg': {
+        name: "Falls (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 1,
+        group: 1
+    },
+    'trGfGTQGj5J': {
+        name: "Self-inflicted injuries (suicide) (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 2,
+        group: 0
+    },
+    'T11thVOCxbC': {
+        name: "Drowning (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 3,
+        group: 1
+    },
+    'XFL2f8OlAaM': {
+        name: "Interpersonal violence (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 4,
+        group: 1
+    },
+    'eTAKBjIkwaz': {
+        name: "All other injuries (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 5,
+        group: 1
+    },
+    'NKpDx4DLbCX': {
+        name: "Road Traffic accidents (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 6,
+        group: 1
+    }
+}]
+
+const diseases_group_2 = [{
+    'ZZIrvfpFn1S': {
+        name: "Ill-defined or cause unknown (deaths)",
+        data: [],
+        val: 0,
+        color: "",
+        index: 0,
+        group: 1
+    }
 }]
 const diseases_obj_deaths = [{
     'VUm3woORMNB': {
@@ -1754,44 +2114,44 @@ const stateNames = [{
 }]
 
 const stateNamesAndId = [{
- "AndamanandNicobar":"J1qTQ3TKlNU",
- "AndhraPradesh":"ft1FqZHkEIV",
- "ArunachalPradesh":"UBKSsG72Cg8",
- "Assam":"nCTGAP1pUqK",
- "Bihar":"z8g8gAEeird",
- "Chandigarh":"xHmXn2gn3rS",
- "Chhattisgarh":"x2yMjFqOh5R",
- "DadraandNagarHaveli":"AOxuENOsJFH",
- "DamanandDiu":"YE9KMXV2qC3",
- "Delhi":"dBKf3LDpfYl",
- "Goa":"N40kwU7hERO",
- "Gujarat":"kBajdL7waFu",
- "Haryana":"XJMaF0ZzGo1",
- "HimachalPradesh":"wTQrXc3kOgA",
- "JammuandKashmir":"y85LzeVqQNo",
- "Jharkhand":"YkAq1G0JN6Y",
- "Karnataka":"qA92TbABPdT",
- "Kerala":    "TABbglhSurr",
- "Lakshadweep":"B8ffozIh5D0",
- "MadhyaPradesh":    "BBnVIaukxaN",
- "Maharashtra":"x5TafwbmlFt",
- "Manipur":"KfUK7GlZqiu",
- "Meghalaya":"XX7mkLtUkZT",
- "Mizoram":"A64ajbtzogd",
- "Nagaland":"ITt5l6I85Uf",
- "NortheasternclusterStates":"n5C3pZ1QbDV",
- "Odisha":"XzbGlw8pVXQ",
- "OtherremainingsmallstatesandUTs":"Cbw7y8SiYyW",
- "Puducherry":"VTNC2rB3AzO",
- "Punjab":    "nAEXiUnvksD",
- "Rajasthan":"WwBDw1qLQfH",
- "Sikkim":"yWmW9qcMVwZ",
- "TamilNadu":"yBFfg3amqn7",
- "Telangana":"BvnPG4cWtyx",
- "Tripura":    "DrcfNamsJRj",
- "UttarPradesh":"N2K15gP6SKn",
- "Uttarakhand":"osxywsmbdA9",
- "WestBengal":"JQq12xOtj1a"
+    "AndamanandNicobar":"J1qTQ3TKlNU",
+    "AndhraPradesh":"ft1FqZHkEIV",
+    "ArunachalPradesh":"UBKSsG72Cg8",
+    "Assam":"nCTGAP1pUqK",
+    "Bihar":"z8g8gAEeird",
+    "Chandigarh":"xHmXn2gn3rS",
+    "Chhattisgarh":"x2yMjFqOh5R",
+    "DadraandNagarHaveli":"AOxuENOsJFH",
+    "DamanandDiu":"YE9KMXV2qC3",
+    "Delhi":"dBKf3LDpfYl",
+    "Goa":"N40kwU7hERO",
+    "Gujarat":"kBajdL7waFu",
+    "Haryana":"XJMaF0ZzGo1",
+    "HimachalPradesh":"wTQrXc3kOgA",
+    "JammuandKashmir":"y85LzeVqQNo",
+    "Jharkhand":"YkAq1G0JN6Y",
+    "Karnataka":"qA92TbABPdT",
+    "Kerala":    "TABbglhSurr",
+    "Lakshadweep":"B8ffozIh5D0",
+    "MadhyaPradesh":    "BBnVIaukxaN",
+    "Maharashtra":"x5TafwbmlFt",
+    "Manipur":"KfUK7GlZqiu",
+    "Meghalaya":"XX7mkLtUkZT",
+    "Mizoram":"A64ajbtzogd",
+    "Nagaland":"ITt5l6I85Uf",
+    "NortheasternclusterStates":"n5C3pZ1QbDV",
+    "Odisha":"XzbGlw8pVXQ",
+    "OtherremainingsmallstatesandUTs":"Cbw7y8SiYyW",
+    "Puducherry":"VTNC2rB3AzO",
+    "Punjab":    "nAEXiUnvksD",
+    "Rajasthan":"WwBDw1qLQfH",
+    "Sikkim":"yWmW9qcMVwZ",
+    "TamilNadu":"yBFfg3amqn7",
+    "Telangana":"BvnPG4cWtyx",
+    "Tripura":    "DrcfNamsJRj",
+    "UttarPradesh":"N2K15gP6SKn",
+    "Uttarakhand":"osxywsmbdA9",
+    "WestBengal":"JQq12xOtj1a"
 }]
 
 export default {
@@ -1799,6 +2159,7 @@ export default {
     yld: yld_id,
     daly: daly_id,
     deaths: death_id,
+    population: death_id,
     age_id: age_id,
     age_0_4_id: age_0_4_id,
     age_5_14_id: age_5_14_id,
@@ -1819,8 +2180,18 @@ export default {
     age_main_var: age_main_var,
     gender_main_var: gender_main_var,
     diseases_yll: diseases_obj_yll,
+    ages_all: ages_obj,
     diseases_daly: diseases_obj_daly,
     diseases_yld: diseases_obj_yld,
+    diseases_group: diseases_group,
+    diseases_group_1: diseases_group_1,
+    diseases_group_2: diseases_group_2,
+    diseases_group_3: diseases_group_3,
+    diseases_group_4: diseases_group_4,
+
+
+
+
     diseases_deaths: diseases_obj_deaths,
     age_categories: age_categories,
     gender_categories: gender_categories,
