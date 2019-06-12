@@ -13,11 +13,13 @@
               height="60px"
             >
           </button>
+
           <button @click="select('mapChart')" :class="{btnActive: selected === 'mapChart'}" data-toggle="tooltip"
           data-placement="bottom"
-          title="Map Chart">
-            <img src="../../assets/images/map.png" alt="Map Chart" width="60px" height="60px">
+          title="Map">
+            <img src="../../assets/images/map.png" alt="Map" width="60px" height="60px">
           </button>
+
           <button @click="select('pointChart')" :class="{btnActive: selected === 'pointChart'}" data-toggle="tooltip"
           data-placement="bottom"
           title="Line Chart">
@@ -28,11 +30,13 @@
           title="Pie Chart">
             <img src="../../assets/images/piechart.png" alt="Pie Chart" width="60px" height="60px">
           </button>
+          <!--
           <button @click="select('donutChart')" :class="{btnActive: selected === 'donutChart'}" data-toggle="tooltip"
           data-placement="bottom"
           title="Donut Chart">
             <img src="../../assets/images/donutchart.png" alt="Donut Chart" width="60px" height="60px">
           </button>
+          -->
           <button @click="select('treeChart')" :class="{btnActive: selected === 'treeChart'}" data-toggle="tooltip"
           data-placement="bottom"
           title="Tree Chart">
@@ -74,11 +78,13 @@
           v-on:click="sendParams('age')"
           id="btnAge"
         >Age</button>
+        <!--
         <button
           class="btn btn-default bottom-options"
           v-on:click="sendParams('gender')"
           id="btnGender"
         >Gender</button>
+        -->
         <button
           class="btn btn-default bottom-options"
           v-on:click="sendParams('site')"

@@ -318,7 +318,7 @@
                         tempArr.push({ name: "30-49 years", y: age_3049, color: "pink" });
                         tempArr.push({ name: "50-59 years", y: age_5059, color: "gray" });
                         tempArr.push({ name: "60-69 years", y: age_6069, color: "coral" });
-                        tempArr.push({ name: "70-70 years", y: age_7079, color: "skyblue" });
+                        tempArr.push({ name: "70-79 years", y: age_7079, color: "skyblue" });
                         tempArr.push({
                             name: "80 years and above",
                             y: age_80above,

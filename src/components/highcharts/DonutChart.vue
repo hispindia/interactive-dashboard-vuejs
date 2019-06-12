@@ -386,7 +386,7 @@
                                 },
                                 color: 'black'
                             },y: age_6069, color: "coral" });
-                        tempArr.push({ name: "70-70 years", dataLabels: {
+                        tempArr.push({ name: "70-79 years", dataLabels: {
                                 enabled: true,
                                 style : {
                                     fontSize : 10,

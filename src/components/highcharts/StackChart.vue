@@ -84,7 +84,7 @@
                     this.chartType = "percent";
                     this.chartOptions.plotOptions.column.stacking = "percent";
                     this.chartOptions.tooltip.pointFormat =
-                        "{series.name}: {point.y}<br/>Total: {point.Total}<br/> Percentage: {point.percentage:.0f}%";
+                        "{series.name}: {point.y}<br/>Total: {point.stackTotal}<br/> Percentage: {point.percentage:.0f}%";
                 } else if (v == "count") {
                     this.chartType = "count";
                     this.chartOptions.plotOptions.column.stacking = "normal";
@@ -92,6 +92,9 @@
                         "{series.name}: {point.y}<br/>Total: {point.stackTotal}";
                 } else {
                     this.chartType = "rate";
+                    this.chartOptions.plotOptions.column.stacking = "normal";
+                    this.chartOptions.tooltip.pointFormat =
+                        "{series.name}: {point.y}<br/>Total: {point.stackTotal}<br/> Rate: {point.rate}";
                 }
                 this.getApiData();
             },
@@ -592,6 +595,7 @@
                             var ratee= (value / this.populationdata.age0_4).toFixed(8).replace(/\.?0+$/,"");
                             console.log("rateee-",ratee);
                             console.log("rateee-100--",ratee*10000);
+                            console.log("rateee-two-place-decimal --", ( (value / this.populationdata.age0_4).toFixed(2).replace(/\.?0+$/,"")*10000)  );
 
                             // console.log("ratee",ratee);
                             age_id_match == variables.age_0_4_id
@@ -642,9 +646,13 @@
                                                         : (temp[0][disease_id].data[7] +=
                                                             ((value / this.populationdata.age80_above).toFixed(8).replace(/\.?0+$/,"")*10000));
                         }
-                        // temp[0][disease_id].data[0]=temp[0][disease_id].data[0].toFixed(2);
-                        // temp[0][disease_id].data[1]=temp[0][disease_id].data[1].toFixed(2);
-                        // temp[0][disease_id].data[2]=temp[0][disease_id].data[2].toFixed(2);
+                        
+                        //console.log(temp[0][disease_id].data[0]=temp[0][disease_id].data[0].toFixed(2));
+                        //console.log(temp[0][disease_id].data[1]=temp[0][disease_id].data[1].toFixed(2));
+                        //console.log(temp[0][disease_id].data[2]=temp[0][disease_id].data[2].toFixed(2));
+
+                        console.log( parseFloat(Math.round(temp[0][disease_id].data[0] * 100 ) / 100).toFixed(2));
+
 
                         if (i == len - 1) {
                             var vm = this;
