@@ -92,9 +92,11 @@
             changeChart: function(v) {
                 if (v == "rate") {
                     this.chartType = "rate";
+                    this.mapOptions.series[0].name = "Rate";
                     this.loadMapData();
                 } else if (v == "count") {
                     this.chartType = "count";
+                    this.mapOptions.series[0].name = "Counts";
                     this.loadMapData();
                 } else {
                 }
@@ -245,7 +247,38 @@
                                                 if (populationdata[h][0]==temp_arr[k][0])
                                                 {
                                                     console.log("before",temp_arr[k][1]);
-                                                    temp_arr[k][1]=temp_arr[k][1]/populationdata[h][1]*100000;
+                                                    temp_arr[k][1]= (temp_arr[k][1]/populationdata[h][1]*100000).toString();
+                                                    
+                                                    if(temp_arr[k][1].indexOf("e") !== -1) {
+                                                    let val = temp_arr[k][1].split("e");
+                                                    let val1 = Number(val[0]).toFixed(2);
+                                                    let val2 = val[1];
+                                                    temp_arr[k][1] =  Number(val1+"e"+val2);
+                                                    }
+                                                    else {
+                                                        if(temp_arr[k][1].indexOf(".") !== -1) {
+                                                            let val = temp_arr[k][1].split(".");
+                                                            let val1 = val[0];
+                                                            let val2 = val[1];
+                                                            if(val1 >= 1) {
+                                                                temp_arr[k][1] = Number(temp_arr[k][1]).toFixed(2);
+                                                            } else {
+                                                                for(let i = 0; i < val2.length; i++) {
+                                                                    if(val2[i] == 0) {
+                                                                        continue;
+                                                                    }else {
+                                                                        let val3 = val2.slice(0,i+1)
+                                                                         temp_arr[k][1] =  Number(val1 + "." + val3);
+                                                                         break;
+                                                                    }
+
+                                                                }
+                                                            }
+
+                                                        } else {
+                                                            temp_arr[k][1] = Number(temp_arr[k][1])
+                                                        }
+                                                    }
                                                     console.log("after",temp_arr[k][1]);
                                                 }
                                             }

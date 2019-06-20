@@ -387,6 +387,6 @@
 </script>
 <style scoped>
     .heatmap {
-        min-height: 1200px !important;
+        min-height: 1800px !important;
     }
 </style>
