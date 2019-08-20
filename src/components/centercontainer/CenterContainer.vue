@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="row justify-content-center py-1 my-1">
-      <div class="text-center col" ><p id="headertext-chart" class="headertext"></p><p id="headertext-age" class="headertext"></p><p id="headertext-gender" class="headertext"></p><p id="headertext-meausre" class="headertext"></p><p id="headertext-site" class="headertext"></p><p id="headertext-unit" class="headertext"></p></div>
+      <div class="text-center col" ><p id="headertext-orgUnit" class="headertext"></p> <p id="headertext-chart" class="headertext">Stack Chart, </p><p id="headertext-age" class="headertext">All,</p><p id="headertext-gender" class="headertext"></p><p id="headertext-meausre" class="headertext"></p><p id="headertext-site" class="headertext"></p><p id="headertext-unit" class="headertext"></p><p id="headertext-date" class="headertext">2015</p></div>
     </div>
     <div class="row">
       <div id="cc" class="col div-content" ref="cc">

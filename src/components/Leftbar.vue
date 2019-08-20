@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="row justify-content-center p-1 leftbar-menu-main">
-      <div class="col class selectedou" v-bind:id="selectedOu">{{selectedOuName}}</div>
+      <div class="col class selectedou"  v-bind:id="selectedOu">{{selectedOuName}}</div>
     </div>
     <div class="row justify-content-center p-1 leftbar-menu-main">
       <div class="col class outree">
@@ -75,6 +75,7 @@ export default {
         .get("../../organisationUnits/" + ou + ".json?fields=displayName,id")
         .then(response => {
           this.selectedOuName = response.data.displayName;
+          document.getElementById("headertext-orgUnit").innerHTML = this.selectedOuName + ", ";
         })
         .catch(error => {
           console.log(error);
@@ -86,6 +87,7 @@ export default {
         .then(response => {
           this.selectedOu = response.data.organisationUnits[0].id;
           this.selectedOuName = response.data.organisationUnits[0].name;
+          document.getElementById("headertext-orgUnit").innerHTML = this.selectedOuName + ", ";
         })
         .catch(error => {
           console.log(error);

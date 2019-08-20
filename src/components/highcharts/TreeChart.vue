@@ -44,7 +44,7 @@
                             },
                             borderWidth: 5,
                             tooltip: {
-                                pointFormat: "<b>{point.name} : <br></b> {point.value}"
+                                pointFormat: "<b>{point.name} : <br></b> {point.value} <br></b> {point.rate}"
                             },
                             levelIsConstant: false,
                             levels: [
@@ -315,18 +315,21 @@
                     };
                     disease_i = 0;
 
+
                     for (var disease in data[diseaseType]) {
                         disease_p = {
                             id: diseaseType_p.id + "_" + disease_i,
                             name: disease,
                             parent: diseaseType_p.id,
                             color: data[diseaseType][disease].color,
-                            value: Math.round(data[diseaseType][disease].val)
+                            value: Math.round(data[diseaseType][disease].val),
+                            rate: "",
                         };
                         diseaseType_val += disease_p.value;
                         points.push(disease_p);
                         disease_i++;
                     }
+
                     diseaseType_p.value = Math.round(diseaseType_val);
                     points.push(diseaseType_p);
                     diseaseType_i++;
