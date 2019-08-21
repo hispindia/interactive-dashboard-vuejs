@@ -1,5 +1,5 @@
 <template>
-  <highcharts id="allcharts" class="chart" :options="chartOptions"></highcharts>
+  <highcharts id="allcharts" class="chart" :options="chartOptions" :updateArgs="updateArgs"></highcharts>
 </template>
 <script>
     import axios from "axios";
@@ -36,28 +36,28 @@
             },
             measureFilter: function(value) {
                 if (value == variables.yll && !this.diseaseFlag) {
-                    document.getElementById("ccbutton").style.display = "block";
+                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_yll;
                     this.chartOptions.yAxis.title.text = "YLL ";
                 } else if (value == variables.yld && !this.diseaseFlag) {
-                    document.getElementById("ccbutton").style.display = "block";
+                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_yld;
                     this.chartOptions.yAxis.title.text = "YLD";
                 } else if (value == variables.daly && !this.diseaseFlag) {
-                    document.getElementById("ccbutton").style.display = "block";
+                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_daly;
                     this.chartOptions.yAxis.title.text = "DALY";
                 } else if (value == variables.deaths && !this.diseaseFlag) {
-                    document.getElementById("ccbutton").style.display = "block";
+                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     this.population_yes ="false";
@@ -65,7 +65,7 @@
                     this.chartOptions.yAxis.title.text = "Deaths";
                 }
                 else if (value == "gNaskBzw5Nq" && !this.diseaseFlag) {
-                    document.getElementById("ccbutton").style.display = "none";
+                    // document.getElementById("ccbutton").style.display = "none";
                     this.population_yes ="popon";
                     $(".rightbarunit").addClass("hidediv");
                     $(".rightbardisease").addClass("hidediv");

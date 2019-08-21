@@ -44,7 +44,7 @@
                             },
                             borderWidth: 5,
                             tooltip: {
-                                pointFormat: "<b>{point.name} : <br></b> {point.value} <br></b> {point.rate}"
+                                pointFormat: "<b>{point.name} : <br></b> {point.value} <br></b> {point.percentage:.1f} %"
                             },
                             levelIsConstant: false,
                             levels: [
@@ -110,8 +110,8 @@
         },
         methods: {
             handleShowHide: function() {
-                $(".rightbardisease").addClass("hidediv");
-                $(".rightbarunit").addClass("hidediv");
+                // $(".rightbardisease").addClass("hidediv");
+                // $(".rightbarunit").addClass("hidediv");
                 $(".population_class").attr("disabled", "disabled");
             },
 
@@ -299,6 +299,9 @@
                 }
             },
             makeTreeChart: function(data) {
+                console.log("shubham");
+                console.log(data);
+                
                 var points = [],
                     diseaseType_p,
                     diseaseType_val,
@@ -335,7 +338,13 @@
                     diseaseType_i++;
                 }
 
+                for (var d in points) {
+                    console.log(d.value);
+                }
+
+                console.log("Shubham Goyal");
                 console.log(points);
+                
                 var vm = this;
                 setTimeout(function() {
                     vm.mapOptions.series[0].data = [...points];

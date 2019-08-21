@@ -1,7 +1,7 @@
 <template>
   <!-- import { watch } from 'fs'; -->
   <div id="leftbar" class="col-2 fixed-left collapse-div">
-    <div class="row justify-content-end">
+    <div class="row justify-content-start">
       <div class="class">
         <i class="material-icons" id="leftbar-icon" v-on:click="slideLeft">menu</i>
       </div>

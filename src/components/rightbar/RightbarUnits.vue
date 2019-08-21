@@ -18,6 +18,7 @@
                     v-model="selected"
                     type="radio"
                     name="units"
+                    disabled="disabled"
                     class="rateunit"
                     autocomplete="off"
                     value="rate"
