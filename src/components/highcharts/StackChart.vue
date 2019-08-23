@@ -39,6 +39,7 @@
                     // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
+                    
                     this.population_yes ="false";
                     this.diseases = variables.diseases_yll;
                     this.chartOptions.yAxis.title.text = "YLL ";
@@ -163,15 +164,16 @@
             },
             handleShowHide: function() {
                 $(".percentunit").removeAttr("disabled");
-                $(".population_class").removeAttr("disabled");
+                $(".population_class").removeAttr("disabled","disabled");
                 $(".bottom-options").removeClass("selected-option");
                 if (this.ou == variables.indiaOuId) {
-                    $("#btnSite , #btnLocation").show();
+                    $("#btnSite , #btnLocation").removeAttr("disabled");
                 } else {
-                    $("#btnSite, #btnLocation").hide();
+                    $("#btnSite, #btnLocation").attr("disabled", "disabled");
                     $(".rightbarsite").addClass("hidediv");
                     $(".rightbarage").addClass("hidediv");
                 }
+                
             },
             setFilters: function(params) {
                 if (params.filter == "gender") {
@@ -391,7 +393,7 @@
                         }
                     });
             },
-            sortDataByGender: function(dataloop) {
+            /*sortDataByGender: function(dataloop) {
                 $("#btnGender").addClass("selected-option");
                 let temp = JSON.parse(JSON.stringify(this.diseases));
                 // if (this.chartType == "rate") this.getPopulationData("gender");
@@ -462,7 +464,7 @@
                         }, 2000);
                     }
                 }
-            },
+            },*/
             sortDataByAge: function(dataloop) {
                 $("#btnAge").addClass("selected-option");
                 console.log("population_yes------",this.population_yes);
@@ -521,7 +523,7 @@
                             setTimeout(function() {
 
                                 vm.chartOptions.series = Object.values(temp[0]);
-                                vm.chartOptions.xAxis.categories = [variables.age_categories];
+                                vm.chartOptions.xAxis.categories = [evariables.age_categories];
                                 console.log("er--after",variables.age_categories.length);
                                 console.log("er-push-after",vm.chartOptions.xAxis.categories);
                                 $("#loader").hide();
@@ -860,19 +862,30 @@
                         text: ""
                     },
                     xAxis: {
-                        categories: []
+                        categories: [],
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
+                        }
                     },
                     yAxis: {
                         stackLabels: {
                             enabled: true,
                             style: {
                                 fontWeight: 'bold',
-                                color:'gray'
+                                color:'gray',
+                                fontSize: '12px'
                             }
                         },
                         min: 0,
                         title: {
                             text: "YLL"
+                        },
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
                         }
                     },
                     legend: {

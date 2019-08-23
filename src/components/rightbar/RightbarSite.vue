@@ -48,7 +48,6 @@
         methods :{
             sendFilter : function(){
                 EventBus.$emit("filters", {value : this.selected, filter:"site"});
-                document.getElementById("headertext-site").innerHTML =  (this.selected==this.urban ? "urban" : this.selected==this.rural ? "rural" : "both") + ", ";
             },
             reset : function(){
                 this.selected = this.both

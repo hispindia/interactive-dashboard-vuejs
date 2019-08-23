@@ -679,12 +679,22 @@
                         text: ""
                     },
                     xAxis: {
-                        categories: []
+                        categories: [],
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
+                        }
                     },
                     yAxis: {
                         min: 0,
                         title: {
                             text: "YLL "
+                        },
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
                         }
                     },
                     legend: {

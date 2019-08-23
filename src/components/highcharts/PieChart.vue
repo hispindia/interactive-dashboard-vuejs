@@ -16,6 +16,7 @@
             EventBus.$on("ou-created", this.setSelectedOu);
             EventBus.$on("ou-changed", this.setSelectedOu);
             EventBus.$on("param-pieChart", this.setSelections);
+            $(".rightbarunit").addClass("hidediv");
             this.getApiData();
         },
         watch: {
@@ -109,6 +110,7 @@
                 } else {
                     $("#btnSite, #btnLocation").hide();
                     $(".rightbarsite").addClass("hidediv");
+                    $(".rightbarunit").addClass("hidediv");
                 }
             },
             setFilters: function(params) {
@@ -500,7 +502,7 @@
                     },
                     series: [
                         {
-                            name: "Patients",
+                            name: "Counts",
                             data: []
                         }
                     ]

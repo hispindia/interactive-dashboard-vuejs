@@ -31,6 +31,7 @@
 
     export default {
         name: "Rightbar",
+        
         methods: {
             slideRight: function() {
                 $("#rightbar").toggleClass("collapse-div");

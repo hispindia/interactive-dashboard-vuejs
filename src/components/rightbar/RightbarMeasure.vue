@@ -49,8 +49,6 @@ import { log } from 'util';
                 // console.log("gg-",$(".selectedOuName"));
                 EventBus.$emit("diseasechange",  this.selected);
                 
-                document.getElementById("headertext-measure").innerHTML =  $(".selectedou").attr('name')+this.selectedOuName+(this.selected==this.yll ? "YLL" : this.selected==this.yld ? "YLD" : this.selected==this.daly ? "DALY" : this.selected==this.population ? "Population":this.selected==this.deaths ? "Deaths":"") + ", ";
-                // document.getElementById("headertext-measure").innerHTML =  (this.selected==this.yll ? "YLL" : this.selected==this.yld ? "YLD" : this.selected==this.daly ? "DALY" : "DEATHS")  +", ";
             },
             reset: function() {
                 this.selected = variables.yll;
