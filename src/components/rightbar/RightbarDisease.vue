@@ -30,7 +30,7 @@
             };
         },
         methods: {
-            reset : function(){
+            reset : function(param){
                 this.selected = {id:'',text:'All causes',value:''}
             },
             sendFilter: function() {

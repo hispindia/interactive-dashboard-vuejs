@@ -50,7 +50,7 @@ import { log } from 'util';
                 EventBus.$emit("diseasechange",  this.selected);
                 
             },
-            reset: function() {
+            reset: function(param) {
                 this.selected = variables.yll;
             }
         },

@@ -51,7 +51,7 @@
                 EventBus.$emit("filters", {value : this.selected, filter:"gender"});
                 document.getElementById("headertext-gender").innerHTML =   (this.selected==this.male ? "male" : this.selected==this.female ? "female" : "both")+ ", ";
             },
-            reset : function(){
+            reset : function(param){
                 this.selected = this.both
             }
         },

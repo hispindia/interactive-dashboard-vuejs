@@ -49,7 +49,7 @@
             sendFilter : function(){
                 EventBus.$emit("filters", {value : this.selected, filter:"site"});
             },
-            reset : function(){
+            reset : function(param){
                 this.selected = this.both
             }
         },

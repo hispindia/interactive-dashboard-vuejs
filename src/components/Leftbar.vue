@@ -2,13 +2,18 @@
   <!-- import { watch } from 'fs'; -->
   <div id="leftbar" class="col-2 fixed-left collapse-div">
     <div class="row justify-content-start">
-      <div class="class">
+      <div class="class menuBar">
         <i class="material-icons" id="leftbar-icon" v-on:click="slideLeft">menu</i>
       </div>
     </div>
+
     <div class="row justify-content-center p-1 leftbar-menu-main">
-      <div class="col class selectedou"  v-bind:id="selectedOu">{{selectedOuName}}</div>
+      <div class="col class selectedou"
+           v-bind:id="selectedOu">
+           {{selectedOuName}}
+      </div>
     </div>
+
     <div class="row justify-content-center p-1 leftbar-menu-main">
       <div class="col class outree">
         <div id="orgUnitTree" v-on:click="handleClicks">

@@ -36,7 +36,6 @@
             },
             measureFilter: function(value) {
                 if (value == variables.yll && !this.diseaseFlag) {
-                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     
@@ -44,36 +43,29 @@
                     this.diseases = variables.diseases_yll;
                     this.chartOptions.yAxis.title.text = "YLL ";
                 } else if (value == variables.yld && !this.diseaseFlag) {
-                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_yld;
                     this.chartOptions.yAxis.title.text = "YLD";
                 } else if (value == variables.daly && !this.diseaseFlag) {
-                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_daly;
                     this.chartOptions.yAxis.title.text = "DALY";
                 } else if (value == variables.deaths && !this.diseaseFlag) {
-                    // document.getElementById("ccbutton").style.display = "block";
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_deaths;
                     this.chartOptions.yAxis.title.text = "Deaths";
-                }
-                else if (value == "gNaskBzw5Nq" && !this.diseaseFlag) {
-                    // document.getElementById("ccbutton").style.display = "none";
-                    this.population_yes ="popon";
+                } else if (value == "gNaskBzw5Nq" && !this.diseaseFlag) {
+                    this.population_yes = "popon";
                     $(".rightbarunit").addClass("hidediv");
                     $(".rightbardisease").addClass("hidediv");
                     this.chartOptions.yAxis.title.text = "Population";
-                }
-
-                else {
+                } else {
 
                 }
                 this.getApiData();
@@ -163,7 +155,6 @@
                 return "rgb(" + r + "," + g + "," + b + "," + o + ")";
             },
             handleShowHide: function() {
-                $(".percentunit").removeAttr("disabled");
                 $(".population_class").removeAttr("disabled","disabled");
                 $(".bottom-options").removeClass("selected-option");
                 if (this.ou == variables.indiaOuId) {
@@ -178,13 +169,9 @@
             setFilters: function(params) {
                 if (params.filter == "gender") {
                     this.genderFilter = params.value;
-                }
-
-                else if (params.filter == "age") {
+                } else if (params.filter == "age") {
                     this.ageFilter = params.value;
-
-                }
-                else if (params.filter == "site") {
+                } else if (params.filter == "site") {
                     this.siteFilter = params.value;
                 } else if (params.filter == "measure") {
                     this.diseaseFlag = false;
@@ -203,7 +190,7 @@
             setSelectedOu: function(params) {
                 if (params.ou === undefined) return;
                 params.ou != "" ? (this.ou = params.ou) : this.ou;
-                this.setSelections(params);
+                // this.setSelections(params);
             },
             setSelections: function(params) {
                 this.selections = params.type;
@@ -215,49 +202,52 @@
             getApiData: function() {
                 $("#loader").show();
                 this.setApis();
+
                 axios
                     .get(
                         this.ou == variables.indiaOuId
                             ? this.selections == "location"
-                            ? this.defaultIndiaApi
-                            : this.measureFilter == variables.yld ||
-                            this.measureFilter == variables.daly
-                                ? this.statesApi
-                                : this.indiaApi
+                                ? this.defaultIndiaApi
+                                : this.measureFilter == variables.yld
+                                    || this.measureFilter == variables.daly
+                                        ? this.statesApi
+                                        : this.indiaApi
                             : this.statesApi
                     )
                     .then(response => {
-                        if(this.chartOptions.yAxis.title.text=="Population")
-                        {
+                        if(this.chartOptions.yAxis.title.text=="Population") {
                             this.setColorsPop();
-                        }
-                        else
-                        {
+                        } else {
                             this.setColors();
                         }
+
                         this.handleShowHide();
                         this.chartOptions.series = [];
                         var dataloop = "";
+
                         response.data.rows.length == 0
                             ? ((this.chartOptions.series = []),
                                 alert("No data at this organisation Unit!"),
                                 $("#loader").hide())
                             : (dataloop = response.data.rows);
+
                         var vm = this;
                         if (this.chartType == "rate") {
-
                             if (this.selections == "gender") {
                                 this.getPopulationData("gender");
+
                                 setTimeout(function() {
                                     vm.sortDataByGender(dataloop);
                                 }, 2000);
                             } else if (this.selections == "age") {
                                 this.getPopulationData("age");
+
                                 setTimeout(function() {
                                     vm.sortDataByAge(dataloop);
                                 }, 2000);
                             } else if (this.selections == "site") {
                                 this.getPopulationData("site");
+
                                 setTimeout(function() {
                                     vm.sortDataBySite(dataloop);
                                 }, 2000);
@@ -266,21 +256,17 @@
                             }
                         }
                         else {
-                            if (this.population_yes !=="popon") {
-
+                            if (this.population_yes !== "popon") {
                                 this.selections == "gender"
                                     ? this.sortDataByGender(dataloop)
                                     : this.selections == "age"
-                                    ? this.sortDataByAge(dataloop)
-                                    : this.selections == "location"
-                                        ? this.sortDataByLoc(dataloop)
-                                        : this.sortDataBySite(dataloop);
-                            }
-
-                            else if(this.population_yes=="popon")
-                            {
+                                        ? this.sortDataByAge(dataloop)
+                                        : this.selections == "location"
+                                            ? this.sortDataByLoc(dataloop)
+                                            : this.sortDataBySite(dataloop);
+                            } else if (this.population_yes == "popon") {
                                 this.getPopulationData("age");
-                                this.population_yes="false";
+                                 this.population_yes="false";
 
                                 setTimeout(function() {
                                     vm.sortDataByAge(dataloop);
@@ -293,14 +279,13 @@
                     });
             },
             getPopulationData: function(type) {
-                debugger;
-                // $("#loader").show();
                 var data_flag = false;
                 var gender_population = {
                     male: 0,
                     female: 0,
                     both: 0
                 };
+
                 var age_population = {
                     age0_4: 0,
                     age5_14: 0,
@@ -311,12 +296,15 @@
                     age70_79: 0,
                     age80_above: 0
                 };
+
                 var site_population = {
                     urban: 0,
                     rural: 0,
                     both: 0
                 };
+
                 var vm = this;
+
                 axios
                     .get(
                         "../../analytics.json?dimension=pe:2015&dimension=" +
@@ -337,18 +325,16 @@
                     )
                     .then(response => {
                         var data = response.data.rows;
-                        // console.log(data);
+
                         for (let i = 0; i < data.length; i++) {
                             var value=0;
-                            if(this.population_yes=="popon")
-                            {
+
+                            if (this.population_yes == "popon") {
                                 value = data[i][6];
-                            }
-                            else
-                            {
+                            } else {
                                 value = data[i][6]*100000;
                             }
-                            console.log("value-",value);
+
                             if (type == "gender") {
                                 if (data[i][2] == variables.gender_male_id) {
                                     gender_population.male = value;
@@ -384,6 +370,7 @@
                                     site_population.both += value;
                                 }
                             }
+
                             if (i == data.length - 1) {
 
                                 if (type == "gender") vm.populationdata = gender_population;
@@ -467,11 +454,9 @@
             },*/
             sortDataByAge: function(dataloop) {
                 $("#btnAge").addClass("selected-option");
-                console.log("population_yes------",this.population_yes);
-                console.log("this.chartOptions.yAxis.title.text",this.chartOptions.yAxis.title.text);
-                if(this.chartOptions.yAxis.title.text=="Population")
-                {
-                    this.chartOptions.plotOptions.column.stacking = undefined;
+
+                if (this.chartOptions.yAxis.title.text == "Population") {
+                    this.chartOptions.plotOptions.column.stacking = "normal";
                     this.chartOptions.tooltip.headerFormat = "<b></b><br/>";
                     let temp = JSON.parse(JSON.stringify(this.ages));
 
@@ -481,56 +466,66 @@
                             this.ou == variables.indiaOuId
                                 ? this.measureFilter == variables.yld ||
                                 this.measureFilter == variables.daly
-                                ? parseFloat(dataloop[i][5])
-                                : parseFloat(dataloop[i][6])
+                                    ? parseFloat(dataloop[i][5])
+                                    : parseFloat(dataloop[i][6])
                                 : parseFloat(dataloop[i][5]);
+
                         var age_id_match = dataloop[i][3];
+
                         age_id_match == variables.age_0_4_id
-                            ? temp[0][disease_id].data[0] === undefined
-                            ? (temp[0][disease_id].data[0] = value)
-                            : (temp[0][disease_id].data[0] += value)
-                            : age_id_match == variables.age_5_14_id
                             ? temp[0][disease_id].data[0] === undefined
                                 ? (temp[0][disease_id].data[0] = value)
                                 : (temp[0][disease_id].data[0] += value)
-                            : age_id_match == variables.age_15_29_id
+                            : age_id_match == variables.age_5_14_id
                                 ? temp[0][disease_id].data[0] === undefined
                                     ? (temp[0][disease_id].data[0] = value)
                                     : (temp[0][disease_id].data[0] += value)
-                                : age_id_match == variables.age_30_49_id
+                                : age_id_match == variables.age_15_29_id
                                     ? temp[0][disease_id].data[0] === undefined
                                         ? (temp[0][disease_id].data[0] = value)
                                         : (temp[0][disease_id].data[0] += value)
-                                    : age_id_match == variables.age_50_59_id
+                                    : age_id_match == variables.age_30_49_id
                                         ? temp[0][disease_id].data[0] === undefined
                                             ? (temp[0][disease_id].data[0] = value)
                                             : (temp[0][disease_id].data[0] += value)
-                                        : age_id_match == variables.age_60_69_id
+                                        : age_id_match == variables.age_50_59_id
                                             ? temp[0][disease_id].data[0] === undefined
                                                 ? (temp[0][disease_id].data[0] = value)
                                                 : (temp[0][disease_id].data[0] += value)
-                                            : age_id_match == variables.age_70_79_id
+                                            : age_id_match == variables.age_60_69_id
                                                 ? temp[0][disease_id].data[0] === undefined
                                                     ? (temp[0][disease_id].data[0] = value)
                                                     : (temp[0][disease_id].data[0] += value)
-                                                : temp[0][disease_id].data[0] === undefined
-                                                    ? (temp[0][disease_id].data[0] = value)
-                                                    : (temp[0][disease_id].data[0] += value);
+                                                : age_id_match == variables.age_70_79_id
+                                                    ? temp[0][disease_id].data[0] === undefined
+                                                        ? (temp[0][disease_id].data[0] = value)
+                                                        : (temp[0][disease_id].data[0] += value)
+                                                    : temp[0][disease_id].data[0] === undefined
+                                                        ? (temp[0][disease_id].data[0] = value)
+                                                        : (temp[0][disease_id].data[0] += value);
 
 
                         if (i == len - 1) {
                             var vm = this;
                             setTimeout(function() {
-
-                                vm.chartOptions.series = Object.values(temp[0]);
-                                vm.chartOptions.xAxis.categories = [evariables.age_categories];
-                                console.log("er--after",variables.age_categories.length);
-                                console.log("er-push-after",vm.chartOptions.xAxis.categories);
+                                
+                                vm.chartOptions.series = [...Object.values(temp[0])];
+                                var tempArray = vm.chartOptions.series;
+                                var series = {
+                                            data: [],
+                                            colorByPoint: true
+                                }
+                                let data = [];
+                                for (let index = 0; index < tempArray.length; index++) {
+                                    data[index] = tempArray[index].data[0];
+                                }
+                                series.data = data;
+                                vm.chartOptions.series = series;
+                                vm.chartOptions.xAxis.categories = [...variables.age_categories];
                                 $("#loader").hide();
                             }, 2000);
                         }
                     }
-
                 }
 
                 else
@@ -591,15 +586,8 @@
                             }
 
                         } else {
-                            console.log("rate-final",value);
-                            console.log("rate-final--",this.populationdata.age0_4);
-                            console.log("ratee-before",value / this.populationdata.age0_4);
                             var ratee= (value / this.populationdata.age0_4).toFixed(8).replace(/\.?0+$/,"");
-                            console.log("rateee-",ratee);
-                            console.log("rateee-100--",ratee*10000);
-                            console.log("rateee-two-place-decimal --", ( (value / this.populationdata.age0_4).toFixed(2).replace(/\.?0+$/,"")*10000)  );
 
-                            // console.log("ratee",ratee);
                             age_id_match == variables.age_0_4_id
                                 ? temp[0][disease_id].data[0] === undefined
                                 ? (temp[0][disease_id].data[0] =
@@ -648,17 +636,13 @@
                                                         : (temp[0][disease_id].data[7] +=
                                                             ((value / this.populationdata.age80_above).toFixed(8).replace(/\.?0+$/,"")*10000));
                         }
-                        
-                        //console.log(temp[0][disease_id].data[0]=temp[0][disease_id].data[0].toFixed(2));
-                        //console.log(temp[0][disease_id].data[1]=temp[0][disease_id].data[1].toFixed(2));
-                        //console.log(temp[0][disease_id].data[2]=temp[0][disease_id].data[2].toFixed(2));
-
-                        console.log( parseFloat(Math.round(temp[0][disease_id].data[0] * 100 ) / 100).toFixed(2));
 
 
                         if (i == len - 1) {
                             var vm = this;
                             setTimeout(function() {
+                                console.log(temp);
+                                
                                 vm.chartOptions.series = [...Object.values(temp[0])];
                                 var temparr = vm.chartOptions.series;
                                 vm.chartOptions.series = [
@@ -685,10 +669,9 @@
                                         }
                                     })
                                 ];
-                                // console.log(vm.chartOptions.series.filter(x => x));
+
+                                console.log(vm.chartOptions.series);
                                 vm.chartOptions.xAxis.categories = [...variables.age_categories];
-                                console.log("er--all",variables.age_categories.length);
-                                console.log("er-push-all",vm.chartOptions.xAxis.categories);
 
                                 $("#loader").hide();
                             }, 2000);

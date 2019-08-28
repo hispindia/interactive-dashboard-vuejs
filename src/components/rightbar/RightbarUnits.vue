@@ -18,7 +18,6 @@
                     v-model="selected"
                     type="radio"
                     name="units"
-                    disabled="disabled"
                     class="rateunit"
                     autocomplete="off"
                     value="rate"
@@ -44,22 +43,54 @@
         name: "RightbarUnits",
         data() {
             return {
-                selected: "count"
+                selected: "count",
+                chartType: "stackChart"
             };
         },
         methods : {
             sendChart : function(){
-                if(this.selected == "percent") EventBus.$emit("chartChange", "percent");
-                else if(this.selected == "count") EventBus.$emit("chartChange" , "count");
-
-                else { EventBus.$emit("chartChange" , "rate"); }
+                if (this.selected == "percent") {
+                    EventBus.$emit("chartChange", "percent");
+                } else if (this.selected == "count") {
+                    EventBus.$emit("chartChange" , "count");
+                } else { 
+                    EventBus.$emit("chartChange" , "rate"); 
+                }
             },
-            reset : function(){
-                this.selected = 'count'
+            reset : function(param){
+                this.selected = 'count';
+                this.chartType = param;
+                this.handleRightBar(this.chartType);
+                
+            },
+            handleRightBar: function(param) {
+                switch (param) {
+                    case "stackChart":
+                        $(".percentunit").removeAttr("disabled");
+                        break;
+                    case "mapChart":
+                        $(".percentunit").attr("disabled", "disabled");
+                        break;
+                    case "pointChart":
+                        $(".percentunit").removeAttr("disabled");
+                        break;
+                    case "pieChart":
+                        $(".percentunit").removeAttr("disabled");
+                        break;
+                    case "treeChart":
+                        $(".percentunit").removeAttr("disabled");
+                        break;
+                    case "heatChart":
+                        $(".percentunit").removeAttr("disabled");
+                        break;
+                    default:
+                        break;
+                }
             }
         },
         watch : {
             selected : function(){
+                this.handleRightBar(this.chartType);
                 this.sendChart();
             }
         },

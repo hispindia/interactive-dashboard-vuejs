@@ -121,36 +121,27 @@ export default {
   components: {
     stackChart: StackChart,
     mapChart: MapChart,
-    PointChart: PointChart,
-    PieChart: PieChart,
+    pointChart: PointChart,
+    pieChart: PieChart,
     donutChart: DonutChart,
-    TreeChart: TreeChart,
-    HeatChart: HeatChart
+    treeChart: TreeChart,
+    heatChart: HeatChart
   },
   methods: {
     select(elem) {
       this.currentView = elem;
-      this.activate(elem);    
+      this.selected = elem;   
     },
-    activate(elem) {
-      this.selected = elem;
-      if(elem == "stackChart")this.selectname = "Stacked Chart"
-      else if(elem == "mapChart")this.selectname = "Map"
-      else if(elem == "pointChart")this.selectname = "Point Chart"
-      else if(elem == "pieChart")this.selectname = "Pie Chart"
-      else if(elem == "donutChart")this.selectname = "Donut Chart"
-      else if(elem == "treeChart")this.selectname = "Tree Chart"
-      else this.selectname = "Heat Map";
-    },
+
     showhidelegend: function() {
       $(".highcharts-legend").toggle();
     },
+
     sendParams: function(t) {
       $(".bottom-options").removeClass("selected-option");
       $(".rightbar-menu-main").removeClass("hidediv");
       if (t == "age") {
         $(".rightbarage").addClass("hidediv");
-        console.log($(".selectedou").attr('id'));
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
           type: "age"
@@ -173,15 +164,27 @@ export default {
           type: "site"
         });
       }
+    },
+
+    showHideLeftBar: function() {
+
+      if(this.selected == "mapChart" || this.selected == "heatChart") {
+        $("#leftbar").addClass('collapse-div');
+        $(".menuBar").hide();
+      } else {
+        $(".menuBar").show();
+      }
     }
   },
+
   watch : {
-    selected : function(v){
-       this.sendParams("age");
-       EventBus.$emit('reset');
-       document.getElementById("headertext-chart").innerHTML = this.selectname + ", ";
+    selected : function(v) {
+      this.showHideLeftBar();
+      this.sendParams("age");
+      EventBus.$emit('reset', this.selected);
     }
   },
+
   mounted() {
     $('[data-toggle="tooltip"]').tooltip();
     $(".rightbarage").addClass("hidediv");

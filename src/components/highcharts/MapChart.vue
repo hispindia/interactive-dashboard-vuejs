@@ -8,6 +8,7 @@
     import axios from "axios";
     import { EventBus } from "../../event-bus";
     let populationdata= [];
+
     export default {
         data() {
             return {
@@ -99,19 +100,17 @@
                     this.mapOptions.series[0].name = "Counts";
                     this.loadMapData();
                 } else {
+                    return;
                 }
                 // this.getApiData();
             },
-
             handleShowHide: function() {
-                $(".percentunit").attr("disabled", "disabled");
                 $(".population_class").attr("disabled", "disabled");
                 $(".rightbarsite").addClass("hidediv");
                 $(".rightbargender").addClass("hidediv");
                 $(".rightbardisease").removeClass("hidediv");
 
             },
-
             setFilters: function(params) {
                 if (params.filter == "measure") {
                     this.diseaseFlag = false;
@@ -246,7 +245,6 @@
                                             {
                                                 if (populationdata[h][0]==temp_arr[k][0])
                                                 {
-                                                    console.log("before",temp_arr[k][1]);
                                                     temp_arr[k][1]= (temp_arr[k][1]/populationdata[h][1]*100000).toString();
                                                     
                                                     if(temp_arr[k][1].indexOf("e") !== -1) {
@@ -279,7 +277,6 @@
                                                             temp_arr[k][1] = Number(temp_arr[k][1])
                                                         }
                                                     }
-                                                    console.log("after",temp_arr[k][1]);
                                                 }
                                             }
                                         }
@@ -289,7 +286,6 @@
                                     setTimeout(function () {
 
                                         vm.mapOptions.series[0].data = [...temp_arr];
-                                        // console.log(vm.mapOptions.series[0].data);
                                         $("#loader").hide();
                                     }, 2000);
                                 }
@@ -317,7 +313,7 @@
                             var ouid = loopdata[i][2];
                             var value = parseFloat(loopdata[i][4]);
                             if (temp[0][ouid] !== undefined) {
-                                temp[0][ouid].data += value;
+                                temp[0][ouid].data += Math.round(value);
                             }
 
                             if (i == len - 1) {
@@ -452,9 +448,14 @@
 
                 });
             }
+        },
+        destroyed() {
+            EventBus.$off("filters", this.setFilters);
+            EventBus.$off("chartChange", this.changeChart);
         }
     };
 </script>
+
 <style scoped>
     .map {
         min-height: 500px;

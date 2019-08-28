@@ -517,6 +517,7 @@
         }
     };
 </script>
+
 <style scoped>
   .chart {
     width: 90%;
