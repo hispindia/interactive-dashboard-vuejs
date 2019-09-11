@@ -44,7 +44,7 @@
           </button>
           <button @click="select('heatChart')" :class="{btnActive: selected === 'heatChart'}" data-toggle="tooltip"
           data-placement="bottom"
-          title="Heat Chart">
+          title="Heat Map">
             <img src="../../assets/images/heatmap.png" alt="Heat Chart" width="60px" height="60px">
           </button>
         </div>
@@ -53,7 +53,7 @@
     <div class="row justify-content-center py-1 my-1">
       <div class="text-center col" >
         <p id="headertext-orgUnit" class="headertext"></p>
-        <p id="headertext-age" class="headertext">All Causes,</p>
+        <p id="headertext-diseases" class="headertext">All Causes,</p>
         <p id="headertext-gender" class="headertext"></p>
         <p id="headertext-date" class="headertext">2015</p>
       </div>

@@ -149,8 +149,13 @@
                     this.measureFilterTemp = params.value;
                 } else {
                     if (params.value.id != "") {
-                        this.diseaseFlag = true;
+                        if (params.value.categorie == true ) {
+                            this.measureFilter = params.value.value;
+                        } else {
+                            this.diseaseFlag = true;
                         this.measureFilter = params.value.id;
+                        }
+                        
                     } else {
                         this.diseaseFlag = false;
                         this.measureFilter = this.measureFilterTemp;

@@ -15,7 +15,7 @@
     <!-- <br> -->
     <RightbarSite/>
     <!-- <br> -->
-    <RightbarUnits/>
+    <RightbarUnits v-if="chartType != 'heatChart' || chartType != 'pieChart' "/>
     <!-- <br> -->
 
   </div>
@@ -28,14 +28,26 @@
     import RightbarSite from "./RightbarSite";
     import RightbarUnits from "./RightbarUnits";
     import RightbarDisease from "./RightbarDisease";
+    import { EventBus } from "../../event-bus";
 
     export default {
         name: "Rightbar",
+        data() {
+            return {
+                chartType: "stackChart"
+            };
+        },
         
         methods: {
             slideRight: function() {
                 $("#rightbar").toggleClass("collapse-div");
-            }
+            },
+            reset : function(param){
+                this.chartType = param;
+                
+            },
+            handleRightBar: function(param) {    
+                }
         },
         components: {
             RightbarAge,
@@ -44,6 +56,9 @@
             RightbarSite,
             RightbarUnits,
             RightbarDisease
+        },
+        mounted(){
+            EventBus.$on("reset", this.reset);
         }
     };
 </script>

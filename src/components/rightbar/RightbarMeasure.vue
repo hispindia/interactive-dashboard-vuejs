@@ -37,21 +37,53 @@ import { log } from 'util';
                 daly: variables.daly,
                 deaths: variables.deaths,
                 population: "gNaskBzw5Nq",
-                selectedOuName:""
+                selectedOuName:"",
+                chartType: "stackChart"
 
             };
         },
         methods: {
             sendFilter: function() {
                 EventBus.$emit("filters", { value: this.selected, filter: "measure" });
-                // this.getOuName($(".selectedou").attr('id'));
-                // console.log("$(\".selectedou\")",$(".selectedou"));
-                // console.log("gg-",$(".selectedOuName"));
+                console.log(this.selected);
                 EventBus.$emit("diseasechange",  this.selected);
+                EventBus.$emit("typechange", this.selected);
                 
             },
             reset: function(param) {
                 this.selected = variables.yll;
+                this.chartType = param;
+                this.handleRightBar(this.chartType);
+            },
+            handleRightBar: function(param) {
+                switch (param) {
+                    case "stackChart":
+                        $(".population_class").removeAttr("disabled");
+                        break;
+                    case "mapChart":
+                        $(".population_class").attr("disabled", "disabled");
+                        break;
+                    case "pointChart":
+                        $(".population_class").attr("disabled", "disabled");
+                        break;
+                    case "pieChart":
+                        $(".population_class").attr("disabled", "disabled");
+                        break;
+                    case "treeChart":
+                        $(".population_class").attr("disabled", "disabled");
+                        $(".RightbarAge").addClass("hidediv");
+                        break;
+                    case "heatChart":
+                        $(".population_class").attr("disabled", "disabled");
+                        $(".RightbarSite").addClass("hidediv");
+                        $(".RightbarAge").addClass("hidediv");
+                        $(".RightbarGender").addClass("hidediv");
+                        $(".RightbarDisease").addClass("hidediv");
+                        $(".RightbarUnits").addClass("hidediv");
+                        break;
+                    default:
+                        break;
+                }
             }
         },
         watch: {

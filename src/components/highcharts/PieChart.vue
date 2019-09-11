@@ -114,11 +114,11 @@
                 }
             },
             setFilters: function(params) {
+                console.log("filterval",params);
                 if (params.filter == "gender") {
                     this.genderFilter = params.value;
                 } else if (params.filter == "age") {
                     this.ageFilter = params.value;
-                    // $(".rightbarage").addClass("hidediv");
                 } else if (params.filter == "site") {
                     this.siteFilter = params.value;
                 } else if (params.filter == "measure") {
@@ -127,8 +127,13 @@
                     this.measureFilterTemp = params.value;
                 } else {
                     if (params.value.id != "") {
-                        this.diseaseFlag = true;
+                        if (params.value.categorie == true ) {
+                            this.measureFilter = params.value.value;
+                        } else {
+                            this.diseaseFlag = true;
                         this.measureFilter = params.value.id;
+                        }
+                        
                     } else {
                         this.diseaseFlag = false;
                         this.measureFilter = this.measureFilterTemp;
@@ -503,7 +508,13 @@
                     series: [
                         {
                             name: "Counts",
+                            dataLabels: {
+                                style: {
+                                    fontSize: 13
+                                }
+                            },
                             data: []
+
                         }
                     ]
                 }

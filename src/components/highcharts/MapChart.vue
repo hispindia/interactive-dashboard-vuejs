@@ -89,7 +89,6 @@
             EventBus.$on("chartChange", this.changeChart);
         },
         methods: {
-
             changeChart: function(v) {
                 if (v == "rate") {
                     this.chartType = "rate";
@@ -102,7 +101,6 @@
                 } else {
                     return;
                 }
-                // this.getApiData();
             },
             handleShowHide: function() {
                 $(".population_class").attr("disabled", "disabled");
@@ -145,7 +143,6 @@
                 var vm = this;
                 var age_var="";
                 if (this.chartType == "rate") {
-
                     vm.chartType = "rate";
                     this.getPopulationData("age");
                     var defaultIndiaApi =

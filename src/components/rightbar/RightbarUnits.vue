@@ -85,8 +85,8 @@
                         break;
                     default:
                         break;
+                        }            
                 }
-            }
         },
         watch : {
             selected : function(){

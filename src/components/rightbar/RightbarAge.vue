@@ -48,7 +48,6 @@
         methods :{
             sendFilter : function(){
                 EventBus.$emit("filters", {value : this.selected.id, filter:"age"});
-                document.getElementById("headertext-age").innerHTML = this.selected.text + ", ";
             },
             reset : function(param){
                 this.selected = { text: "All" , id : data.age_main_var}

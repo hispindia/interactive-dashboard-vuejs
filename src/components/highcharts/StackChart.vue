@@ -1,12 +1,11 @@
 <template>
-  <highcharts id="allcharts" class="chart" :options="chartOptions" :updateArgs="updateArgs"></highcharts>
+    <highcharts id="allcharts" class="chart" :options="chartOptions" :updateArgs="updateArgs"></highcharts>
 </template>
 <script>
     import axios from "axios";
     import variables from "../../config.js";
     import Highcharts from "highcharts";
     import { EventBus } from "../../event-bus";
-
     export default {
         name: "Chart",
         mounted() {
@@ -14,7 +13,7 @@
             EventBus.$on("ou-created", this.setSelectedOu);
             EventBus.$on("ou-changed", this.setSelectedOu);
             EventBus.$on("param-stackChart", this.setSelections);
-            EventBus.$on("chartChange", this.changeChart);
+            EventBus.$on("chartChange", this.changeChart); 
         },
         watch: {
             ou: function() {
@@ -38,7 +37,6 @@
                 if (value == variables.yll && !this.diseaseFlag) {
                     $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
-                    
                     this.population_yes ="false";
                     this.diseases = variables.diseases_yll;
                     this.chartOptions.yAxis.title.text = "YLL ";
@@ -179,8 +177,13 @@
                     this.measureFilterTemp = params.value;
                 } else {
                     if (params.value.id != "") {
-                        this.diseaseFlag = true;
+                        if (params.value.categorie == true ) {
+                            this.measureFilter = params.value.value;
+                        } else {
+                            this.diseaseFlag = true;
                         this.measureFilter = params.value.id;
+                        }
+                        
                     } else {
                         this.diseaseFlag = false;
                         this.measureFilter = this.measureFilterTemp;
@@ -205,16 +208,20 @@
 
                 axios
                     .get(
-                        this.ou == variables.indiaOuId
-                            ? this.selections == "location"
-                                ? this.defaultIndiaApi
-                                : this.measureFilter == variables.yld
-                                    || this.measureFilter == variables.daly
-                                        ? this.statesApi
-                                        : this.indiaApi
-                            : this.statesApi
+                        this.ou == variables.indiaOuId 
+                        ? 
+                         this.selections == "location"
+                            ? this.defaultIndiaApi
+                            : this.measureFilter == variables.yld 
+                         || 
+                         this.measureFilter == variables.daly
+                            ? this.statesApi
+                            : this.indiaApi
+                        : this.statesApi
                     )
-                    .then(response => {
+                    .then(response => 
+                    
+                    {
                         if(this.chartOptions.yAxis.title.text=="Population") {
                             this.setColorsPop();
                         } else {
@@ -275,8 +282,9 @@
                         }
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log("error",error);
                     });
+
             },
             getPopulationData: function(type) {
                 var data_flag = false;
@@ -641,7 +649,6 @@
                         if (i == len - 1) {
                             var vm = this;
                             setTimeout(function() {
-                                console.log(temp);
                                 
                                 vm.chartOptions.series = [...Object.values(temp[0])];
                                 var temparr = vm.chartOptions.series;
@@ -669,8 +676,6 @@
                                         }
                                     })
                                 ];
-
-                                console.log(vm.chartOptions.series);
                                 vm.chartOptions.xAxis.categories = [...variables.age_categories];
 
                                 $("#loader").hide();
