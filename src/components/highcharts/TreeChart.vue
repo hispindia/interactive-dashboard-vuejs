@@ -137,7 +137,7 @@
                     this.measureFilterTemp = params.value;
                 } else {
                     if (params.value.id != "") {
-                        if (params.value.categorie == true ) {
+                        if (params.value.category == true ) {
                             this.measureFilter = params.value.value;
                         } else {
                             this.diseaseFlag = true;
@@ -206,8 +206,6 @@
             },
             loadMapData: function(dataloop) {
                 let temp = JSON.parse(JSON.stringify(this.diseases));
-                console.log("dataloop");
-                console.log(dataloop);
 
                 for (let j = 0, len = dataloop.length; j < len; j++) {
                     var disease_id = dataloop[j][0];
@@ -244,7 +242,6 @@
                                 temp_arr["Disease Type 4"][name] = { val: val, color: color };
                             }
                         }
-                        console.log("temp_arr");
                         
                         this.makeTreeChart(temp_arr);
                     }

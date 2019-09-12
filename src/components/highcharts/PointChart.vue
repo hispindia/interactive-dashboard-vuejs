@@ -149,7 +149,7 @@
                     this.measureFilterTemp = params.value;
                 } else {
                     if (params.value.id != "") {
-                        if (params.value.categorie == true ) {
+                        if (params.value.category == true ) {
                             this.measureFilter = params.value.value;
                         } else {
                             this.diseaseFlag = true;
@@ -180,12 +180,14 @@
                 axios
                     .get(
                         this.ou == variables.indiaOuId
-                            ? this.selections == "location"
-                            ? this.defaultIndiaApi
-                            : this.measureFilter == variables.yld ||
-                            this.measureFilter == variables.daly
-                                ? this.statesApi
-                                : this.indiaApi
+                            ? 
+                                this.selections == "location"
+                                    ? this.defaultIndiaApi
+                                    : this.measureFilter == variables.yld 
+                                ||
+                                this.measureFilter == variables.daly
+                                    ? this.statesApi
+                                    : this.indiaApi
                             : this.statesApi
                     )
                     .then(response => {
@@ -276,7 +278,6 @@
                     )
                     .then(response => {
                         var data = response.data.rows;
-                        // console.log(data);
                         for (let i = 0; i < data.length; i++) {
                             var value = (Number(data[i][6])*100000).toFixed(2);
                             if (type == "gender") {
@@ -515,7 +516,6 @@
                                     }
                                 })
                             ];
-                            // console.log(vm.chartOptions.series.filter(x => x));
                             vm.chartOptions.xAxis.categories = [...variables.age_categories];
                             $("#loader").hide();
                         }, 2000);
@@ -732,7 +732,7 @@
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);
             EventBus.$off("ou-changed", this.getApiData);
-            EventBus.$off("param-pointChart", this.getApiData);
+            EventBus.$off("param-pointChart", this.setSelections);
             EventBus.$off("filters", this.setFilters);
             EventBus.$off("chartChange", this.changeChart);
         }

@@ -445,9 +445,9 @@
             };
         },
         destroyed() {
-            EventBus.$on("filters", this.setFilters);
-            EventBus.$on("catchclicks", this.updateChart);
-            EventBus.$on("chartChange", this.updateChart);
+            EventBus.$off("filters", this.setFilters);
+            EventBus.$off("catchclicks", this.updateChart);
+            EventBus.$off("chartChange", this.updateChart);
         }
     };
 </script>

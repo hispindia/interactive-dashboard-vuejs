@@ -67,21 +67,27 @@
                 switch (param) {
                     case "stackChart":
                         $(".percentunit").removeAttr("disabled");
+                        $(".rateunit").removeAttr("disabled");
                         break;
                     case "mapChart":
                         $(".percentunit").attr("disabled", "disabled");
+                        $(".rateunit").removeAttr("disabled");
                         break;
                     case "pointChart":
                         $(".percentunit").removeAttr("disabled");
+                        $(".rateunit").removeAttr("disabled");
                         break;
                     case "pieChart":
                         $(".percentunit").removeAttr("disabled");
+                        $(".rateunit").removeAttr("disabled");
                         break;
                     case "treeChart":
                         $(".percentunit").removeAttr("disabled");
+                        $(".rateunit").attr("disabled", "disabled");
                         break;
                     case "heatChart":
                         $(".percentunit").removeAttr("disabled");
+                        $(".rateunit").removeAttr("disabled");
                         break;
                     default:
                         break;

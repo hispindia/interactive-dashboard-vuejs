@@ -177,7 +177,7 @@
                     this.measureFilterTemp = params.value;
                 } else {
                     if (params.value.id != "") {
-                        if (params.value.categorie == true ) {
+                        if (params.value.category == true ) {
                             this.measureFilter = params.value.value;
                         } else {
                             this.diseaseFlag = true;
@@ -905,8 +905,8 @@
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);
             EventBus.$off("ou-changed", this.getApiData);
-            EventBus.$off("param-stackChart", this.getApiData);
             EventBus.$off("filters", this.setFilters);
+            EventBus.$off("param-stackChart", this.setSelections);
             EventBus.$off("chartChange", this.changeChart);
         }
     };

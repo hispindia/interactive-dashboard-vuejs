@@ -662,7 +662,7 @@
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);
             EventBus.$off("ou-changed", this.getApiData);
-            EventBus.$off("param-donutChart", this.getApiData);
+            EventBus.$off("param-donutChart", this.setSelections);
             EventBus.$off("filters", this.setFilters);
         }
     };

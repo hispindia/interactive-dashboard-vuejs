@@ -114,7 +114,6 @@
                 }
             },
             setFilters: function(params) {
-                console.log("filterval",params);
                 if (params.filter == "gender") {
                     this.genderFilter = params.value;
                 } else if (params.filter == "age") {
@@ -127,7 +126,7 @@
                     this.measureFilterTemp = params.value;
                 } else {
                     if (params.value.id != "") {
-                        if (params.value.categorie == true ) {
+                        if (params.value.category == true ) {
                             this.measureFilter = params.value.value;
                         } else {
                             this.diseaseFlag = true;
@@ -523,7 +522,7 @@
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);
             EventBus.$off("ou-changed", this.getApiData);
-            EventBus.$off("param-pieChart", this.getApiData);
+            EventBus.$off("param-pieChart", this.setSelections);
             EventBus.$off("filters", this.setFilters);
         }
     };

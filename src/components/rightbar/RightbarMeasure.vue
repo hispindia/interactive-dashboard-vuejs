@@ -45,7 +45,6 @@ import { log } from 'util';
         methods: {
             sendFilter: function() {
                 EventBus.$emit("filters", { value: this.selected, filter: "measure" });
-                console.log(this.selected);
                 EventBus.$emit("diseasechange",  this.selected);
                 EventBus.$emit("typechange", this.selected);
                 
