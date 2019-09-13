@@ -482,7 +482,12 @@
                 colors: [],
                 chartOptions: {
                     chart: {
-                        type: "pie"
+                        type: "pie",
+                        options3d: {
+                            enabled: true,
+                            alpha: 45,
+                            beta: 0
+                        }
                     },
                     title: {
                         text: ""
@@ -502,6 +507,7 @@
                         pie: {
                             allowPointSelect: true,
                             shadow: false,
+                            depth: 35
                         }
                     },
                     series: [

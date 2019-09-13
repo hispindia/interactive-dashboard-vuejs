@@ -78,16 +78,12 @@
                         $(".rateunit").removeAttr("disabled");
                         break;
                     case "pieChart":
-                        $(".percentunit").removeAttr("disabled");
-                        $(".rateunit").removeAttr("disabled");
                         break;
                     case "treeChart":
                         $(".percentunit").removeAttr("disabled");
                         $(".rateunit").attr("disabled", "disabled");
                         break;
                     case "heatChart":
-                        $(".percentunit").removeAttr("disabled");
-                        $(".rateunit").removeAttr("disabled");
                         break;
                     default:
                         break;
@@ -96,12 +92,12 @@
         },
         watch : {
             selected : function(){
-                this.handleRightBar(this.chartType);
                 this.sendChart();
             }
         },
         mounted(){
             EventBus.$on("reset", this.reset);
+            this.handleRightBar(this.chartType);
         }
     };
 </script>

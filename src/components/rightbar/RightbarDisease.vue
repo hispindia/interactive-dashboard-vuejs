@@ -8,7 +8,9 @@
               id="dropdown-disease"
               v-model="selected"
       >Select diseases
-        <option class="dropdown-item" v-for="d in diseases" :value="d" :key="d">{{d.text}}</option>
+        <option class="dropdown-item" v-for="d in diseases" :value="d" :key="d">
+            {{d.text}}
+        </option>
       </select>
     </div>
   </div>
@@ -40,11 +42,11 @@
         },
         methods: {
             reset : function(param){
-                this.selected = {id:'',text:'All causes',value:'', category: false}
+                this.selected = {id:'',text:'All causes',value:'', category: false};
             },
             sendFilter: function() {
                 EventBus.$emit("filters", { value: this.selected, filter: "disease" });
-                    document.getElementById("headertext-diseases").innerHTML = this.selected.text + ", ";   
+                document.getElementById("headertext-diseases").innerHTML = this.selected.text + ", ";   
             },
             changeDropDown: function(diseaseType) {
                 this.reset();

@@ -238,8 +238,6 @@
                         setTimeout(function() {
                             vm.chartOptions.series[0].data = [...tempArr];
                             vm.chartOptions.series[1].data = [...tempOuter];
-                            console.log(tempArr);
-                            console.log(tempOuter);
                             $("#loader").hide();
                         }, 2000);
                     }
@@ -523,7 +521,6 @@
                             vm.chartOptions.series[0].data = [...temp_arr];
                             vm.chartOptions.plotOptions.pie.allowPointSelect = true;
                             vm.chartOptions.series[1].data = [];
-                            // console.log(vm.mapOptions.series[0].data);
                             $("#loader").hide();
                         }, 2000);
                     }

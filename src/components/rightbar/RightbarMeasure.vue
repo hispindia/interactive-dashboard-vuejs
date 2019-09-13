@@ -39,7 +39,6 @@ import { log } from 'util';
                 population: "gNaskBzw5Nq",
                 selectedOuName:"",
                 chartType: "stackChart"
-
             };
         },
         methods: {
@@ -47,7 +46,6 @@ import { log } from 'util';
                 EventBus.$emit("filters", { value: this.selected, filter: "measure" });
                 EventBus.$emit("diseasechange",  this.selected);
                 EventBus.$emit("typechange", this.selected);
-                
             },
             reset: function(param) {
                 this.selected = variables.yll;
@@ -70,15 +68,10 @@ import { log } from 'util';
                         break;
                     case "treeChart":
                         $(".population_class").attr("disabled", "disabled");
-                        $(".RightbarAge").addClass("hidediv");
                         break;
                     case "heatChart":
                         $(".population_class").attr("disabled", "disabled");
-                        $(".RightbarSite").addClass("hidediv");
-                        $(".RightbarAge").addClass("hidediv");
-                        $(".RightbarGender").addClass("hidediv");
-                        $(".RightbarDisease").addClass("hidediv");
-                        $(".RightbarUnits").addClass("hidediv");
+                        $(".rightbarunit").addClass("hidediv");
                         break;
                     default:
                         break;
@@ -87,18 +80,22 @@ import { log } from 'util';
         },
         watch: {
             selected: function() {
+                this.handleRightBar(this.chartType);
+                $(".rightbarunit").addClass("hidediv");
                 this.sendFilter();
             }
+            
         },
         mounted() {
             EventBus.$on("reset", this.reset);
+            this.reset(this.chartType);
+            this.handleRightBar(this.chartType);
         },
         getOuName: function(ou) {
             axios
                 .get("../../organisationUnits/" + ou + ".json?fields=displayName,id")
                 .then(response => {
                     this.selectedOuName = response.data.displayName;
-                    console.log("daorg",this.selectedOuName);
                 })
                 .catch(error => {
                     console.log(error);

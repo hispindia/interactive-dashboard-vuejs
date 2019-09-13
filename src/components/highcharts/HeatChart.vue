@@ -11,7 +11,7 @@
     export default {
         mounted() {
             this.loadApi();
-            EventBus.$on("filters", this.setFilters);
+            EventBus.$on("filters", this.measureFilter);
             EventBus.$on("catchclicks", this.updateChart);
             EventBus.$on("chartChange", this.updateChart);
             clicks.setClassToCatchClicks("xaxis-labels");
@@ -120,7 +120,6 @@
                     else temp_arr[stateData + "_" + disease_id] += value;
 
                     if (i == dataloop.length - 1) {
-                        // console.log(temp_arr);
                         var map_arr = [];
                         var temp_x = [];
                         var temp_y = [];
@@ -219,7 +218,6 @@
                         map_arr.filter(x => (x.x == e ? x : null)),
                         afterSort
                     );
-                    // console.log(singlesort);
                     sortedMapArray.push(...singlesort);
                     if (e == Object.keys(states[0]).length - 1) {
                         return sortedMapArray;

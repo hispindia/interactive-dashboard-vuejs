@@ -211,7 +211,6 @@ export default {
         window.location.href = "../../" + this.appManagement;
     },
     handleClicks: function(vm){
-        // console.log(vm);
         if(vm.target.id=="icon-app" || vm.target.className.includes('menubox')){
             this.menuHidden = false;
         }

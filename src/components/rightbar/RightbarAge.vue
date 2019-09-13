@@ -50,7 +50,7 @@
                 EventBus.$emit("filters", {value : this.selected.id, filter:"age"});
             },
             reset : function(param){
-                this.selected = { text: "All" , id : data.age_main_var}
+                this.selected = { text: "All" , id : data.age_main_var};
             }
         },
         watch : {

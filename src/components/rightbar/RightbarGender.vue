@@ -49,7 +49,7 @@
         methods :{
             sendFilter : function(){
                 EventBus.$emit("filters", {value : this.selected, filter:"gender"});
-                document.getElementById("headertext-gender").innerHTML =   (this.selected==this.male ? "male" : this.selected==this.female ? "female" : "both")+ ", ";
+                document.getElementById("headertext-gender").innerHTML =   (this.selected==this.male ? "Male" : this.selected==this.female ? "Female" : "Both")+ ", ";
             },
             reset : function(param){
                 this.selected = this.both

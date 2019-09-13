@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="row justify-content-center py-1 my-1">
-      <div class="text-center col" >
+      <div class="text-center col" style="font-weight:bold">
         <p id="headertext-orgUnit" class="headertext"></p>
         <p id="headertext-diseases" class="headertext">All Causes,</p>
         <p id="headertext-gender" class="headertext"></p>
@@ -130,7 +130,9 @@ export default {
   methods: {
     select(elem) {
       this.currentView = elem;
-      this.selected = elem;   
+      this.selected = elem;  
+      this.handleRightBar(this.selected);
+      
     },
 
     showhidelegend: function() {
@@ -142,6 +144,7 @@ export default {
       $(".rightbar-menu-main").removeClass("hidediv");
       if (t == "age") {
         $(".rightbarage").addClass("hidediv");
+        $(".rightbarunit").addClass("hidediv");
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
           type: "age"
@@ -167,13 +170,64 @@ export default {
     },
 
     showHideLeftBar: function() {
-
       if(this.selected == "mapChart" || this.selected == "heatChart") {
         $("#leftbar").addClass('collapse-div');
         $(".menuBar").hide();
       } else {
         $(".menuBar").show();
       }
+    },
+    handleRightBar: function(param) {
+        switch (param) {
+            case "stackChart":
+                $(".population_class").removeAttr("disabled");
+                $(".rightbardisease").removeClass("hidediv");
+                $(".rightbargender").removeClass("hidediv");
+                $(".rightbarsite").removeClass("hidediv");
+                $(".rightbarunit").removeClass("hidediv");
+                break;
+            case "mapChart":
+                $(".population_class").attr("disabled", "disabled");
+                $(".rightbardisease").removeClass("hidediv");
+                $(".rightbarunit").removeClass("hidediv");
+                $(".rightbarsite").addClass("hidediv");
+                $(".rightbargender").addClass("hidediv");
+                $(".rightbarage").addClass("hidediv");
+                break;
+            case "pointChart":
+                $(".rightbarunit").removeClass("hidediv");
+                $(".population_class").attr("disabled", "disabled");
+                $(".rightbardisease").removeClass("hidediv");
+                $(".rightbargender").removeClass("hidediv");
+                $(".rightbarunit").removeClass("hidediv");
+                $(".rightbarsite").removeClass("hidediv");
+                break;
+            case "pieChart":
+                $(".population_class").attr("disabled", "disabled");
+                $(".rightbarage").addClass("hidediv");
+                $(".rightbarunit").addClass("hidediv");
+                $(".rightbardisease").removeClass("hidediv");
+                $(".rightbargender").removeClass("hidediv");
+                $(".rightbarsite").removeClass("hidediv");
+                break;
+            case "treeChart":
+                $(".population_class").attr("disabled", "disabled");
+                $(".rightbardisease").removeClass("hidediv");
+                $(".rightbargender").removeClass("hidediv");
+                $(".rightbarsite").removeClass("hidediv");
+                $(".rightbarunit").removeClass("hidediv");
+                break;
+            case "heatChart":
+                $(".population_class").attr("disabled", "disabled");
+                $(".rightbarunit").addClass("hidediv");
+                $(".rightbardisease").addClass("hidediv");
+                $(".rightbargender").addClass("hidediv");
+                $(".rightbarsite").addClass("hidediv");
+                break;
+            default:
+                break;
+      }
+    
     }
   },
 
@@ -182,6 +236,7 @@ export default {
       this.showHideLeftBar();
       this.sendParams("age");
       EventBus.$emit('reset', this.selected);
+      this.handleRightBar(this.selected);
     }
   },
 

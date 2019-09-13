@@ -35,26 +35,26 @@
             },
             measureFilter: function(value) {
                 if (value == variables.yll && !this.diseaseFlag) {
-                    $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_yll;
                     this.chartOptions.yAxis.title.text = "YLL ";
                 } else if (value == variables.yld && !this.diseaseFlag) {
-                    $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_yld;
                     this.chartOptions.yAxis.title.text = "YLD";
                 } else if (value == variables.daly && !this.diseaseFlag) {
-                    $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_daly;
                     this.chartOptions.yAxis.title.text = "DALY";
                 } else if (value == variables.deaths && !this.diseaseFlag) {
-                    $(".rightbarunit").removeClass("hidediv");
                     $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
                     this.population_yes ="false";
                     this.diseases = variables.diseases_deaths;
                     this.chartOptions.yAxis.title.text = "Deaths";

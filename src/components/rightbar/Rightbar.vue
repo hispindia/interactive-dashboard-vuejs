@@ -7,15 +7,15 @@
     </div>
     <RightbarMeasure/>
     <!-- <br> -->
-    <RightbarDisease/>
+    <RightbarDisease v-if= " chartType != 'heatChart' " />
 
-    <RightbarAge/>
+    <RightbarAge v-if= " chartType != 'mapChart' && chartType != 'heatChart'"/>
     <!-- <br> -->
-    <RightbarGender/>
+    <RightbarGender v-if= " chartType != 'mapChart' && chartType != 'heatChart'"/>
     <!-- <br> -->
-    <RightbarSite/>
+    <RightbarSite v-if= " chartType != 'mapChart' && chartType != 'heatChart'"/>
     <!-- <br> -->
-    <RightbarUnits v-if="chartType != 'heatChart' || chartType != 'pieChart' "/>
+    <RightbarUnits v-if= " chartType != 'heatChart' && chartType != 'pieChart'"/>
     <!-- <br> -->
 
   </div>
@@ -46,8 +46,6 @@
                 this.chartType = param;
                 
             },
-            handleRightBar: function(param) {    
-                }
         },
         components: {
             RightbarAge,
