@@ -61,28 +61,6 @@
                 }
             };
         },
-        watch: {
-            measureFilter: function(value) {
-                if (value == variables.yll && !this.diseaseFlag)
-                    this.diseases = variables.diseases_yll;
-                else if (value == variables.yld && !this.diseaseFlag)
-                    this.diseases = variables.diseases_yld;
-                else if (value == variables.daly && !this.diseaseFlag)
-                    this.diseases = variables.diseases_daly;
-                else if (value == variables.deaths && !this.diseaseFlag)
-                    this.diseases = variables.diseases_deaths;
-                else {
-                }
-                this.loadMapData();
-            },
-            ageFilter: function (value) {
-                if (value!=null)
-                {
-                    this.loadMapData();
-                }
-            },
-
-        },
         mounted() {
             this.loadMapData();
             EventBus.$on("filters", this.setFilters);
@@ -445,6 +423,28 @@
 
                 });
             }
+        },
+        watch: {
+            measureFilter: function(value) {
+                if (value == variables.yll && !this.diseaseFlag)
+                    this.diseases = variables.diseases_yll;
+                else if (value == variables.yld && !this.diseaseFlag)
+                    this.diseases = variables.diseases_yld;
+                else if (value == variables.daly && !this.diseaseFlag)
+                    this.diseases = variables.diseases_daly;
+                else if (value == variables.deaths && !this.diseaseFlag)
+                    this.diseases = variables.diseases_deaths;
+                else {
+                }
+                this.loadMapData();
+            },
+            ageFilter: function (value) {
+                if (value!=null)
+                {
+                    this.loadMapData();
+                }
+            },
+
         },
         destroyed() {
             EventBus.$off("filters", this.setFilters);

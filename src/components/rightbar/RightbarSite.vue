@@ -45,6 +45,9 @@
                 both : variables.site_main_var
             };
         },
+        mounted() {
+            EventBus.$on("reset", this.reset);
+        },
         methods :{
             sendFilter : function(){
                 EventBus.$emit("filters", {value : this.selected, filter:"site"});
@@ -57,9 +60,6 @@
             selected : function(){
                 this.sendFilter();
             }
-        },
-        mounted() {
-            EventBus.$on("reset", this.reset);
         }
     };
 </script>

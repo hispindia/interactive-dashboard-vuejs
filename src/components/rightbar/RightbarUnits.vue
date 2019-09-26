@@ -47,6 +47,10 @@
                 chartType: "stackChart"
             };
         },
+        mounted(){
+            EventBus.$on("reset", this.reset);
+            this.handleRightBar(this.chartType);
+        },
         methods : {
             sendChart : function(){
                 if (this.selected == "percent") {
@@ -94,10 +98,6 @@
             selected : function(){
                 this.sendChart();
             }
-        },
-        mounted(){
-            EventBus.$on("reset", this.reset);
-            this.handleRightBar(this.chartType);
         }
     };
 </script>

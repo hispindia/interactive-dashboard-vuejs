@@ -7,36 +7,82 @@
     import { EventBus } from "../../event-bus";
     import Highcharts from "highcharts";
     export default {
+        data() {
+            return {
+                diseaseFlag: false,
+                diseases: variables.diseases_yll,
+                genderFilter: variables.gender_main_var,
+                ageFilter: variables.age_main_var,
+                siteFilter: variables.site_main_var,
+                measureFilter: variables.yll,
+                measureFilterTemp: variables.yll,
+                ou: variables.indiaOuId,
+                statesApi: "",
+                indiaApi: "",
+                mapOptions: {
+                    chart: {
+                        type: "treemap"
+                    },
+                    title : {
+                        text : ""
+                    },
+                    series: [
+                        {
+                            type: "treemap",
+                            layoutAlgorithm: "squarified",
+                            allowDrillToNode: false,
+                            animation: {
+                                duration: 1500
+                            },
+                            dataLabels: {
+                                enabled: true,
+                                color: 'black',
+                                style: {
+                                    textShadow: false
+                                }
+                            },
+                            borderWidth: 5,
+                            tooltip: {
+                                pointFormat: "<b>{point.name} : <br></b> {point.value}"
+                            },
+                            levelIsConstant: false,
+                            levels: [
+                                {
+                                    level: 2,
+                                    dataLabels: {
+                                        enabled: true,
+                                        color: 'black',
+                                        align: "left",
+                                        verticalAlign: "left",
+                                        style : {
+                                            fontSize : 12,
+                                            textShadow: false
+
+                                        }
+                                    },
+                                    borderWidth: 2
+                                }
+                            ],
+                            data: ""
+                        }
+                    ]
+                },
+
+                subtitle: {
+                    text:
+                        'Click points to drill down. Source: <a href="http://apps.who.int/gho/data/node.main.12?lang=en">WHO</a>.'
+                },
+                title: {
+                    text: "Global Mortality Rate 2012, per 100 000 population"
+                }
+            };
+        },
         mounted() {
             this.loadApi();
             EventBus.$on("filters", this.setFilters);
             EventBus.$on("ou-created", this.setSelectedOu);
             EventBus.$on("ou-changed", this.setSelectedOu);
             EventBus.$on("chartChange", this.changeChart);
-        },
-        watch: {
-            ou: function() {
-                this.loadApi();
-            },
-            genderFilter: function() {
-                this.loadApi();
-            },
-            ageFilter: function() {
-                this.loadApi();
-            },
-            siteFilter: function() {
-                this.loadApi();
-            },
-            measureFilter: function(value) {
-                if (value == variables.yll && !this.diseaseFlag) this.diseases = variables.diseases_yll;
-                else if (value == variables.yld && !this.diseaseFlag) this.diseases = variables.diseases_yld;
-                else if (value == variables.daly && !this.diseaseFlag) this.diseases = variables.diseases_daly;
-                else if(value == variables.deaths && !this.diseaseFlag) this.diseases = variables.diseases_deaths;
-                else{
-
-                }
-                this.loadApi();
-            }
         },
         methods: {
             changeChart: function(v) {
@@ -55,11 +101,9 @@
                 }
                 this.getApiData();
             },
-
             handleShowHide: function() {
                 $(".population_class").attr("disabled", "disabled");
             },
-
             setSelectedOu: function(params) {
                 if (params.ou === undefined) return;
                 params.ou != "" ? (this.ou = params.ou) : this.ou;
@@ -301,75 +345,29 @@
                 }, 2000);
             }
         },
-        data() {
-            return {
-                diseaseFlag: false,
-                diseases: variables.diseases_yll,
-                genderFilter: variables.gender_main_var,
-                ageFilter: variables.age_main_var,
-                siteFilter: variables.site_main_var,
-                measureFilter: variables.yll,
-                measureFilterTemp: variables.yll,
-                ou: variables.indiaOuId,
-                statesApi: "",
-                indiaApi: "",
-                mapOptions: {
-                    chart: {
-                        type: "treemap"
-                    },
-                    title : {
-                        text : ""
-                    },
-                    series: [
-                        {
-                            type: "treemap",
-                            layoutAlgorithm: "squarified",
-                            allowDrillToNode: false,
-                            animation: {
-                                duration: 1500
-                            },
-                            dataLabels: {
-                                enabled: true,
-                                color: 'black',
-                                style: {
-                                    textShadow: false
-                                }
-                            },
-                            borderWidth: 5,
-                            tooltip: {
-                                pointFormat: "<b>{point.name} : <br></b> {point.value}"
-                            },
-                            levelIsConstant: false,
-                            levels: [
-                                {
-                                    level: 2,
-                                    dataLabels: {
-                                        enabled: true,
-                                        color: 'black',
-                                        align: "left",
-                                        verticalAlign: "left",
-                                        style : {
-                                            fontSize : 12,
-                                            textShadow: false
+        watch: { 
+            ou: function() {
+                this.loadApi();
+            },
+            genderFilter: function() {
+                this.loadApi();
+            },
+            ageFilter: function() {
+                this.loadApi();
+            },
+            siteFilter: function() {
+                this.loadApi();
+            },
+            measureFilter: function(value) {
+                if (value == variables.yll && !this.diseaseFlag) this.diseases = variables.diseases_yll;
+                else if (value == variables.yld && !this.diseaseFlag) this.diseases = variables.diseases_yld;
+                else if (value == variables.daly && !this.diseaseFlag) this.diseases = variables.diseases_daly;
+                else if(value == variables.deaths && !this.diseaseFlag) this.diseases = variables.diseases_deaths;
+                else{
 
-                                        }
-                                    },
-                                    borderWidth: 2
-                                }
-                            ],
-                            data: ""
-                        }
-                    ]
-                },
-
-                subtitle: {
-                    text:
-                        'Click points to drill down. Source: <a href="http://apps.who.int/gho/data/node.main.12?lang=en">WHO</a>.'
-                },
-                title: {
-                    text: "Global Mortality Rate 2012, per 100 000 population"
                 }
-            };
+                this.loadApi();
+            }
         },
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);

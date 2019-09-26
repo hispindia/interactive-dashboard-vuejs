@@ -9,22 +9,145 @@
     import clicks from "../../catch-clicks";
     import { setTimeout } from "timers";
     export default {
+        data() {
+            return {
+                map_arr: [],
+                diseases: variables.diseases_yll,
+                measureFilter: variables.yll,
+                defaultIndiaApi: "",
+                mapOptions: {
+                    chart: {
+                        type: "heatmap",
+                        marginTop: 150,
+                        marginBottom: 50,
+                        plotBorderWidth: 0,
+                        borderColor: "white"
+                    },
+                    animation: {
+                        duration: 1000
+                    },
+
+                    title: {
+                        text: ""
+                    },
+
+                    xAxis: {
+                        categories: [],
+                        className: "xAxis",
+                        title: "States",
+
+                        labels: {
+                            formatter: function() {
+                                return (
+                                    "<span class='xaxis-labels' id='" +
+                                    this.value.split(" ").join("") +
+                                    "'>" +
+                                    this.value +
+                                    "</span>"
+                                );
+                            },
+                            style: {
+                                cursor: "pointer"
+                            },
+                            useHTML: true
+                        },
+                        opposite: true
+                    },
+
+                    yAxis: {
+                        categories: [],
+                        className: "yaxis",
+                        title: "Diseases",
+                        labels: {
+                            formatter: function() {
+                                return "<b>" + this.value + "</b>";
+                            }
+                        }
+                    },
+
+                    colorAxis: {
+                        min: 0,
+                        max: 50000,
+                        minColor: "#FFFFFF",
+                        maxColor: Highcharts.getOptions().colors[0]
+                    },
+
+                    legend: {
+                        align: "right",
+                        layout: "vertical",
+                        margin: 0,
+                        verticalAlign: "top",
+                        y: 25,
+                        symbolHeight: 280
+                    },
+
+                    tooltip: {
+                        formatter: function() {
+                            return (
+                                "<b>" +
+                                this.series.xAxis.categories[this.point.x] +
+                                "<br>" +
+                                this.point.value +
+                                "<br>" +
+                                this.series.yAxis.categories[this.point.y] +
+                                "</b>"
+                            );
+                        }
+                    },
+
+                    series: [
+                        {
+                            name: "Heat Map",
+                            borderWidth: 4,
+                            borderColor: "white",
+                            className: "seriesmap",
+                            id: "series",
+                            useHTML: true,
+                            data: [],
+                            dataLabels: {
+                                enabled: true,
+                                color: "#000000",
+                                formatter: function() {
+                                    return this.point.point;
+                                }
+                            },
+                            animation: {
+                                duration: 1000
+                            },
+                            events: {
+                                click: function(event) {}
+                            },
+                            point: {},
+                            turboThreshold: 0,
+                            states: {
+                                hover: {
+                                    halo: {
+                                        fill: "gray"
+                                    }
+                                }
+                            },
+                            animation: {
+                                duration: 1000
+                            }
+                        }
+                    ]
+                },
+
+                subtitle: {
+                    text:
+                        'Click points to drill down. Source: <a href="http://apps.who.int/gho/data/node.main.12?lang=en">WHO</a>.'
+                },
+                title: {
+                    text: "Global Mortality Rate 2012, per 100 000 population"
+                }
+            };
+        },
         mounted() {
             this.loadApi();
             EventBus.$on("filters", this.measureFilter);
             EventBus.$on("catchclicks", this.updateChart);
             EventBus.$on("chartChange", this.updateChart);
             clicks.setClassToCatchClicks("xaxis-labels");
-        },
-        watch: {
-            measureFilter: function(value) {
-                if (value == variables.yll) this.diseases = variables.diseases_yll;
-                else if (value == variables.yld) this.diseases = variables.diseases_yld;
-                else if (value == variables.daly) this.diseases = variables.diseases_daly;
-                else this.diseases = variables.diseases_deaths;
-                this.getApiData();
-                
-            }
         },
         methods: {
             handleShowHide: function() {
@@ -309,138 +432,14 @@
                     });
             }
         },
-        data() {
-            return {
-                map_arr: [],
-                diseases: variables.diseases_yll,
-                measureFilter: variables.yll,
-                defaultIndiaApi: "",
-                mapOptions: {
-                    chart: {
-                        type: "heatmap",
-                        marginTop: 150,
-                        marginBottom: 50,
-                        plotBorderWidth: 0,
-                        borderColor: "white"
-                    },
-                    animation: {
-                        duration: 1000
-                    },
-
-                    title: {
-                        text: ""
-                    },
-
-                    xAxis: {
-                        categories: [],
-                        className: "xAxis",
-                        title: "States",
-
-                        labels: {
-                            formatter: function() {
-                                return (
-                                    "<span class='xaxis-labels' id='" +
-                                    this.value.split(" ").join("") +
-                                    "'>" +
-                                    this.value +
-                                    "</span>"
-                                );
-                            },
-                            style: {
-                                cursor: "pointer"
-                            },
-                            useHTML: true
-                        },
-                        opposite: true
-                    },
-
-                    yAxis: {
-                        categories: [],
-                        className: "yaxis",
-                        title: "Diseases",
-                        labels: {
-                            formatter: function() {
-                                return "<b>" + this.value + "</b>";
-                            }
-                        }
-                    },
-
-                    colorAxis: {
-                        min: 0,
-                        max: 50000,
-                        minColor: "#FFFFFF",
-                        maxColor: Highcharts.getOptions().colors[0]
-                    },
-
-                    legend: {
-                        align: "right",
-                        layout: "vertical",
-                        margin: 0,
-                        verticalAlign: "top",
-                        y: 25,
-                        symbolHeight: 280
-                    },
-
-                    tooltip: {
-                        formatter: function() {
-                            return (
-                                "<b>" +
-                                this.series.xAxis.categories[this.point.x] +
-                                "<br>" +
-                                this.point.value +
-                                "<br>" +
-                                this.series.yAxis.categories[this.point.y] +
-                                "</b>"
-                            );
-                        }
-                    },
-
-                    series: [
-                        {
-                            name: "Heat Map",
-                            borderWidth: 4,
-                            borderColor: "white",
-                            className: "seriesmap",
-                            id: "series",
-                            useHTML: true,
-                            data: [],
-                            dataLabels: {
-                                enabled: true,
-                                color: "#000000",
-                                formatter: function() {
-                                    return this.point.point;
-                                }
-                            },
-                            animation: {
-                                duration: 1000
-                            },
-                            events: {
-                                click: function(event) {}
-                            },
-                            point: {},
-                            turboThreshold: 0,
-                            states: {
-                                hover: {
-                                    halo: {
-                                        fill: "gray"
-                                    }
-                                }
-                            },
-                            animation: {
-                                duration: 1000
-                            }
-                        }
-                    ]
-                },
-
-                subtitle: {
-                    text:
-                        'Click points to drill down. Source: <a href="http://apps.who.int/gho/data/node.main.12?lang=en">WHO</a>.'
-                },
-                title: {
-                    text: "Global Mortality Rate 2012, per 100 000 population"
-                }
-            };
+        watch: {
+            measureFilter: function(value) {
+                if (value == variables.yll) this.diseases = variables.diseases_yll;
+                else if (value == variables.yld) this.diseases = variables.diseases_yld;
+                else if (value == variables.daly) this.diseases = variables.diseases_daly;
+                else this.diseases = variables.diseases_deaths;
+                this.getApiData();
+            }
         },
         destroyed() {
             EventBus.$off("filters", this.setFilters);

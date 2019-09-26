@@ -127,6 +127,17 @@ export default {
     treeChart: TreeChart,
     heatChart: HeatChart
   },
+  data() {
+    return {
+      selected: "stackChart",
+      currentView: "stackChart",
+      selectname : "Stack Chart"
+    };
+  },
+  mounted() {
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".rightbarage").addClass("hidediv");
+  },
   methods: {
     select(elem) {
       this.currentView = elem;
@@ -230,7 +241,6 @@ export default {
     
     }
   },
-
   watch : {
     selected : function(v) {
       this.showHideLeftBar();
@@ -238,19 +248,6 @@ export default {
       EventBus.$emit('reset', this.selected);
       this.handleRightBar(this.selected);
     }
-  },
-
-  mounted() {
-    $('[data-toggle="tooltip"]').tooltip();
-    $(".rightbarage").addClass("hidediv");
-
-  },
-  data() {
-    return {
-      selected: "stackChart",
-      currentView: "stackChart",
-      selectname : "Stack Chart"
-    };
   }
 };
 </script>

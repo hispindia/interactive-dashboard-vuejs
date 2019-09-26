@@ -11,6 +11,83 @@
 
     export default {
         name: "Chart",
+        data() {
+            return {
+                populationdata: "",
+                chartType: "",
+                diseaseFlag: false,
+                width: "",
+                selections: "age",
+                diseases: variables.diseases_yll,
+                genderFilter: variables.gender_main_var,
+                ageFilter: variables.age_main_var,
+                siteFilter: variables.site_main_var,
+                measureFilter: variables.yll,
+                measureFilterTemp : variables.yll,
+                ou: variables.indiaOuId,
+                statesApi: "",
+                defaultIndiaApi:
+                    "../../analytics.json?dimension=pe:2015&dimension=ou:" +
+                    variables.allouIDs +
+                    "&dimension=dx:" +
+                    this.measureFilter +
+                    "&displayProperty=NAME&outputIdScheme=UID",
+                indiaApi: "",
+                updateArgs: [true, true, { duration: 1000 }],
+                colors: [],
+                chartOptions: {
+                    chart: {
+                        type: "line"
+                    },
+                    title: {
+                        text: ""
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: "YLL "
+                        },
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
+                        }
+                    },
+                    legend: {
+                        align: "left",
+                        x: 0,
+                        verticalAlign: "top",
+                        y: 25,
+                        floating: true,
+                        backgroundColor: "white",
+                        borderColor: "#CCC",
+                        borderWidth: 1,
+                        shadow: false
+                    },
+                    tooltip: {
+                        headerFormat: "<b>{point.x}</b><br/>",
+                        pointFormat: "{series.name}: {point.y}"
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: "normal",
+                            borderWidth: 0,
+                        }
+                    },
+                    series: [
+
+                    ]
+                }
+            };
+        },
         mounted() {
             EventBus.$on("filters", this.setFilters);
             EventBus.$on("ou-created", this.setSelectedOu);
@@ -18,42 +95,6 @@
             EventBus.$on("param-pointChart", this.setSelections);
             EventBus.$on("chartChange", this.changeChart);
             this.getApiData();
-        },
-        watch: {
-            ou: function() {
-                this.getApiData();
-            },
-            selections: function(v) {
-                this.chartOptions.title.text =
-                    "Diseases aggregated line chart : " + v + "-wise";
-                this.getApiData();
-            },
-            genderFilter: function() {
-                this.getApiData();
-            },
-            ageFilter: function() {
-                this.getApiData();
-            },
-            siteFilter: function() {
-                this.getApiData();
-            },
-            measureFilter: function(value) {
-                if (value == variables.yll && !this.diseaseFlag) {
-                    this.diseases = variables.diseases_yll;
-                    this.chartOptions.yAxis.title.text = "YLL";
-                } else if (value == variables.yld && !this.diseaseFlag) {
-                    this.diseases = variables.diseases_yld;
-                    this.chartOptions.yAxis.title.text = "YLD Counts";
-                } else if (value == variables.daly && !this.diseaseFlag) {
-                    this.diseases = variables.diseases_daly;
-                    this.chartOptions.yAxis.title.text = "DALY Counts";
-                } else if (value == variables.deaths && !this.diseaseFlag) {
-                    this.diseases = variables.diseases_deaths;
-                    this.chartOptions.yAxis.title.text = "Deaths Counts";
-                } else {
-                }
-                this.getApiData();
-            }
         },
         methods: {
             changeChart: function(v) {
@@ -652,82 +693,41 @@
                     "&displayProperty=NAME&outputIdScheme=UID";
             }
         },
-        data() {
-            return {
-                populationdata: "",
-                chartType: "",
-                diseaseFlag: false,
-                width: "",
-                selections: "age",
-                diseases: variables.diseases_yll,
-                genderFilter: variables.gender_main_var,
-                ageFilter: variables.age_main_var,
-                siteFilter: variables.site_main_var,
-                measureFilter: variables.yll,
-                measureFilterTemp : variables.yll,
-                ou: variables.indiaOuId,
-                statesApi: "",
-                defaultIndiaApi:
-                    "../../analytics.json?dimension=pe:2015&dimension=ou:" +
-                    variables.allouIDs +
-                    "&dimension=dx:" +
-                    this.measureFilter +
-                    "&displayProperty=NAME&outputIdScheme=UID",
-                indiaApi: "",
-                updateArgs: [true, true, { duration: 1000 }],
-                colors: [],
-                chartOptions: {
-                    chart: {
-                        type: "line"
-                    },
-                    title: {
-                        text: ""
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels: {
-                            style: {
-                                fontSize:'15px'
-                            }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: "YLL "
-                        },
-                        labels: {
-                            style: {
-                                fontSize:'15px'
-                            }
-                        }
-                    },
-                    legend: {
-                        align: "left",
-                        x: 0,
-                        verticalAlign: "top",
-                        y: 25,
-                        floating: true,
-                        backgroundColor: "white",
-                        borderColor: "#CCC",
-                        borderWidth: 1,
-                        shadow: false
-                    },
-                    tooltip: {
-                        headerFormat: "<b>{point.x}</b><br/>",
-                        pointFormat: "{series.name}: {point.y}"
-                    },
-                    plotOptions: {
-                        column: {
-                            stacking: "normal",
-                            borderWidth: 0,
-                        }
-                    },
-                    series: [
-
-                    ]
+        watch: {
+            ou: function() {
+                this.getApiData();
+            },
+            selections: function(v) {
+                this.chartOptions.title.text =
+                    "Diseases aggregated line chart : " + v + "-wise";
+                this.getApiData();
+            },
+            genderFilter: function() {
+                this.getApiData();
+            },
+            ageFilter: function() {
+                this.getApiData();
+            },
+            siteFilter: function() {
+                this.getApiData();
+            },
+            measureFilter: function(value) {
+                if (value == variables.yll && !this.diseaseFlag) {
+                    this.diseases = variables.diseases_yll;
+                    this.chartOptions.yAxis.title.text = "YLL";
+                } else if (value == variables.yld && !this.diseaseFlag) {
+                    this.diseases = variables.diseases_yld;
+                    this.chartOptions.yAxis.title.text = "YLD Counts";
+                } else if (value == variables.daly && !this.diseaseFlag) {
+                    this.diseases = variables.diseases_daly;
+                    this.chartOptions.yAxis.title.text = "DALY Counts";
+                } else if (value == variables.deaths && !this.diseaseFlag) {
+                    this.diseases = variables.diseases_deaths;
+                    this.chartOptions.yAxis.title.text = "Deaths Counts";
+                } else {
                 }
-            };
+                this.getApiData();
+            }
         },
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);

@@ -45,6 +45,9 @@
                 selected: { text: "All" , id : data.age_main_var}
             };
         },
+        mounted() {
+            EventBus.$on("reset", this.reset);
+        },
         methods :{
             sendFilter : function(){
                 EventBus.$emit("filters", {value : this.selected.id, filter:"age"});
@@ -57,9 +60,6 @@
             selected : function(val){
                 this.sendFilter();
             }
-        },
-        mounted() {
-            EventBus.$on("reset", this.reset);
         }
     };
 </script>

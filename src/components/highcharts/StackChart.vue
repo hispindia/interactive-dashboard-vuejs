@@ -8,66 +8,98 @@
     import { EventBus } from "../../event-bus";
     export default {
         name: "Chart",
+        data() {
+            return {
+                populationdata: "",
+                chartType: "",
+                diseaseFlag: false,
+                width: "",
+                selections: "age",
+                population_yes:"false",
+                diseases: variables.diseases_yll,
+                ages:variables.ages_all,
+                genderFilter: variables.gender_main_var,
+                ageFilter: variables.age_main_var,
+                siteFilter: variables.site_main_var,
+                measureFilter: variables.yll,
+                measureFilterTemp: variables.yll,
+                ou: "",
+                statesApi: "",
+                defaultIndiaApi:
+                    "../../analytics.json?dimension=pe:2015&dimension=ou:" +
+                    variables.allouIDs +
+                    "&dimension=dx:" +
+                    this.measureFilter +
+                    "&displayProperty=NAME&outputIdScheme=UID",
+                indiaApi: "",
+                updateArgs: [true, true, { duration: 1000 }],
+                colors: [],
+                chartOptions: {
+                    chart: {
+                        type: "column"
+                    },
+                    title: {
+                        text: ""
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        stackLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                color:'gray',
+                                fontSize: '12px'
+                            }
+                        },
+                        min: 0,
+                        title: {
+                            text: "YLL"
+                        },
+                        labels: {
+                            style: {
+                                fontSize:'15px'
+                            }
+                        }
+                    },
+                    legend: {
+                        align: "left",
+                        x: 0,
+                        verticalAlign: "top",
+                        y: 25,
+                        floating: true,
+                        backgroundColor: "white",
+                        borderColor: "#CCC",
+                        borderWidth: 1,
+                        shadow: false
+                    },
+                    tooltip: {
+                        headerFormat: "<b>{point.x}</b><br/>",
+                        pointFormat: "{series.name}: {point.y}"
+                        // pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}<br/> Percentage: {point.percentage:.0f}%"
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: "normal",
+                            borderWidth: 0
+                        }
+                    },
+                    series: []
+                }
+            };
+        },
         mounted() {
             EventBus.$on("filters", this.setFilters);
             EventBus.$on("ou-created", this.setSelectedOu);
             EventBus.$on("ou-changed", this.setSelectedOu);
             EventBus.$on("param-stackChart", this.setSelections);
             EventBus.$on("chartChange", this.changeChart); 
-        },
-        watch: {
-            ou: function() {
-                this.getApiData();
-            },
-            selections: function(v) {
-                this.chartOptions.title.text =
-                    "Stacked Diseases aggregated chart : " + v + "-wise";
-                this.getApiData();
-            },
-            genderFilter: function() {
-                this.getApiData();
-            },
-            ageFilter: function() {
-                this.getApiData();
-            },
-            siteFilter: function() {
-                this.getApiData();
-            },
-            measureFilter: function(value) {
-                if (value == variables.yll && !this.diseaseFlag) {
-                    $(".rightbardisease").removeClass("hidediv");
-                    $(".rightbarunit").removeClass("hidediv");
-                    this.population_yes ="false";
-                    this.diseases = variables.diseases_yll;
-                    this.chartOptions.yAxis.title.text = "YLL ";
-                } else if (value == variables.yld && !this.diseaseFlag) {
-                    $(".rightbardisease").removeClass("hidediv");
-                    $(".rightbarunit").removeClass("hidediv");
-                    this.population_yes ="false";
-                    this.diseases = variables.diseases_yld;
-                    this.chartOptions.yAxis.title.text = "YLD";
-                } else if (value == variables.daly && !this.diseaseFlag) {
-                    $(".rightbardisease").removeClass("hidediv");
-                    $(".rightbarunit").removeClass("hidediv");
-                    this.population_yes ="false";
-                    this.diseases = variables.diseases_daly;
-                    this.chartOptions.yAxis.title.text = "DALY";
-                } else if (value == variables.deaths && !this.diseaseFlag) {
-                    $(".rightbardisease").removeClass("hidediv");
-                    $(".rightbarunit").removeClass("hidediv");
-                    this.population_yes ="false";
-                    this.diseases = variables.diseases_deaths;
-                    this.chartOptions.yAxis.title.text = "Deaths";
-                } else if (value == "gNaskBzw5Nq" && !this.diseaseFlag) {
-                    this.population_yes = "popon";
-                    $(".rightbarunit").addClass("hidediv");
-                    $(".rightbardisease").addClass("hidediv");
-                    this.chartOptions.yAxis.title.text = "Population";
-                } else {
-
-                }
-                this.getApiData();
-            }
         },
         methods: {
             changeChart: function(v) {
@@ -122,7 +154,6 @@
                     }
                 }
             },
-
             setColorsPop: function() {
                 this.ages[0]["LJglh3dKkBF"].color = "rgb(255,0,255)";
                 this.ages[0]["Y80cGPh9cA9"].color = "rgb(118, 215, 196)";
@@ -535,7 +566,6 @@
                         }
                     }
                 }
-
                 else
                 {
                     this.chartOptions.plotOptions.column.stacking = "normal";
@@ -816,91 +846,59 @@
                     "&displayProperty=NAME&outputIdScheme=UID";
             }
         },
-        data() {
-            return {
-                populationdata: "",
-                chartType: "",
-                diseaseFlag: false,
-                width: "",
-                selections: "age",
-                population_yes:"false",
-                diseases: variables.diseases_yll,
-                ages:variables.ages_all,
-                genderFilter: variables.gender_main_var,
-                ageFilter: variables.age_main_var,
-                siteFilter: variables.site_main_var,
-                measureFilter: variables.yll,
-                measureFilterTemp: variables.yll,
-                ou: "",
-                statesApi: "",
-                defaultIndiaApi:
-                    "../../analytics.json?dimension=pe:2015&dimension=ou:" +
-                    variables.allouIDs +
-                    "&dimension=dx:" +
-                    this.measureFilter +
-                    "&displayProperty=NAME&outputIdScheme=UID",
-                indiaApi: "",
-                updateArgs: [true, true, { duration: 1000 }],
-                colors: [],
-                chartOptions: {
-                    chart: {
-                        type: "column"
-                    },
-                    title: {
-                        text: ""
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels: {
-                            style: {
-                                fontSize:'15px'
-                            }
-                        }
-                    },
-                    yAxis: {
-                        stackLabels: {
-                            enabled: true,
-                            style: {
-                                fontWeight: 'bold',
-                                color:'gray',
-                                fontSize: '12px'
-                            }
-                        },
-                        min: 0,
-                        title: {
-                            text: "YLL"
-                        },
-                        labels: {
-                            style: {
-                                fontSize:'15px'
-                            }
-                        }
-                    },
-                    legend: {
-                        align: "left",
-                        x: 0,
-                        verticalAlign: "top",
-                        y: 25,
-                        floating: true,
-                        backgroundColor: "white",
-                        borderColor: "#CCC",
-                        borderWidth: 1,
-                        shadow: false
-                    },
-                    tooltip: {
-                        headerFormat: "<b>{point.x}</b><br/>",
-                        pointFormat: "{series.name}: {point.y}"
-                        // pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}<br/> Percentage: {point.percentage:.0f}%"
-                    },
-                    plotOptions: {
-                        column: {
-                            stacking: "normal",
-                            borderWidth: 0
-                        }
-                    },
-                    series: []
+        watch: {
+            ou: function() {
+                this.getApiData();
+            },
+            selections: function(v) {
+                this.chartOptions.title.text =
+                    "Stacked Diseases aggregated chart : " + v + "-wise";
+                this.getApiData();
+            },
+            genderFilter: function() {
+                this.getApiData();
+            },
+            ageFilter: function() {
+                this.getApiData();
+            },
+            siteFilter: function() {
+                this.getApiData();
+            },
+            measureFilter: function(value) {
+                if (value == variables.yll && !this.diseaseFlag) {
+                    $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
+                    this.population_yes ="false";
+                    this.diseases = variables.diseases_yll;
+                    this.chartOptions.yAxis.title.text = "YLL ";
+                } else if (value == variables.yld && !this.diseaseFlag) {
+                    $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
+                    this.population_yes ="false";
+                    this.diseases = variables.diseases_yld;
+                    this.chartOptions.yAxis.title.text = "YLD";
+                } else if (value == variables.daly && !this.diseaseFlag) {
+                    $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
+                    this.population_yes ="false";
+                    this.diseases = variables.diseases_daly;
+                    this.chartOptions.yAxis.title.text = "DALY";
+                } else if (value == variables.deaths && !this.diseaseFlag) {
+                    $(".rightbardisease").removeClass("hidediv");
+                    $(".rightbarunit").removeClass("hidediv");
+                    this.population_yes ="false";
+                    this.diseases = variables.diseases_deaths;
+                    this.chartOptions.yAxis.title.text = "Deaths";
+                } else if (value == "gNaskBzw5Nq" && !this.diseaseFlag) {
+                    this.population_yes = "popon";
+                    $(".rightbarunit").addClass("hidediv");
+                    $(".rightbardisease").addClass("hidediv");
+                    this.chartOptions.yAxis.title.text = "Population";
+                } else {
+
                 }
-            };
+                this.getApiData();
+            }
         },
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);

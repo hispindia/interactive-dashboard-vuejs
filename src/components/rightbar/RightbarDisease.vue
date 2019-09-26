@@ -3,18 +3,16 @@
   <div class="row justify-content-center p-1 rightbar-menu-main rightbardisease">
     <div class="class col rightbar-menu">
       Diseases : &ensp; &ensp;
-      <select
-              class="disease-button"
-              id="dropdown-disease"
-              v-model="selected"
-      >Select diseases
+      <select 
+        class="disease-button" 
+        id="dropdown-disease" 
+        v-model="selected">Select diseases
         <option class="dropdown-item" v-for="d in diseases" :value="d" :key="d">
             {{d.text}}
         </option>
       </select>
     </div>
   </div>
-
   <!-- Disease Dropdown end-->
 </template>
 
@@ -28,7 +26,6 @@
         data() {
             return {
                 diseases: [],
-                tempDiseases: [],
                 diseasesTemp: [{id:'',text:'All causes',value:'', category: false}],
                 selected : {id:'',text:'All causes',value:'', category: false},
                 disease_typeapi_1: "",
@@ -99,6 +96,7 @@
             },
             getApiData: function(diseaseType) {
                 this.tempDiseases = [];
+                this.typeorder = [];
                 this.setApis(diseaseType);
                     axios
                     .get(
@@ -106,52 +104,151 @@
                     )
                     .then(response => {
                         if (diseaseType == variables.deaths) {
-                            
                             for (let j = 0; j < response.data.dataElementGroups.length; j++) {
-                                this.tempDiseases.push({
-                                    id: response.data.dataElementGroups[j].id,
-                                    text: response.data.dataElementGroups[j].displayName,
-                                    value: '',
-                                    category: true
-                                });
+                                if (response.data.dataElementGroups[j].displayName.indexOf("Ill") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.dataElementGroups[j].id,
+                                        text: response.data.dataElementGroups[j].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                } else if (response.data.dataElementGroups[j].displayName.indexOf("Injuries") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.dataElementGroups[j].id,
+                                        text: response.data.dataElementGroups[j].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                } else if (response.data.dataElementGroups[j].displayName.indexOf("Non") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.dataElementGroups[j].id,
+                                        text: response.data.dataElementGroups[j].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                } else if (response.data.dataElementGroups[j].displayName.indexOf("maternal") != -1) {
+                                        this.diseases.unshift({
+                                        id: response.data.dataElementGroups[j].id,
+                                        text: response.data.dataElementGroups[j].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                }
                             }
                         } else {
                             for (let i = 0; i < response.data.indicatorGroups.length; i++) {
                                 if (response.data.indicatorGroups[i].displayName.indexOf("(YLL)") != -1 && diseaseType == variables.yll) {
-                                        this.tempDiseases.push({
+                                    if (response.data.indicatorGroups[i].displayName.indexOf("Ill") != -1) {
+                                        this.diseases.splice(1,0,{
                                         id: response.data.indicatorGroups[i].id,
                                         text: response.data.indicatorGroups[i].displayName,
                                         value: '',
                                         category: true
-                                    });
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("Injuries") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("Non") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("maternal") != -1) {
+                                        this.diseases.unshift({
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    }
                                 } else if (response.data.indicatorGroups[i].displayName.indexOf("(YLD)") != -1 && diseaseType == variables.yld) {
-                                    this.tempDiseases.push({
+                                    if (response.data.indicatorGroups[j].displayName.indexOf("Ill") != -1) {
+                                        this.diseases.splice(1,0,{
                                         id: response.data.indicatorGroups[i].id,
                                         text: response.data.indicatorGroups[i].displayName,
                                         value: '',
                                         category: true
-                                    });
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("Injuries") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("Non") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("maternal") != -1) {
+                                        this.diseases.unshift({
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    }
                                 } else if (response.data.indicatorGroups[i].displayName.indexOf("(DALY)") != -1 && diseaseType == variables.daly) {
-                                    this.tempDiseases.push({
+                                    if (response.data.indicatorGroups[i].displayName.indexOf("Ill") != -1) {
+                                        this.diseases.splice(1,0,{
                                         id: response.data.indicatorGroups[i].id,
                                         text: response.data.indicatorGroups[i].displayName,
                                         value: '',
                                         category: true
-                                    });
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("Injuries") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("Non") != -1) {
+                                        this.diseases.splice(1,0,{
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    } else if (response.data.indicatorGroups[i].displayName.indexOf("maternal") != -1) {
+                                        this.diseases.unshift({
+                                        id: response.data.indicatorGroups[i].id,
+                                        text: response.data.indicatorGroups[i].displayName,
+                                        value: '',
+                                        category: true
+                                        });
+                                    }
                                 }
                             }
                         }
-
-                        for (let k = 0; k < this.tempDiseases.length; k++) {
-                            axios
-                            .get ("../../29/indicatorGroups/"+ this.tempDiseases[k].id +".json")
-                            .then(res => {
-                                for (let indicator = 0; indicator < res.data.indicators.length; indicator++) {
-                                    this.tempDiseases[k].value += res.data.indicators[indicator].id + ";";
-                                }
-                                this.diseases.unshift(this.tempDiseases[k]);
-                            })
-                            
+                        for (let k = 0; k < 4; k++) {
+                            if (diseaseType == variables.deaths) {
+                                axios
+                                    .get ("../../29/dataElementGroups/"+ this.diseases[k].id +".json")
+                                    .then(res => {
+                                        for (let indicator = 0; indicator < res.data.dataElements.length; indicator++) {
+                                        this.diseases[k].value += res.data.dataElements[indicator].id + ";";
+                                        }
+                                        })
+                                
+                            } else {
+                                axios
+                                    .get ("../../29/indicatorGroups/"+ this.diseases[k].id +".json")
+                                    .then(res => {
+                                        for (let indicator = 0; indicator < res.data.indicators.length; indicator++) {
+                                        this.diseases[k].value += res.data.indicators[indicator].id + ";";
+                                        }
+                                        })
+                            }
                         }
                     })
                     .catch(error => {

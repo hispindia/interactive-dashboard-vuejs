@@ -41,6 +41,11 @@ import { log } from 'util';
                 chartType: "stackChart"
             };
         },
+        mounted() {
+            EventBus.$on("reset", this.reset);
+            this.reset(this.chartType);
+            this.handleRightBar(this.chartType);
+        },
         methods: {
             sendFilter: function() {
                 EventBus.$emit("filters", { value: this.selected, filter: "measure" });
@@ -84,12 +89,6 @@ import { log } from 'util';
                 $(".rightbarunit").addClass("hidediv");
                 this.sendFilter();
             }
-            
-        },
-        mounted() {
-            EventBus.$on("reset", this.reset);
-            this.reset(this.chartType);
-            this.handleRightBar(this.chartType);
         },
         getOuName: function(ou) {
             axios

@@ -11,6 +11,73 @@
 
     export default {
         name: "Chart",
+        data() {
+            return {
+                diseaseFlag: false,
+                width: "",
+                selections: "age",
+                diseases: variables.diseases_yll,
+                genderFilter: variables.gender_main_var,
+                ageFilter: variables.age_main_var,
+                siteFilter: variables.site_main_var,
+                measureFilter: variables.yll,
+                measureFilterTemp: variables.yll,
+                ou: variables.indiaOuId,
+                statesApi: "",
+                defaultIndiaApi:
+                    "../../analytics.json?dimension=pe:2015&dimension=ou:" +
+                    variables.allouIDs +
+                    "&dimension=dx:" +
+                    this.measureFilter +
+                    "&displayProperty=NAME&outputIdScheme=UID",
+                indiaApi: "",
+                updateArgs: [true, true, { duration: 1000 }],
+                colors: [],
+                chartOptions: {
+                    chart: {
+                        type: "pie",
+                        options3d: {
+                            enabled: true,
+                            alpha: 45,
+                            beta: 0
+                        }
+                    },
+                    title: {
+                        text: ""
+                    },
+                    yAxis: {
+                        title: {
+                            text: "YLL "
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: "",
+                        cursor: "pointer",
+                        headerFormat:
+                            "<b>Percentage :</b> {point.name}</b>: {point.percentage:.1f} % - "
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            shadow: false,
+                            depth: 35
+                        }
+                    },
+                    series: [
+                        {
+                            name: "Counts",
+                            dataLabels: {
+                                style: {
+                                    fontSize: 13
+                                }
+                            },
+                            data: []
+
+                        }
+                    ]
+                }
+            };
+        },
         mounted() {
             EventBus.$on("filters", this.setFilters);
             EventBus.$on("ou-created", this.setSelectedOu);
@@ -18,36 +85,6 @@
             EventBus.$on("param-pieChart", this.setSelections);
             $(".rightbarunit").addClass("hidediv");
             this.getApiData();
-        },
-        watch: {
-            ou: function() {
-                this.getApiData();
-            },
-            selections: function() {
-                this.getApiData();
-            },
-            genderFilter: function() {
-                this.getApiData();
-            },
-            ageFilter: function() {
-                this.getApiData();
-            },
-            siteFilter: function() {
-                this.getApiData();
-            },
-            measureFilter: function(value) {
-                if (value == variables.yll && !this.diseaseFlag)
-                    this.diseases = variables.diseases_yll;
-                else if (value == variables.yld && !this.diseaseFlag)
-                    this.diseases = variables.diseases_yld;
-                else if (value == variables.daly && !this.diseaseFlag)
-                    this.diseases = variables.diseases_daly;
-                else if (value == variables.deaths && !this.diseaseFlag)
-                    this.diseases = variables.diseases_deaths;
-                else {
-                }
-                this.getApiData();
-            }
         },
         methods: {
             setColors: function() {
@@ -458,72 +495,35 @@
                     "&displayProperty=NAME&outputIdScheme=UID";
             }
         },
-        data() {
-            return {
-                diseaseFlag: false,
-                width: "",
-                selections: "age",
-                diseases: variables.diseases_yll,
-                genderFilter: variables.gender_main_var,
-                ageFilter: variables.age_main_var,
-                siteFilter: variables.site_main_var,
-                measureFilter: variables.yll,
-                measureFilterTemp: variables.yll,
-                ou: variables.indiaOuId,
-                statesApi: "",
-                defaultIndiaApi:
-                    "../../analytics.json?dimension=pe:2015&dimension=ou:" +
-                    variables.allouIDs +
-                    "&dimension=dx:" +
-                    this.measureFilter +
-                    "&displayProperty=NAME&outputIdScheme=UID",
-                indiaApi: "",
-                updateArgs: [true, true, { duration: 1000 }],
-                colors: [],
-                chartOptions: {
-                    chart: {
-                        type: "pie",
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    title: {
-                        text: ""
-                    },
-                    yAxis: {
-                        title: {
-                            text: "YLL "
-                        }
-                    },
-                    tooltip: {
-                        valueSuffix: "",
-                        cursor: "pointer",
-                        headerFormat:
-                            "<b>Percentage :</b> {point.name}</b>: {point.percentage:.1f} % - "
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            shadow: false,
-                            depth: 35
-                        }
-                    },
-                    series: [
-                        {
-                            name: "Counts",
-                            dataLabels: {
-                                style: {
-                                    fontSize: 13
-                                }
-                            },
-                            data: []
-
-                        }
-                    ]
+        watch: {
+            ou: function() {
+                this.getApiData();
+            },
+            selections: function() {
+                this.getApiData();
+            },
+            genderFilter: function() {
+                this.getApiData();
+            },
+            ageFilter: function() {
+                this.getApiData();
+            },
+            siteFilter: function() {
+                this.getApiData();
+            },
+            measureFilter: function(value) {
+                if (value == variables.yll && !this.diseaseFlag)
+                    this.diseases = variables.diseases_yll;
+                else if (value == variables.yld && !this.diseaseFlag)
+                    this.diseases = variables.diseases_yld;
+                else if (value == variables.daly && !this.diseaseFlag)
+                    this.diseases = variables.diseases_daly;
+                else if (value == variables.deaths && !this.diseaseFlag)
+                    this.diseases = variables.diseases_deaths;
+                else {
                 }
-            };
+                this.getApiData();
+            }
         },
         destroyed() {
             EventBus.$off("ou-created", this.getApiData);

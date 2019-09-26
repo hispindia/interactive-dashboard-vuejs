@@ -8,7 +8,7 @@
     <RightbarMeasure/>
     <!-- <br> -->
     <RightbarDisease v-if= " chartType != 'heatChart' " />
-
+    <!-- <br> -->
     <RightbarAge v-if= " chartType != 'mapChart' && chartType != 'heatChart'"/>
     <!-- <br> -->
     <RightbarGender v-if= " chartType != 'mapChart' && chartType != 'heatChart'"/>
@@ -17,7 +17,6 @@
     <!-- <br> -->
     <RightbarUnits v-if= " chartType != 'heatChart' && chartType != 'pieChart'"/>
     <!-- <br> -->
-
   </div>
 </template>
 
@@ -37,14 +36,15 @@
                 chartType: "stackChart"
             };
         },
-        
+        mounted(){
+            EventBus.$on("reset", this.reset);
+        },
         methods: {
             slideRight: function() {
                 $("#rightbar").toggleClass("collapse-div");
             },
             reset : function(param){
                 this.chartType = param;
-                
             },
         },
         components: {
@@ -54,9 +54,6 @@
             RightbarSite,
             RightbarUnits,
             RightbarDisease
-        },
-        mounted(){
-            EventBus.$on("reset", this.reset);
         }
     };
 </script>
