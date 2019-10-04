@@ -168,7 +168,7 @@
                                         });
                                     }
                                 } else if (response.data.indicatorGroups[i].displayName.indexOf("(YLD)") != -1 && diseaseType == variables.yld) {
-                                    if (response.data.indicatorGroups[j].displayName.indexOf("Ill") != -1) {
+                                    if (response.data.indicatorGroups[i].displayName.indexOf("Ill") != -1) {
                                         this.diseases.splice(1,0,{
                                         id: response.data.indicatorGroups[i].id,
                                         text: response.data.indicatorGroups[i].displayName,

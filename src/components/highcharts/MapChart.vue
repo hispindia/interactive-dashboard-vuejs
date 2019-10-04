@@ -12,7 +12,6 @@
     export default {
         data() {
             return {
-
                 chartType: "count",
                 diseaseFlag: false,
                 selections: "age",
@@ -27,37 +26,31 @@
                         map: mapdata,
                         mapZoom:5
                     },
-
                     title: {
                         text: ""
                     },
-
                     mapNavigation: {
                         enabled: true,
                         buttonOptions: {
                             verticalAlign: "bottom"
                         }
                     },
-
                     colorAxis: {
                         min: 0
                     },
-
-                    series: [
-                        {
-                            data: [],
-                            name: "Counts",
-                            states: {
-                                hover: {
-                                    color: "#BADA55"
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false,
-                                format: "{point.name}"
+                    series: [ {
+                        data: [],
+                        name: "Counts",
+                        states: {
+                            hover: {
+                                color: "#BADA55"
                             }
+                        },
+                        dataLabels: {
+                            enabled: false,
+                            format: "{point.name}"
                         }
-                    ]
+                    } ]
                 }
             };
         },
@@ -123,17 +116,16 @@
                 if (this.chartType == "rate") {
                     vm.chartType = "rate";
                     this.getPopulationData("age");
-                    var defaultIndiaApi =
-                        "../../analytics.json?dimension=pe:2015&dimension=ou:" +
-                        variables.allouIDs +
-                        "&dimension=dx:" +
-                        this.measureFilter +
-                        "&dimension=" +
-                        variables.age_id +
-                        ":" +
-                        this.ageFilter +
-                        "&displayProperty=NAME&outputIdScheme=UID";
-
+                     var defaultIndiaApi =
+                    "../../analytics.json?dimension=pe:2015&dimension=ou:" +
+                    variables.allouIDs +
+                    "&dimension=dx:" +
+                    this.measureFilter +
+                    "&dimension=" +
+                    variables.age_id +
+                    ":" +
+                    this.ageFilter +
+                    "&displayProperty=NAME&outputIdScheme=UID";     
                     age_var=this.ageFilter;
                     axios.get(defaultIndiaApi).then(response => {
                         var loopdata = response.data.rows;
@@ -149,84 +141,63 @@
                                 if (i == len - 1) {
                                     $("#loader").show();
                                     var temp_arr = [];
-
                                     for (let j = 0; j < Object.keys(temp[0]).length; j++) {
 
-                                        if(age_var=="LJglh3dKkBF")
-                                        {
+                                        if(age_var=="LJglh3dKkBF") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*88600 ]);
                                         }
-                                        else if(age_var=="ppIxci61gTu")
-                                        {
+                                        else if(age_var=="ppIxci61gTu") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*246200 ]);
 
                                         }
-                                        else if(age_var=="rHmIMu8bVmy")
-                                        {
+                                        else if(age_var=="rHmIMu8bVmy") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*15450]);
-
                                         }
-                                        else if(age_var=="FPQcIz7kBvD")
-                                        {
+                                        else if(age_var=="FPQcIz7kBvD") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*66800 ]);
-
                                         }
-                                        else if(age_var=="fuZTseIa9nS")
-                                        {
+                                        else if(age_var=="fohLv27MtjN") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*37300 ]);
-
                                         }
-                                        else if(age_var=="fuZTseIa9nS")
-                                        {
+                                        else if(age_var=="fuZTseIa9nS") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*99200 ]);
-
                                         }
-                                        else if(age_var=="yvdQkzHuq2E")
-                                        {
+                                        else if(age_var=="yvdQkzHuq2E") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*274900 ]);
-
                                         }
-                                        else if(age_var=="Y80cGPh9cA9")
-                                        {
+                                        else if(age_var=="Y80cGPh9cA9") {
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data*172900]);
-
                                         }
                                         else {
-
-
                                             temp_arr.push([
                                                 variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                                 temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data ]);
                                         }
-                                        for(let h=0;h<populationdata.length;h++)
-                                        {
-                                            for (let k=0;k<temp_arr.length;k++)
-                                            {
-                                                if (populationdata[h][0]==temp_arr[k][0])
-                                                {
+                                        for(let h=0;h<populationdata.length;h++) {
+                                            for (let k=0;k<temp_arr.length;k++) {
+                                                if (populationdata[h][0]==temp_arr[k][0]) {
                                                     temp_arr[k][1]= (temp_arr[k][1]/populationdata[h][1]*100000).toString();
-                                                    
                                                     if(temp_arr[k][1].indexOf("e") !== -1) {
-                                                    let val = temp_arr[k][1].split("e");
-                                                    let val1 = Number(val[0]).toFixed(2);
-                                                    let val2 = val[1];
-                                                    temp_arr[k][1] =  Number(val1+"e"+val2);
+                                                        let val = temp_arr[k][1].split("e");
+                                                        let val1 = Number(val[0]).toFixed(2);
+                                                        let val2 = val[1];
+                                                        temp_arr[k][1] =  Number(val1+"e"+val2);
                                                     }
                                                     else {
                                                         if(temp_arr[k][1].indexOf(".") !== -1) {
@@ -235,31 +206,29 @@
                                                             let val2 = val[1];
                                                             if(val1 >= 1) {
                                                                 temp_arr[k][1] = Number(temp_arr[k][1]).toFixed(2);
-                                                            } else {
+                                                            } 
+                                                            else {
                                                                 for(let i = 0; i < val2.length; i++) {
                                                                     if(val2[i] == 0) {
                                                                         continue;
-                                                                    }else {
+                                                                    }
+                                                                    else {
                                                                         let val3 = val2.slice(0,i+1)
                                                                          temp_arr[k][1] =  Number(val1 + "." + val3);
                                                                          break;
                                                                     }
-
                                                                 }
                                                             }
-
-                                                        } else {
+                                                        } 
+                                                        else {
                                                             temp_arr[k][1] = Number(temp_arr[k][1])
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-
-
                                     }
                                     setTimeout(function () {
-
                                         vm.mapOptions.series[0].data = [...temp_arr];
                                         $("#loader").hide();
                                     }, 2000);
@@ -311,6 +280,7 @@
                 }
             },
             getPopulationData: function(type) {
+                console.log("3");
                 debugger;
                 var age_var="";
                 var age_population = {
@@ -323,7 +293,6 @@
                     age70_79: 0,
                     age80_above: 0
                 };
-
                 var vm = this;
                 var defaultIndiaApi =
                     "../../analytics.json?dimension=pe:2015&dimension=ou:" +
@@ -335,6 +304,7 @@
                     "&dimension=dx:gNaskBzw5Nq&displayProperty=NAME&outputIdScheme=UID";
                 age_var=this.ageFilter;
                 axios.get(defaultIndiaApi).then(response => {
+                    console.log(response);
                     var loopdata = response.data.rows;
                     let temp = JSON.parse(JSON.stringify(variables.statesMapData));
                     setTimeout(function () {
@@ -348,59 +318,50 @@
                             if (i == len - 1) {
                                 var temp_arr_rate = [];
                                 $("#loader").show();
-
                                 for (let j = 0; j < Object.keys(temp[0]).length; j++) {
-                                    if(age_var=="LJglh3dKkBF")
-                                    {
+                                    if(age_var=="LJglh3dKkBF") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data ]);
 
                                     }
-                                    else if(age_var=="ppIxci61gTu")
-                                    {
+                                    else if(age_var=="ppIxci61gTu") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data ]);
 
                                     }
-                                    else if(age_var=="rHmIMu8bVmy")
-                                    {
+                                    else if(age_var=="rHmIMu8bVmy") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data]);
 
                                     }
-                                    else if(age_var=="FPQcIz7kBvD")
-                                    {
+                                    else if(age_var=="FPQcIz7kBvD") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data ]);
 
                                     }
-                                    else if(age_var=="fuZTseIa9nS")
-                                    {
+                                    else if(age_var=="fohLv27MtjN") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data ]);
 
                                     }
-                                    else if(age_var=="fuZTseIa9nS")
-                                    {
+                                    else if(age_var=="fuZTseIa9nS") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data ]);
 
                                     }
-                                    else if(age_var=="yvdQkzHuq2E")
-                                    {
+                                    else if(age_var=="yvdQkzHuq2E") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data ]);
 
                                     }
-                                    else if(age_var=="Y80cGPh9cA9")
-                                    {
+                                    else if(age_var=="Y80cGPh9cA9") {
                                         temp_arr_rate.push([
                                             variables.statesMapName[0][Object.keys(temp[0])[j]] === undefined ? "" : variables.statesMapName[0][Object.keys(temp[0])[j]].name,
                                             temp[0][Object.keys(temp[0])[j]].data == 0 ? temp[0]['Cbw7y8SiYyW'].data : temp[0][Object.keys(temp[0])[j]].data]);
@@ -414,8 +375,6 @@
                                     if (i == loopdata.length - 1) {
                                         if (type == "age") populationdata = temp_arr_rate;
                                     }
-
-
                                 }
                             }
                         }

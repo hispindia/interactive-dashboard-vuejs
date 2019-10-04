@@ -40,14 +40,6 @@ const site_categories_forpie = ["Urban", "Rural"];
 const site_main_var = "GkHE9YVFkpE;Vl6ZLaCt2mW";
 
 const diseases_obj_yll = [{
-    'jUOkNisSGtL': {
-        name: 'Epilepsy - YLL',
-        data: [],
-        val: 0,
-        color: "",
-        index: 13,
-        group: 1
-    },
     'rbvkGJD9mNb': {
         name: 'Malaria - YLL',
         data: [],
@@ -120,6 +112,46 @@ const diseases_obj_yll = [{
         index: 8,
         group: 0
     },
+    'f54afn66e00': {
+        name: 'Perinatal conditions - YLL',
+        data: [],
+        val: 0,
+        color: "",
+        index: 9,
+        group: 0
+    },
+    'ZenTjUJdMit': {
+        name: 'Nutritional deficiencies - YLL',
+        data: [],
+        val: 0,
+        color: "",
+        index: 10,
+        group: 0
+    },
+    'qSGAN58i4Y4': {
+        name: 'Fever of unknown origin - YLL',
+        data: [],
+        val: 0,
+        color: "",
+        index: 11,
+        group: 0
+    },
+    'WlkD7uIrJS1': {
+        name: 'Tuberculosis YLL',
+        data: [],
+        val: 0,
+        color: "",
+        index: 12,
+        group: 0
+    },
+    'jUOkNisSGtL': {
+        name: 'Epilepsy - YLL',
+        data: [],
+        val: 0,
+        color: "",
+        index: 13,
+        group: 1
+    },
     'pEmQPvuMsCd': {
         name: 'Stomach cancer - YLL',
         data: [],
@@ -151,30 +183,6 @@ const diseases_obj_yll = [{
         color: "",
         index: 17,
         group: 1
-    },
-    'f54afn66e00': {
-        name: 'Perinatal conditions - YLL',
-        data: [],
-        val: 0,
-        color: "",
-        index: 9,
-        group: 0
-    },
-    'ZenTjUJdMit': {
-        name: 'Nutritional deficiencies - YLL',
-        data: [],
-        val: 0,
-        color: "",
-        index: 10,
-        group: 0
-    },
-    'qSGAN58i4Y4': {
-        name: 'Fever of unknown origin - YLL',
-        data: [],
-        val: 0,
-        color: "",
-        index: 11,
-        group: 0
     },
     'K3vVuinN0sf': {
         name: 'Other digestive cancers - YLL',
@@ -320,20 +328,20 @@ const diseases_obj_yll = [{
         index: 35,
         group: 1
     },
-    'YAZdpC2fdlp': {
-        name: 'Falls - YLL',
+    'Ft4sC50UywO': {
+        name: 'Congenital anomalies - YLL',
         data: [],
         val: 0,
         color: "",
-        index: 44,
-        group: 2
+        index: 36,
+        group: 1
     },
     'oE12jKw1cDn': {
         name: 'Drowning - YLL',
         data: [],
         val: 0,
         color: "",
-        index: 36,
+        index: 37,
         group: 2
     },
     'LiDCa42AKC1': {
@@ -341,27 +349,11 @@ const diseases_obj_yll = [{
         data: [],
         val: 0,
         color: "",
-        index: 37,
+        index: 38,
         group: 2
     },
     'qZvcjbS6Vaq': {
         name: 'All other injuries - YLL',
-        data: [],
-        val: 0,
-        color: "",
-        index: 38,
-        group: 2
-    },
-    'Gzmf8Brlebv': {
-        name: 'Ill-defined or cause unknown - YLL',
-        data: [],
-        val: 0,
-        color: "",
-        index: 45,
-        group: 3
-    },
-    'Ft4sC50UywO': {
-        name: 'Congenital anomalies - YLL',
         data: [],
         val: 0,
         color: "",
@@ -392,13 +384,21 @@ const diseases_obj_yll = [{
         index: 42,
         group: 2
     },
-    'WlkD7uIrJS1': {
-        name: 'Tuberculosis YLL',
+    'YAZdpC2fdlp': {
+        name: 'Falls - YLL',
         data: [],
         val: 0,
         color: "",
-        index: 12,
-        group: 0
+        index: 44,
+        group: 2
+    },
+    'Gzmf8Brlebv': {
+        name: 'Ill-defined or cause unknown - YLL',
+        data: [],
+        val: 0,
+        color: "",
+        index: 45,
+        group: 3
     },
 }]
 const ages_obj = [{

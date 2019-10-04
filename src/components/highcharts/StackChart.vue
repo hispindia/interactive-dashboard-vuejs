@@ -236,7 +236,6 @@
             getApiData: function() {
                 $("#loader").show();
                 this.setApis();
-
                 axios
                     .get(
                         this.ou == variables.indiaOuId 
@@ -250,42 +249,35 @@
                             : this.indiaApi
                         : this.statesApi
                     )
-                    .then(response => 
-                    
+                    .then(response =>
                     {
                         if(this.chartOptions.yAxis.title.text=="Population") {
                             this.setColorsPop();
                         } else {
                             this.setColors();
                         }
-
                         this.handleShowHide();
                         this.chartOptions.series = [];
                         var dataloop = "";
-
                         response.data.rows.length == 0
                             ? ((this.chartOptions.series = []),
                                 alert("No data at this organisation Unit!"),
                                 $("#loader").hide())
                             : (dataloop = response.data.rows);
-
                         var vm = this;
                         if (this.chartType == "rate") {
                             if (this.selections == "gender") {
                                 this.getPopulationData("gender");
-
                                 setTimeout(function() {
                                     vm.sortDataByGender(dataloop);
                                 }, 2000);
                             } else if (this.selections == "age") {
                                 this.getPopulationData("age");
-
                                 setTimeout(function() {
                                     vm.sortDataByAge(dataloop);
                                 }, 2000);
                             } else if (this.selections == "site") {
                                 this.getPopulationData("site");
-
                                 setTimeout(function() {
                                     vm.sortDataBySite(dataloop);
                                 }, 2000);
@@ -305,7 +297,6 @@
                             } else if (this.population_yes == "popon") {
                                 this.getPopulationData("age");
                                  this.population_yes="false";
-
                                 setTimeout(function() {
                                     vm.sortDataByAge(dataloop);
                                 }, 2000);
@@ -315,7 +306,6 @@
                     .catch(error => {
                         console.log("error",error);
                     });
-
             },
             getPopulationData: function(type) {
                 var data_flag = false;
@@ -493,12 +483,10 @@
             },*/
             sortDataByAge: function(dataloop) {
                 $("#btnAge").addClass("selected-option");
-
                 if (this.chartOptions.yAxis.title.text == "Population") {
                     this.chartOptions.plotOptions.column.stacking = "normal";
                     this.chartOptions.tooltip.headerFormat = "<b></b><br/>";
                     let temp = JSON.parse(JSON.stringify(this.ages));
-
                     for (let i = 0, len = dataloop.length; i < len; i++) {
                         var disease_id = dataloop[i][3];
                         var value =
@@ -566,8 +554,7 @@
                         }
                     }
                 }
-                else
-                {
+                else {
                     this.chartOptions.plotOptions.column.stacking = "normal";
                     let temp = JSON.parse(JSON.stringify(this.diseases));
                     for (let i = 0, len = dataloop.length; i < len; i++) {
@@ -580,10 +567,7 @@
                                 : parseFloat(dataloop[i][6])
                                 : parseFloat(dataloop[i][5]);
                         var age_id_match = dataloop[i][3];
-
-
                         if (this.chartType != "rate") {
-
                             if(temp[0][disease_id]!==undefined)
                             {
                                 age_id_match == variables.age_0_4_id
@@ -618,8 +602,7 @@
                                                             ? (temp[0][disease_id].data[7] = value)
                                                             : (temp[0][disease_id].data[7] += value);
                             }
-                            else
-                            {
+                            else {
                                 console.log("undefined","data----");
                             }
 
@@ -674,14 +657,12 @@
                                                         : (temp[0][disease_id].data[7] +=
                                                             ((value / this.populationdata.age80_above).toFixed(8).replace(/\.?0+$/,"")*10000));
                         }
-
-
                         if (i == len - 1) {
                             var vm = this;
                             setTimeout(function() {
-                                
                                 vm.chartOptions.series = [...Object.values(temp[0])];
                                 var temparr = vm.chartOptions.series;
+                                console.log(vm.chartOptions.series);
                                 vm.chartOptions.series = [
                                     ...temparr.map(temparr => {
                                         if (temparr.data.length == 0) {
@@ -713,8 +694,6 @@
                         }
                     }
                 }
-
-
             },
             sortDataBySite: function(dataloop) {
                 $("#btnSite").addClass("selected-option");
@@ -783,7 +762,6 @@
                             ? (temp[0][disease_id].data[j] = 0)
                             : (temp[0][disease_id].data[j] += 0);
                     }
-
                     if (i == len - 1) {
                         var vm = this;
                         setTimeout(function() {
