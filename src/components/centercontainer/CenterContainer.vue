@@ -82,6 +82,7 @@
           class="btn btn-default bottom-options selected-option"
           v-on:click="sendParams('age')"
           id="btnAge"
+          v-if="measureFilter != 'gNaskBzw5Nq'"
         >Age</button>
         <!--
         <button
@@ -94,11 +95,13 @@
           class="btn btn-default bottom-options"
           v-on:click="sendParams('site')"
           id="btnSite"
+          v-if="measureFilter != 'gNaskBzw5Nq'"
         >Site</button>
         <button
           class="btn btn-default bottom-options"
           v-on:click="sendParams('location')"
           id="btnLocation"
+          v-if="measureFilter != 'gNaskBzw5Nq'"
         >Location</button>
       </div>
     </div>
@@ -131,55 +134,58 @@ export default {
     return {
       selected: "stackChart",
       currentView: "stackChart",
-      selectname : "Stack Chart"
+      selectname : "Stack Chart",
+      measureFilter : ""
     };
   },
   mounted() {
     $('[data-toggle="tooltip"]').tooltip();
     $(".rightbarage").addClass("hidediv");
+    EventBus.$on("filters", this.setFilters);
   },
   methods: {
     select(elem) {
       this.currentView = elem;
       this.selected = elem;  
       this.handleRightBar(this.selected);
-      
+      EventBus.$emit("reset",this.selected);
     },
-
     showhidelegend: function() {
       $(".highcharts-legend").toggle();
     },
-
     sendParams: function(t) {
       $(".bottom-options").removeClass("selected-option");
       $(".rightbar-menu-main").removeClass("hidediv");
       if (t == "age") {
         $(".rightbarage").addClass("hidediv");
-        $(".rightbarunit").addClass("hidediv");
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
-          type: "age"
+          type: "age",
+          value: this.measureFilter
         });
       } else if (t == "gender") {
         $(".rightbargender").addClass("hidediv");
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
-          type: "gender"
+          type: "gender",
+          value: this.measureFilter
         });
       } else if (t == "location") {
+        $(".rightbarsite").addClass("hidediv");
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
-          type: "location"
+          type: "location",
+          value: this.measureFilter
         });
       } else {
         $(".rightbarsite").addClass("hidediv");
         EventBus.$emit("param-"+this.selected, {
           ou: $(".selectedou").attr('id'),
-          type: "site"
+          type: "site",
+          value: this.measureFilter
         });
       }
     },
-
     showHideLeftBar: function() {
       if(this.selected == "mapChart" || this.selected == "heatChart") {
         $("#leftbar").addClass('collapse-div');
@@ -239,7 +245,12 @@ export default {
                 break;
       }
     
-    }
+    },
+    setFilters: function(params) {
+                if (params.filter == "measure") {
+                    this.measureFilter = params.value;
+                } else {}
+            }
   },
   watch : {
     selected : function(v) {

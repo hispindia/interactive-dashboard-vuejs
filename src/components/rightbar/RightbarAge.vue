@@ -25,7 +25,7 @@
 <script>
     import { EventBus } from "../../event-bus";
     import data from "../../config.js";
-    console.log("gg-",$(".selectedOuName"));
+    // console.log("gg-",$(".selectedOuName"));
     export default {
         name: "RightbarAge",
         data() {

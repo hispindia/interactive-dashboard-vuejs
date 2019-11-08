@@ -23,16 +23,16 @@ var clicks = {
         console.log(document.getElementsByTagName(tagName));
     },
     setIdToCatchClicks: function (id) {
-        this.globalId = "#" + id
-        console.log(this.globalId)
+        this.globalId = "#" + id;
+        console.log(this.globalId);
     },
     setClassToCatchClicks: function (className) {
-        this.globalClass = className
-        console.log(this.globalClass)
+        this.globalClass = className;
+        console.log(this.globalClass);
     },
     toggleClass: function (id) {
         $('.selected-xaxis').removeClass("selected-xaxis");
-        let element = document.getElementById(id);
+        let element = document.getElementById(id);;
         if (element !== undefined) {
             element.classList.add("selected-xaxis");
         }

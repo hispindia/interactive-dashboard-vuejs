@@ -85,9 +85,9 @@ import { log } from 'util';
         },
         watch: {
             selected: function() {
-                this.handleRightBar(this.chartType);
                 $(".rightbarunit").addClass("hidediv");
                 this.sendFilter();
+                this.handleRightBar(this.chartType);
             }
         },
         getOuName: function(ou) {

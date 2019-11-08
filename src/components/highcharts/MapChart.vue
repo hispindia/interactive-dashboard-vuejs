@@ -280,7 +280,6 @@
                 }
             },
             getPopulationData: function(type) {
-                console.log("3");
                 debugger;
                 var age_var="";
                 var age_population = {
@@ -304,7 +303,6 @@
                     "&dimension=dx:gNaskBzw5Nq&displayProperty=NAME&outputIdScheme=UID";
                 age_var=this.ageFilter;
                 axios.get(defaultIndiaApi).then(response => {
-                    console.log(response);
                     var loopdata = response.data.rows;
                     let temp = JSON.parse(JSON.stringify(variables.statesMapData));
                     setTimeout(function () {

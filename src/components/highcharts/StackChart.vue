@@ -231,7 +231,7 @@
                 this.genderFilter = variables.gender_main_var;
                 this.ageFilter = variables.age_main_var;
                 this.siteFilter = variables.site_main_var;
-                this.measureFilter = variables.yll;
+                this.measureFilter = params.value;
             },
             getApiData: function() {
                 $("#loader").show();
@@ -662,7 +662,6 @@
                             setTimeout(function() {
                                 vm.chartOptions.series = [...Object.values(temp[0])];
                                 var temparr = vm.chartOptions.series;
-                                console.log(vm.chartOptions.series);
                                 vm.chartOptions.series = [
                                     ...temparr.map(temparr => {
                                         if (temparr.data.length == 0) {
@@ -870,6 +869,8 @@
                 } else if (value == "gNaskBzw5Nq" && !this.diseaseFlag) {
                     this.population_yes = "popon";
                     $(".rightbarunit").addClass("hidediv");
+                    $(".rightbardisease").addClass("hidediv");
+                    // $(".cc").addClass("hidediv");
                     $(".rightbardisease").addClass("hidediv");
                     this.chartOptions.yAxis.title.text = "Population";
                 } else {

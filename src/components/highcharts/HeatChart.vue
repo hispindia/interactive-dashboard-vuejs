@@ -144,7 +144,7 @@
         },
         mounted() {
             this.loadApi();
-            EventBus.$on("filters", this.measureFilter);
+            EventBus.$on("filters", this.setFilters);
             EventBus.$on("catchclicks", this.updateChart);
             EventBus.$on("chartChange", this.updateChart);
             clicks.setClassToCatchClicks("xaxis-labels");
@@ -152,11 +152,6 @@
         methods: {
             handleShowHide: function() {
                 $(".population_class").attr("disabled", "disabled");
-                $(".rightbarsite").addClass("hidediv");
-                $(".rightbargender").addClass("hidediv");
-                $(".rightbarage").addClass("hidediv");
-                $(".rightbardisease").addClass("hidediv");
-                $(".rightbarunit").addClass("hidediv");
             },
             updateChart: function(v) {
                 this.getApiData();
@@ -231,7 +226,7 @@
                     });
             },
             sortDataByLoc: function(dataloop, n) {
-                //   $("#btnLocation").addClass("selected-option");
+                this.handleShowHide();
                 let temp = JSON.parse(JSON.stringify(this.diseases));
                 var temp_arr = [];
                 for (let i = 0, len = dataloop.length; i < len; i++) {
@@ -253,13 +248,17 @@
                             temp_x[i] = states[0][statename];
                             for (let k = 0, lenn = disease_arr.length; k < lenn; k++) {
                                 var disease_id = disease_arr[k];
-                                temp_y[k] = temp[0][disease_id].name;
+                                if (temp[0][disease_id] != null) {
+                                    temp_y[k] = temp[0][disease_id].name;
+                                }
                                 var matrix_val =
                                     temp_arr[statename + "_" + disease_id] === undefined
                                         ? 0
                                         : temp_arr[statename + "_" + disease_id];
-                                var color = temp[0][disease_id].color;
-                                var index = temp[0][disease_id].index;
+                                if (temp[0][disease_id] != null) {
+                                    var color = temp[0][disease_id].color;
+                                    var index = temp[0][disease_id].index;
+                                }
                                 map_arr.push({
                                     x: i,
                                     y: k,
@@ -277,7 +276,6 @@
                         this.map_arr = temp_arr;
                         var vm = this;
                         setTimeout(function() {
-                            // console.log(temp_arr);
                             vm.mapOptions.series[0].data = [...temp_arr];
                             vm.mapOptions.xAxis.categories = [...Object.values(temp_x)];
                             vm.mapOptions.yAxis.categories = [...updated_y];
@@ -294,7 +292,9 @@
                 let singlesort = arr.filter(x => (x.x == n ? x : null));
                 let tempy = [];
                 for (let l = 0; l < singlesort.length; l++) {
-                    tempy[l] = this.diseases[0][singlesort[l].ref].name.split("- YLL")[0];
+                    if (this.diseases[0][singlesort[l].ref] != null) {
+                        tempy[l] = this.diseases[0][singlesort[l].ref].name.split("- YLL")[0];
+                    }
                 }
                 return tempy;
             },
@@ -430,15 +430,42 @@
                             }
                         }
                     });
+            },
+            setFilters: function(params) {
+                if (params.filter == "measure") {
+                    this.diseaseFlag = false;
+                    this.measureFilter = params.value;
+                } else {
+                    if (params.value.id != "") {
+                        if (params.value.category == true ) {
+                            this.measureFilter = params.value.value;
+                        } else {
+                            this.diseaseFlag = true;
+                        this.measureFilter = params.value.id;
+                        }
+                        
+                    } else {
+                        this.diseaseFlag = false;
+                        this.measureFilter = this.measureFilterTemp;
+                    }
+                }
             }
         },
         watch: {
             measureFilter: function(value) {
-                if (value == variables.yll) this.diseases = variables.diseases_yll;
-                else if (value == variables.yld) this.diseases = variables.diseases_yld;
-                else if (value == variables.daly) this.diseases = variables.diseases_daly;
-                else this.diseases = variables.diseases_deaths;
-                this.getApiData();
+                if (value == variables.yll) {
+                    this.diseases = variables.diseases_yll;
+                }
+                else if (value == variables.yld) {
+                    this.diseases = variables.diseases_yld;
+                }
+                else if (value == variables.daly) {
+                    this.diseases = variables.diseases_daly;
+                    }
+                else {
+                    this.diseases = variables.diseases_deaths;
+                }
+                this.loadApi();
             }
         },
         destroyed() {

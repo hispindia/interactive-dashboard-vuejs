@@ -400,7 +400,7 @@ const diseases_obj_yll = [{
         index: 45,
         group: 3
     },
-}]
+}];
 const ages_obj = [{
     'LJglh3dKkBF': {
         name: '0-4 Years',
@@ -466,7 +466,7 @@ const ages_obj = [{
         index: 7,
         group: 0
     },
-}]
+}];
 const diseases_group = [{
     'cbEjdFMYLh0': {
         name: "Communicable, maternal, perinatal and nutritional conditions",
@@ -500,7 +500,7 @@ const diseases_group = [{
         index: 3,
         group: 1
     }
-}]
+}];
 const diseases_group_1 = [{
     'KjyPR5oK8KF': {
         name: "Maternal conditions (deaths)",
@@ -614,7 +614,7 @@ const diseases_group_1 = [{
         index: 12,
         group: 1
     }
-}]
+}];
 
 const diseases_group_4 = [{
     'X8fpBqisVaW': {
@@ -689,7 +689,7 @@ const diseases_group_4 = [{
         index: 8,
         group: 1
     }
-}]
+}];
 
 const diseases_group_3 = [{
     'Uq5cNdR3bl8': {
@@ -748,7 +748,7 @@ const diseases_group_3 = [{
         index: 6,
         group: 1
     }
-}]
+}];
 
 const diseases_group_2 = [{
     'ZZIrvfpFn1S': {
@@ -759,7 +759,7 @@ const diseases_group_2 = [{
         index: 0,
         group: 1
     }
-}]
+}];
 const diseases_obj_deaths = [{
     'VUm3woORMNB': {
         name: "Congenital anomalies (deaths)",
@@ -1134,7 +1134,7 @@ const diseases_obj_deaths = [{
         index: 35,
         group: 1
     }
-}]
+}];
 
 const diseases_obj_yld = [{
     'cBGfQMmf14S': {
@@ -1496,7 +1496,7 @@ const diseases_obj_yld = [{
         index: 43,
         group: 2
     }
-}]
+}];
 
 const diseases_obj_daly = [{
     "OcJVS6d9JYV": {
@@ -1860,7 +1860,7 @@ const diseases_obj_daly = [{
         group: 2
     },
 
-}]
+}];
 
 const indiaOuId = "cBx1Gyq06xU";
 
@@ -2111,7 +2111,7 @@ const stateNames = [{
     "N2K15gP6SKn": "Uttar Pradesh",
     "osxywsmbdA9": "Uttarakhand",
     "JQq12xOtj1a": "West Bengal",
-}]
+}];
 
 const stateNamesAndId = [{
     "AndamanandNicobar":"J1qTQ3TKlNU",
@@ -2152,7 +2152,7 @@ const stateNamesAndId = [{
     "UttarPradesh":"N2K15gP6SKn",
     "Uttarakhand":"osxywsmbdA9",
     "WestBengal":"JQq12xOtj1a"
-}]
+}];
 
 export default {
     yll: yll_id,
@@ -2188,9 +2188,6 @@ export default {
     diseases_group_2: diseases_group_2,
     diseases_group_3: diseases_group_3,
     diseases_group_4: diseases_group_4,
-
-
-
 
     diseases_deaths: diseases_obj_deaths,
     age_categories: age_categories,
