@@ -118,6 +118,7 @@ import TreeChart from "../highcharts/TreeChart";
 import HeatChart from "../highcharts/HeatChart";
 import { EventBus } from "../../event-bus";
 import params from "../Leftbar";
+import variables from "../../config.js";
 
 export default {
   name: "CenterContainer",
@@ -135,7 +136,7 @@ export default {
       selected: "stackChart",
       currentView: "stackChart",
       selectname : "Stack Chart",
-      measureFilter : ""
+      measureFilter: variables.yll
     };
   },
   mounted() {
@@ -256,6 +257,7 @@ export default {
     selected : function(v) {
       this.showHideLeftBar();
       this.sendParams("age");
+      setFilters("");
       EventBus.$emit('reset', this.selected);
       this.handleRightBar(this.selected);
     }
