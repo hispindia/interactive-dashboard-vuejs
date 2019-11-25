@@ -52,6 +52,7 @@
                             useHTML: true
                         },
                         opposite: true
+                        //id: 
                     },
 
                     yAxis: {
@@ -154,13 +155,14 @@
                 $(".population_class").attr("disabled", "disabled");
             },
             updateChart: function(v) {
-                this.getApiData();
+                this.getApiData(v);
                 $("#loader").show();
                 let sn = variables.stateNamesAndId[0][v];
                 let n = Object.keys(variables.stateNamesAndId[0]).indexOf(v);
                 var map_arr = this.map_arr;
                 // var array_with_labels = this.getPointLabels(map_arr);
                 var temp_arr = this.getMatrixSorted(n, map_arr);
+                // console.log(v);
                 var updated_y = this.updateYaxis(n, temp_arr);
                 var vm = this;
                 setTimeout(function() {
@@ -169,10 +171,12 @@
                     $("#loader").hide();
                 }, 100);
                 setTimeout(function() {
-                    let element = document.getElementById(v);
-                    element.classList.add("selected-xaxis");
+                    if (document.getElementById(v) != null) {
+                        let element = document.getElementById(v);
+                        element.classList.add("selected-xaxis");
+                    }
                     $("#loader").hide();
-                }, 1000);
+                }, 5000);
             },
             setColors: function(index, count) {
                 if (index == 0) {
@@ -204,8 +208,9 @@
                 b = (x * b) / 10;
                 return "rgb(" + r + "," + g + "," + b + "," + o + ")";
             },
-            getApiData: function() {
+            getApiData: function(v) {
                 $("#loader").show();
+                let n = Object.keys(variables.stateNamesAndId[0]).indexOf(v);
                 this.handleShowHide();
                 this.setApis();
                 axios
@@ -219,13 +224,17 @@
                                 alert("No data at this organisation Unit!"),
                                 $("#loader").hide())
                             : (dataloop = response.data.rows);
-                        this.sortDataByLoc(dataloop);
+                        this.sortDataByLoc(dataloop,n);
                     })
                     .catch(error => {
                         console.log(error);
                     });
             },
             sortDataByLoc: function(dataloop, n) {
+                console.log(n);
+                if (n == null) {
+                    n = 1;
+                }
                 this.handleShowHide();
                 let temp = JSON.parse(JSON.stringify(this.diseases));
                 var temp_arr = [];
@@ -271,8 +280,8 @@
                             }
                         }
                         var array_with_labels = this.getPointLabels(map_arr);
-                        var temp_arr = this.getMatrixSorted(1, array_with_labels);
-                        var updated_y = this.updateYaxis(1, temp_arr);
+                        var temp_arr = this.getMatrixSorted(n, array_with_labels);
+                        var updated_y = this.updateYaxis(n, temp_arr);
                         this.map_arr = temp_arr;
                         var vm = this;
                         setTimeout(function() {
@@ -332,15 +341,12 @@
                         if (a.value < b.value) {
                             return -1;
                         } else {
-                            1;
+                            return 1;
                         }
                     });
                 var sortedMapArray = [];
                 for (let e = 0; e < Object.keys(states[0]).length; e++) {
-                    let singlesort = this.getSorted(
-                        map_arr.filter(x => (x.x == e ? x : null)),
-                        afterSort
-                    );
+                    let singlesort = this.getSorted(map_arr.filter(x => (x.x == e ? x : null)),afterSort);
                     sortedMapArray.push(...singlesort);
                     if (e == Object.keys(states[0]).length - 1) {
                         return sortedMapArray;

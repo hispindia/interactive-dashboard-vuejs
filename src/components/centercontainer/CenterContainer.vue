@@ -256,7 +256,7 @@ export default {
   watch : {
     selected : function(v) {
       this.showHideLeftBar();
-      this.sendParams("age");
+      this.sendParams(v);
       setFilters("");
       EventBus.$emit('reset', this.selected);
       this.handleRightBar(this.selected);
