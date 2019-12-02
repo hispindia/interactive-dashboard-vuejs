@@ -137,6 +137,7 @@ export default {
       currentView: "stackChart",
       selectname : "Stack Chart",
       measureFilter: variables.yll
+      // setFilters : {value : this.selected, filter : "measure"} 
     };
   },
   mounted() {
@@ -255,9 +256,10 @@ export default {
   },
   watch : {
     selected : function(v) {
+      console.log(v);
       this.showHideLeftBar();
-      this.sendParams(v);
-      setFilters("");
+      this.sendParams("age");
+      this.setFilters( {value : variables.yll, filter : "measure"} );
       EventBus.$emit('reset', this.selected);
       this.handleRightBar(this.selected);
     }

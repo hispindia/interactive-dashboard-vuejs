@@ -231,7 +231,7 @@
                     });
             },
             sortDataByLoc: function(dataloop, n) {
-                console.log(n);
+                // console.log(n);
                 if (n == null) {
                     n = 1;
                 }
@@ -449,8 +449,8 @@
                             this.diseaseFlag = true;
                         this.measureFilter = params.value.id;
                         }
-                        
-                    } else {
+                    } 
+                    else {
                         this.diseaseFlag = false;
                         this.measureFilter = this.measureFilterTemp;
                     }
@@ -471,7 +471,7 @@
                 else {
                     this.diseases = variables.diseases_deaths;
                 }
-                this.loadApi();
+                // this.loadApi();
             }
         },
         destroyed() {
