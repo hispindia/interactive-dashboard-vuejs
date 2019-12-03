@@ -471,7 +471,7 @@
                 else {
                     this.diseases = variables.diseases_deaths;
                 }
-                // this.loadApi();
+                this.loadApi();
             }
         },
         destroyed() {
